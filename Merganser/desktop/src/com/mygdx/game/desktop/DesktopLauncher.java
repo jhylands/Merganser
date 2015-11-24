@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
 		config.title = "Merganser";
-		config.height = 249;
+		config.height = 270;
 		config.width = 480;
 				
 		new LwjglApplication(new MyGdxGame(), config);
