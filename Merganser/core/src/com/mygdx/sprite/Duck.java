@@ -10,6 +10,7 @@ public class Duck {
 	private int screenHeight = Gdx.graphics.getHeight();
 	private int screenWidth = Gdx.graphics.getWidth();
 	private int duckSpeed = 2;
+	private int score = 0;
 	
 	
 	
@@ -60,6 +61,20 @@ public class Duck {
 			this.Rotation=3;
 		}
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void addScore(int score){
+		this.score += score;
+	}
+	
+	
 	
 	
 }

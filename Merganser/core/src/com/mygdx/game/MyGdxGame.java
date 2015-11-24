@@ -38,7 +38,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		parameter.size = 12;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
 		myFont = generator.generateFont(parameter);
-		myFont.setColor(Color.BLACK);
+		myFont.setColor(Color.WHITE);
 		generator.dispose();
 	}
 	
@@ -46,13 +46,13 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render() {
 		duck.getDuckMovement();
 		duck2.getDuckMovement();
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(background, 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
 		batch.draw(duck2.getTexture(), duck2.getDuckLocation().x, duck2.getDuckLocation().y);
-		myFont.draw(batch, "Use W,S,A,D to move the Duck around the screen", 0, 30);
+		myFont.draw(batch, "Score: " + duck.getScore(), screenWidth/2 - 5, screenHeight - 5);
 		batch.end();
 	}
 }
