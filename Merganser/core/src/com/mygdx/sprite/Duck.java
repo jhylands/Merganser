@@ -5,14 +5,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public class Duck {
+public class Duck extends LiveEntity {
 	
 	private int screenHeight = Gdx.graphics.getHeight();
 	private int screenWidth = Gdx.graphics.getWidth();
-	private int duckSpeed = 2;
 	private int score = 0;
-	
-	
 	
 	
 	private Texture[] duck = {new Texture("large_duck.png"),new Texture("large_duck_down.png"),new Texture("large_duck_left.png"),new Texture("large_duck_right.png")};
@@ -24,14 +21,6 @@ public class Duck {
 	
 	public Texture getTexture(){
 		return duck[this.Rotation];
-	}
-
-	public int getDuckSpeed() {
-		return duckSpeed;
-	}
-
-	public void setDuckSpeed(int duckSpeed) {
-		this.duckSpeed = duckSpeed;
 	}
 	
 	public void setDuckLocation(int x, int y){
@@ -47,17 +36,17 @@ public class Duck {
 	}
 	
 	public void getDuckMovement() {
-		if (Gdx.input.isKeyPressed(Keys.W) && (duckLocation.y < (screenHeight - getHeight()))) {
-			duckLocation.y += duckSpeed;
+		if (Gdx.input.isKeyPressed(Keys.W) && (duckLocation.y < (screenHeight - 21 - getHeight()))) {
+			duckLocation.y += getSpeed();
 			this.Rotation = 0;
 		}else if (Gdx.input.isKeyPressed(Keys.S) && (duckLocation.y > 0)) {
-			duckLocation.y -= duckSpeed;
+			duckLocation.y -= getSpeed();
 			this.Rotation = 1;
 		}else if (Gdx.input.isKeyPressed(Keys.A) && (duckLocation.x > 0)) {
-			duckLocation.x -= duckSpeed;
+			duckLocation.x -= getSpeed();
 			this.Rotation=2;
 		}else if (Gdx.input.isKeyPressed(Keys.D) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
-			duckLocation.x += duckSpeed;
+			duckLocation.x += getSpeed();
 			this.Rotation=3;
 		}
 	}
