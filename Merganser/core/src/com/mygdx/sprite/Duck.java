@@ -15,6 +15,11 @@ public class Duck extends LiveEntity {
 	private Texture[] duck = {new Texture("large_duck.png"),new Texture("large_duck_down.png"),new Texture("large_duck_left.png"),new Texture("large_duck_right.png")};
 	private Vector2 duckLocation = new Vector2(20, (screenHeight / 2) - (duck[0].getHeight() / 2));
 	private int Rotation = 0;
+	
+	public Duck() {
+		this.setHealth(12);
+	}
+
 	public Vector2 getDuckLocation(){
 		return duckLocation;
 	}
