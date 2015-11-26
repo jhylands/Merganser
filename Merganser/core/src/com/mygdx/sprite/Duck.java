@@ -17,8 +17,8 @@ public class Duck extends LiveEntity {
 	private int Rotation = 0;
 	
 	public Duck() {
-		this.setHealth(7);
-		this.setMaxHealth(16);
+		this.setHealth(12);
+		this.setMaxHealth(12);
 	}
 
 	public Vector2 getDuckLocation(){
@@ -42,7 +42,7 @@ public class Duck extends LiveEntity {
 	}
 	
 	public void getDuckMovement() {
-		if (Gdx.input.isKeyPressed(Keys.W) && (duckLocation.y < (screenHeight - 21 - getHeight()))) {
+		if (Gdx.input.isKeyPressed(Keys.W) && (duckLocation.y < (screenHeight - 21 - duck[0].getHeight()))) {
 			duckLocation.y += getSpeed();
 			this.Rotation = 0;
 		}else if (Gdx.input.isKeyPressed(Keys.S) && (duckLocation.y > 0)) {
