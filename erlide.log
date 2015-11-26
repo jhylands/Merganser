@@ -1,0 +1,23 @@
+11:37:56,168 I: (ErlangCore.java:64) : Starting CORE Thread[Worker-3,5,main]
+11:37:56,184 I: (ErlangCore.java:79) : *** starting Erlide v0.29.13.201509181435 (core=0.24.13.201509181435) (model api=0.24.12.201509181435) *** (Cp1252) ui
+11:37:56,199 I: (ErlangCore.java:86) : Started CORE
+11:37:56,199 F: (ErlangPlugin.java:88) : Core started
+11:37:57,058 F: (ErlangHostnameRetriever.java:40) : Test long hostname: PC642S.its.york.ac.uk
+11:37:57,355 F: (ErlangHostnameRetriever.java:40) : Test short hostname: PC642S
+11:37:57,370 F: (HostnameUtils.java:74) : Detected:: PC642S && PC642S.its.york.ac.uk
+11:37:57,433 F: (BackendActivator.java:25) : Backend plugin started
+11:37:57,433 I: (ErlideUIPlugin.java:132) : Starting UI Thread[Worker-3,5,main]
+11:37:57,448 F: (ModelActivator.java:19) : Starting Erlang model api
+11:37:57,495 F: (BackendFactory.java:42) : Create ide backend 18.0.0
+11:37:57,495 F: (BackendFactory.java:56) : Create backend 55188_dh900_4933f7_erlide
+11:37:57,713 F: (OtpNodeProxy.java:419) : START node :> ["c:\program files\erl7.0/bin/erl", -name, 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk, -setcookie, erlide] *** H:\SEPR\Merganser
+11:37:57,713 F: (OtpNodeProxy.java:301) : Runtime 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk starting
+11:37:57,745 F: (OtpNodeProxy.java:212) : 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk: waiting connection to peer... 
+11:37:58,150 F: (OtpNodeProxy.java:219) : connected!
+11:37:58,478 F: (OtpNodeProxy.java:306) : Runtime 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk running
+11:37:58,478 F: (LogEventHandler.java:27) : info: {"Monitoring java node",'jerlide_94934e1@PC642S.its.york.ac.uk'}
+11:37:58,478 F: (LogEventHandler.java:27) : info: {"Start monitor process: ",10000000,50000000}
+11:37:58,821 F: (ModelActivator.java:30) : Started model api
+11:37:58,837 I: (ErlideUIPlugin.java:154) : Started UI
+11:38:08,982 F: (OtpNodeProxy.java:311) : Runtime 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk stopping
+11:38:09,014 F: (OtpNodeProxy.java:271) : Runtime 55188_dh900_4933f7_erlide@PC642S.its.york.ac.uk terminated

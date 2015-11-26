@@ -13,7 +13,7 @@ import com.mygdx.sprite.Duck;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture background;
+	Map currentMap;
 	Heart heart; 
 	Duck duck;
 	BitmapFont myFont;
@@ -24,7 +24,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		background = new Texture("bio-lab-0.png");
+		currentMap = new Map();
+		currentMap.setBackground(new Texture("bio-lab-0.png"));
 		duck = new Duck();
 		heart = new Heart();
 
@@ -47,7 +48,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(background, 0, 0);
+		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
 		//System.out.println(heart.getTexture(duck.getHealth()).size());
 		// 
