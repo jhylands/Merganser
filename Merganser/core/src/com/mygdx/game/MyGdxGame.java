@@ -36,7 +36,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 12;
-		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
+		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
 		myFont = generator.generateFont(parameter);
 		myFont.setColor(Color.WHITE);
 		generator.dispose();
@@ -50,10 +50,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
-		//System.out.println(heart.getTexture(duck.getHealth()).size());
-		// 
-		for (int i = 0; i < heart.getTexture(duck.getHealth()).size(); i++){
-			batch.draw(heart.getTexture(duck.getHealth()).get(i), screenWidth - 20 - i*heart.getTexture(duck.getHealth()).get(i).getWidth(), screenHeight - heart.getTexture(duck.getHealth()).get(i).getHeight() - 2);
+		for (int i = 0; i < heart.getTexture(duck.getHealth(), duck.getMaxHealth()).size(); i++){
+			batch.draw(heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i), screenWidth - 20 - i*heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getWidth(), screenHeight - heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getHeight() - 2);
 		}
 		myFont.draw(batch, "Score: " + duck.getScore(), screenWidth/2 - 25, screenHeight - 5);
 		batch.end();

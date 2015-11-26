@@ -92,7 +92,7 @@ public class Map {
 		return true;
 	}
 	
-	public boolean isSwimming(Rectangle hitbox){
+	public boolean isSwimming(Rectangle hitbox){   //Only use this if not flying
 		int i = 0;
 		while (i < this.liquids.length){
 			if(hitbox.overlaps(this.liquids[i])){

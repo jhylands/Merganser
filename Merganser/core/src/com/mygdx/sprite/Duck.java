@@ -17,7 +17,8 @@ public class Duck extends LiveEntity {
 	private int Rotation = 0;
 	
 	public Duck() {
-		this.setHealth(12);
+		this.setHealth(7);
+		this.setMaxHealth(16);
 	}
 
 	public Vector2 getDuckLocation(){
@@ -52,8 +53,22 @@ public class Duck extends LiveEntity {
 			this.Rotation=2;
 		}else if (Gdx.input.isKeyPressed(Keys.D) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
 			duckLocation.x += getSpeed();
-			this.Rotation=3;
-		}
+			this.Rotation=3;}
+//		else if (Gdx.input.isKeyPressed(Keys.RIGHT) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
+//			score += 1;
+//			this.Rotation=3;
+//		}else if (Gdx.input.isKeyPressed(Keys.LEFT) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
+//			score -= 1;
+//			this.Rotation=3;
+//		}else if (Gdx.input.isKeyPressed(Keys.UP) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
+//			if(this.getHealth() < this.getMaxHealth()){
+//				this.setHealth(this.getHealth() + 1);
+//			}
+//		}else if (Gdx.input.isKeyPressed(Keys.DOWN) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
+//			if(this.getHealth() > 0){
+//				this.setHealth(this.getHealth() - 1);
+//			} //tests for health and score. use arrow keys.
+		
 	}
 
 	public int getScore() {
