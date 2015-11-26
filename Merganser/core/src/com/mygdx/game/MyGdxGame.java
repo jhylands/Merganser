@@ -13,7 +13,7 @@ import com.mygdx.sprite.Duck;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	map currentMap;
+	Map currentMap;
 	Heart heart; 
 	Duck duck;
 	BitmapFont myFont;
@@ -24,7 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		currentMap = new map();
+		currentMap = new Map();
 		currentMap.setBackground(new Texture("bio-lab-0.png"));
 		duck = new Duck();
 		heart = new Heart();

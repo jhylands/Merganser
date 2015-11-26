@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 public class Area {
 	String name;
-	map[] maps;
+	Map[] maps;
 	
 	
 	public String getName() {
@@ -11,10 +11,10 @@ public class Area {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public map[] getMaps() {
+	public Map[] getMaps() {
 		return maps;
 	}
-	public void setMaps(map[] maps) {
+	public void setMaps(Map[] maps) {
 		this.maps = maps;
 	}
 

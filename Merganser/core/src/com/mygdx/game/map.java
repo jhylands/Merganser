@@ -3,10 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
-public class map {
+public class Map {
 	private Texture background;
 	private Rectangle[] portals;  //portals take you to a different map
-	private map[] portalExits;    //must use the same indices as portals
+	private Map[] portalExits;    //must use the same indices as portals
 	                              //|-this is annoying and can be removed, but requires a Portal class
 	private Rectangle[] walls;    //walls impede movement
 	private Rectangle[] blocks;   //blocks impede movement, unless you're flying
@@ -26,10 +26,10 @@ public class map {
 	public void setPortals(Rectangle[] portals) {
 		this.portals = portals;
 	}
-	public map[] getPortalExits() {
+	public Map[] getPortalExits() {
 		return portalExits;
 	}
-	public void setPortalExits(map[] portalExits) {
+	public void setPortalExits(Map[] portalExits) {
 		this.portalExits = portalExits;
 	}
 	public Rectangle[] getWalls() {
@@ -112,7 +112,7 @@ public class map {
 		return false;
 	}
 	
-	public map changeMap(Rectangle hitbox){
+	public Map changeMap(Rectangle hitbox){
 		int i = 0;
 		while (i < this.portals.length){
 			if(hitbox.overlaps(portals[i])){
