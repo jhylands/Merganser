@@ -12,6 +12,8 @@ public class map {
 	private Rectangle[] blocks;   //blocks impede movement, unless you're flying
 	private Rectangle[] liquids;  //liquids cause you to be swimming, if you can swim
 	
+	//swimming and flying will be needed later to calculate stamina use
+	
 	public Texture getBackground() {
 		return background;
 	}
@@ -42,6 +44,7 @@ public class map {
 	public void setBlocks(Rectangle[] blocks) {
 		this.blocks = blocks;
 	}
+	
 	
 	public boolean validSpace(Rectangle hitbox, boolean flying, boolean canSwim){
 		if(flying == true){
