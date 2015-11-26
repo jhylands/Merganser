@@ -12,15 +12,19 @@ public class Heart {
 	public ArrayList<Texture> getTexture(int health) {
 		ArrayList<Texture> disp = new ArrayList<Texture>();
 		if (health % 4 == 0) {
-			for (int i = 0; i <= health / 4; i++) {
-				disp.add(heart[4]);
+			if (health != 0) {
+				for (int i = 0; i <= health / 4; i++) {
+					disp.add(heart[4]);
+				}
 			}
 		} else {
 			int whole = health / 4;
 			int rem = health % 4;
 
-			for (int i = 0; i <= whole; i++) {
-				disp.add(heart[4]);
+			if (whole != 0) {
+				for (int i = 0; i <= whole; i++) {
+					disp.add(heart[4]);
+				}
 			}
 			disp.add(heart[rem]);
 		}

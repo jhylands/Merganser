@@ -49,8 +49,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(background, 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
+		//System.out.println(heart.getTexture(duck.getHealth()).size());
+		// 
 		for (int i = 0; i < heart.getTexture(duck.getHealth()).size(); i++){
-			batch.draw(heart.getTexture(duck.getHealth()).get(i), screenWidth - 2 - i*heart.getTexture(duck.getHealth()).get(i).getWidth(), screenHeight - heart.getTexture(duck.getHealth()).get(i).getHeight() - 2);
+			batch.draw(heart.getTexture(duck.getHealth()).get(i), screenWidth - 20 - i*heart.getTexture(duck.getHealth()).get(i).getWidth(), screenHeight - heart.getTexture(duck.getHealth()).get(i).getHeight() - 2);
 		}
 		myFont.draw(batch, "Score: " + duck.getScore(), screenWidth/2 - 25, screenHeight - 5);
 		batch.end();
