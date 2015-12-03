@@ -10,6 +10,7 @@ public class Duck extends LiveEntity {
 	private int screenHeight = Gdx.graphics.getHeight();
 	private int screenWidth = Gdx.graphics.getWidth();
 	private int score = 0;
+	private int stamina = 100;
 	
 	
 	private Texture[] duck = {new Texture("large_duck.png"),new Texture("large_duck_down.png"),new Texture("large_duck_left.png"),new Texture("large_duck_right.png")};
@@ -56,10 +57,8 @@ public class Duck extends LiveEntity {
 			this.Rotation=3;}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
 			score += 1;
-			this.Rotation=3;
 		}else if (Gdx.input.isKeyPressed(Keys.LEFT) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
 			score -= 1;
-			this.Rotation=3;
 		}else if (Gdx.input.isKeyPressed(Keys.UP) && (duckLocation.x < (screenWidth - duck[3].getWidth()))) {
 			if(this.getHealth() < this.getMaxHealth()){
 				this.setHealth(this.getHealth() + 1);
@@ -68,6 +67,12 @@ public class Duck extends LiveEntity {
 			if(this.getHealth() > 0){
 				this.setHealth(this.getHealth() - 1);
 			} //tests for health and score. use arrow keys.
+		}
+		else if(Gdx.input.isKeyPressed(Keys.NUM_9)){
+			this.setStamina(stamina += 1);
+		}
+		else if(Gdx.input.isKeyPressed(Keys.NUM_0)){
+			this.setStamina(stamina -= 1);
 		}
 	}
 
@@ -81,6 +86,14 @@ public class Duck extends LiveEntity {
 	
 	public void addScore(int score){
 		this.score += score;
+	}
+
+	public int getStamina() {
+		return stamina;
+	}
+
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
 	}
 	
 	

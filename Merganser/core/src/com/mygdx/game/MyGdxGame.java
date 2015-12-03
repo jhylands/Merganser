@@ -14,14 +14,15 @@ import com.mygdx.sprite.Duck;
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Map currentMap;
-	Heart heart; 
+	Heart heart;
 	Duck duck;
 	BitmapFont myFont;
 	Texture menu;
+	StaminaBar pbar;
 
 	float screenWidth;
 	float screenHeight;
-	
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
@@ -30,6 +31,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		duck = new Duck();
 		heart = new Heart();
 		menu = new Texture("GUI panel.png");
+		pbar = new StaminaBar();
 
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
@@ -43,20 +45,23 @@ public class MyGdxGame extends ApplicationAdapter {
 		myFont.setColor(Color.WHITE);
 		generator.dispose();
 	}
-	
+
 	@Override
 	public void render() {
 		duck.getDuckMovement();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(menu, 0, screenHeight-menu.getHeight());
-		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth/2 - 72, screenHeight - 6);
+		batch.draw(menu, 0, screenHeight - menu.getHeight());
+		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth / 2 - 72, screenHeight - 6);
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
-		for (int i = 0; i < heart.getTexture(duck.getHealth(), duck.getMaxHealth()).size(); i++){
-			batch.draw(heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i), screenWidth - 20 - i*heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getWidth(), screenHeight - heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getHeight() - 2);
+		for (int i = 0; i < heart.getTexture(duck.getHealth(), duck.getMaxHealth()).size(); i++) {
+			batch.draw(heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i),
+					screenWidth - 20 - i * heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getWidth(),
+					screenHeight - heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getHeight() - 2);
 		}
+		batch.draw(pbar.getTexture(duck), 3, screenHeight - 18);
 		batch.end();
 	}
 }
