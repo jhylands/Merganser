@@ -51,7 +51,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(menu, 0, screenHeight-menu.getHeight());
-		myFont.draw(batch, "" + duck.getScore(), screenWidth/2 - 70, screenHeight - 6);
+		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth/2 - 72, screenHeight - 6);
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
 		for (int i = 0; i < heart.getTexture(duck.getHealth(), duck.getMaxHealth()).size(); i++){
