@@ -4,7 +4,7 @@ public class Area {
 	String name;
 	Map[] maps;
 	
-	public void Area(String name){
+	public Area(String name){
 		this.name = name;
 	}
 	
@@ -17,7 +17,7 @@ public class Area {
 	}
 	
 	public void addMap(Map map){
-		this.maps.append(map);
+//		this.maps.append(map);
 	}
 	
 	public void setMaps(Map[] maps) {

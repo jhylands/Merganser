@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class LiveEntity {
 	private int health;
-	private int maxHealth;
+	private int maxHealth; //for duck, should always be divisible by 4, anything else doesn't matter
 	private int attackStrength;
 	private int speed = 2;
 	private Rectangle hitbox;

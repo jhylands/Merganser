@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -56,12 +58,23 @@ public class MyGdxGame extends ApplicationAdapter {
 		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth / 2 - 72, screenHeight - 6);
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getDuckLocation().x, duck.getDuckLocation().y);
-		for (int i = 0; i < heart.getTexture(duck.getHealth(), duck.getMaxHealth()).size(); i++) {
-			batch.draw(heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i),
-					screenWidth - 20 - i * heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getWidth(),
-					screenHeight - heart.getTexture(duck.getHealth(), duck.getMaxHealth()).get(i).getHeight() - 2);
+		// Needs to pass numbers rather than textures
+		ArrayList<Integer> heartArray = heart.getTextures(duck.getHealth(), duck.getMaxHealth());
+		for (int i = 0;  i < heartArray.size(); i++) {
+			batch.draw(heart.getTexture(heartArray.get(i)),
+					screenWidth - 20 - i * heart.getTexture(heartArray.get(i)).getWidth(),
+					screenHeight - heart.getTexture(heartArray.get(i)).getHeight() - 2);
 		}
 		batch.draw(pbar.getTexture(duck), 3, screenHeight - 18);
 		batch.end();
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		super.dispose();
+		batch.dispose();
+	}
+	
+	
 }
