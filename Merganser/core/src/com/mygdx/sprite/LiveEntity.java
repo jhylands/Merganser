@@ -2,7 +2,7 @@ package com.mygdx.sprite;
 
 import com.badlogic.gdx.math.Rectangle;
 
-public class LiveEntity {
+public class LiveEntity extends Entity{
 	private int health;
 	private int maxHealth; //for duck, should always be divisible by 4, anything else doesn't matter
 	private int attackStrength;
