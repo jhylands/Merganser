@@ -19,11 +19,13 @@ public class Repeatable extends LiveEntity{
 
 	// update the ducks position by the direction towards the player multiplied by the ducks speed
 	public void move(PlayerDuck duck){
-		this.position.add( this.findDirection(duck).scl(1) ); //.scl(this.speed) );
+		if(duck.getPosition().sub(this.position).len2()<10000){
+			this.position.add( this.findDirection(duck).scl(this.speed) );
+		}
 	}
 	
 	public Vector2 findDirection(PlayerDuck duck){
-		return (this.position.sub(duck.getPosition())).nor();
+		return duck.getPosition().sub(this.position).nor();
 	}
 	
 }

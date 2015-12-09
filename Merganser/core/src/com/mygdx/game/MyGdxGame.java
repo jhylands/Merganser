@@ -37,7 +37,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		menu = new Texture("GUI panel.png");
 		pbar = new StaminaBar();
 		badies = new Repeatable[1];
-		badies[0] = new Repeatable(-1);
+		badies[0] = new Repeatable(1);
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 

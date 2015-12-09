@@ -10,7 +10,7 @@ public class Entity {
 	public String name;
 	
 	public Vector2 getPosition(){
-		return this.position;
+		return new Vector2(this.position.x,this.position.y);
 	}
 	public Texture getTexture(){
 		return this.sprite[this.rotation];
