@@ -11,7 +11,6 @@ public class PlayerDuck extends LiveEntity {
 	private int screenWidth = Gdx.graphics.getWidth();
 	private int score = 0;
 	private int stamina = 100;
-	private int Rotation = 0;
 	
 	public PlayerDuck() {
 		this.sprite = new Texture[4];
@@ -22,50 +21,36 @@ public class PlayerDuck extends LiveEntity {
 		this.position = new Vector2(20, (screenHeight / 2) - (this.sprite[0].getHeight() / 2));
 		this.setHealth(12);
 		this.setMaxHealth(12);
-	}
-
-	public Vector2 getPosition(){
-		return this.position;
+		this.speed=2;
 	}
 	
-	public Texture getTexture(){
-		return this.sprite[this.Rotation];
-	}
-	
-	public void setPosition(int x, int y){
+	public void setposition(int x, int y){
 		this.position = new Vector2(x,y);
 	}
 	
-	public int getWidth(){
-		return this.sprite[this.Rotation].getWidth();
-	}
-	
-	public int getHeight(){
-		return this.sprite[this.Rotation].getHeight();
-	}
-	
+	//why does the name of this void function start with get?
 	public void getMovement() {
-		if (Gdx.input.isKeyPressed(Keys.W) && (position.y < (screenHeight - 21 - this.sprite[0].getHeight()))) {
-			position.y += getSpeed();
-			this.Rotation = 0;
-		}else if (Gdx.input.isKeyPressed(Keys.S) && (position.y > 0)) {
-			position.y -= getSpeed();
-			this.Rotation = 1;
-		}else if (Gdx.input.isKeyPressed(Keys.A) && (position.x > 0)) {
-			position.x -= getSpeed();
-			this.Rotation=2;
-		}else if (Gdx.input.isKeyPressed(Keys.D) && (position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			position.x += getSpeed();
-			this.Rotation=3;}
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT) && (position.x < (screenWidth - this.sprite[3].getWidth()))) {
+		if (Gdx.input.isKeyPressed(Keys.W) && (this.position.y < (screenHeight - 21 - this.sprite[0].getHeight()))) {
+			this.position.y += getSpeed();
+			this.rotation = 0;
+		}else if (Gdx.input.isKeyPressed(Keys.S) && (this.position.y > 0)) {
+			this.position.y -= getSpeed();
+			this.rotation = 1;
+		}else if (Gdx.input.isKeyPressed(Keys.A) && (this.position.x > 0)) {
+			this.position.x -= getSpeed();
+			this.rotation=2;
+		}else if (Gdx.input.isKeyPressed(Keys.D) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
+			this.position.x += getSpeed();
+			this.rotation=3;}
+		else if (Gdx.input.isKeyPressed(Keys.RIGHT) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
 			score += 1;
-		}else if (Gdx.input.isKeyPressed(Keys.LEFT) && (position.x < (screenWidth - this.sprite[3].getWidth()))) {
+		}else if (Gdx.input.isKeyPressed(Keys.LEFT) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
 			score -= 1;
-		}else if (Gdx.input.isKeyPressed(Keys.UP) && (position.x < (screenWidth - this.sprite[3].getWidth()))) {
+		}else if (Gdx.input.isKeyPressed(Keys.UP) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
 			if(this.getHealth() < this.getMaxHealth()){
 				this.setHealth(this.getHealth() + 1);
 			}
-		}else if (Gdx.input.isKeyPressed(Keys.DOWN) && (position.x < (screenWidth - this.sprite[3].getWidth()))) {
+		}else if (Gdx.input.isKeyPressed(Keys.DOWN) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
 			if(this.getHealth() > 0){
 				this.setHealth(this.getHealth() - 1);
 			} //tests for health and score. use arrow keys.

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.sprite.PlayerDuck;
+import com.mygdx.sprite.Repeatable;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -21,6 +22,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	BitmapFont myFont;
 	Texture menu;
 	StaminaBar pbar;
+	Repeatable[] badies;
 
 	float screenWidth;
 	float screenHeight;
@@ -34,7 +36,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		heart = new Heart();
 		menu = new Texture("GUI panel.png");
 		pbar = new StaminaBar();
-
+		badies = new Repeatable[1];
+		badies[0] = new Repeatable(-1);
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 
@@ -51,6 +54,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		duck.getMovement();
+		badies[0].move(duck);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -58,6 +62,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth / 2 - 72, screenHeight - 6);
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getPosition().x, duck.getPosition().y);
+		batch.draw(badies[0].getTexture(), badies[0].getPosition().x, badies[0].getPosition().y);
 		// Needs to pass numbers rather than textures
 		heart.addTextures(duck.getHealth(), duck.getMaxHealth(), batch, screenWidth, screenHeight);
 		
