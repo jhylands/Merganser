@@ -25,43 +25,14 @@ public class PlayerDuck extends LiveEntity {
 	}
 	
 	public void setposition(int x, int y){
-		this.position = new Vector2(x,y);
+		this.position.set(x, y);
 	}
 	
-	//why does the name of this void function start with get?
-	public void getMovement() {
-		if (Gdx.input.isKeyPressed(Keys.W) && (this.position.y < (screenHeight - 21 - this.sprite[0].getHeight()))) {
-			this.position.y += getSpeed();
-			this.rotation = 0;
-		}else if (Gdx.input.isKeyPressed(Keys.S) && (this.position.y > 0)) {
-			this.position.y -= getSpeed();
-			this.rotation = 1;
-		}else if (Gdx.input.isKeyPressed(Keys.A) && (this.position.x > 0)) {
-			this.position.x -= getSpeed();
-			this.rotation=2;
-		}else if (Gdx.input.isKeyPressed(Keys.D) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			this.position.x += getSpeed();
-			this.rotation=3;}
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			score += 1;
-		}else if (Gdx.input.isKeyPressed(Keys.LEFT) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			score -= 1;
-		}else if (Gdx.input.isKeyPressed(Keys.UP) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			if(this.getHealth() < this.getMaxHealth()){
-				this.setHealth(this.getHealth() + 1);
-			}
-		}else if (Gdx.input.isKeyPressed(Keys.DOWN) && (this.position.x < (screenWidth - this.sprite[3].getWidth()))) {
-			if(this.getHealth() > 0){
-				this.setHealth(this.getHealth() - 1);
-			} //tests for health and score. use arrow keys.
-		}
-		else if(Gdx.input.isKeyPressed(Keys.NUM_9)){
-			this.setStamina(stamina += 1);
-		}
-		else if(Gdx.input.isKeyPressed(Keys.NUM_0)){
-			this.setStamina(stamina -= 1);
-		}
+	public void incPosition(int x, int y){
+		this.position.x += x;
+		this.position.y += y;
 	}
+	
 
 	public int getScore() {
 		return score;
@@ -83,7 +54,13 @@ public class PlayerDuck extends LiveEntity {
 		this.stamina = stamina;
 	}
 	
+	public int getSpriteWidth(int i){
+		return this.sprite[i].getWidth();
+	}
 	
+	public int getSpriteHeight(int i){
+		return this.sprite[i].getHeight();
+	}
 	
 	
 }

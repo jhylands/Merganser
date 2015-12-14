@@ -22,4 +22,12 @@ public class Entity {
 	public int getHeight(){
 		return this.sprite[this.rotation].getHeight();
 	}
+	public int getRotation() {
+		return rotation;
+	}
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+	
+	
 }

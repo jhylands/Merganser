@@ -1,12 +1,12 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.mygdx.sprite.PlayerDuck;
+import com.badlogic.gdx.graphics.Texture;
 
 public class GameScreen implements Screen {
 
@@ -19,6 +19,41 @@ public class GameScreen implements Screen {
 	}
 
 	private void handleInput() {
+		if (Gdx.input.isKeyPressed(Keys.W)
+				&& (game.duck.getPosition().y < (game.screenHeight - 21 - game.duck.getSpriteHeight(0)))) {
+			game.duck.incPosition(0, game.duck.getSpeed());
+			game.duck.setRotation(0);
+		} else if (Gdx.input.isKeyPressed(Keys.S) && (game.duck.getPosition().y > 0)) {
+			game.duck.incPosition(0, -(game.duck.getSpeed()));
+			game.duck.setRotation(1);
+		} else if (Gdx.input.isKeyPressed(Keys.A) && (game.duck.getPosition().x > 0)) {
+			game.duck.incPosition(-game.duck.getSpeed(), 0);
+			game.duck.setRotation(2);
+		} else if (Gdx.input.isKeyPressed(Keys.D)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+			game.duck.incPosition(game.duck.getSpeed(), 0);
+			game.duck.setRotation(3);
+		} else if (Gdx.input.isKeyPressed(Keys.RIGHT)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+			game.duck.addScore(1);
+		} else if (Gdx.input.isKeyPressed(Keys.LEFT)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+			game.duck.addScore(-1);
+		} else if (Gdx.input.isKeyPressed(Keys.UP)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
+				game.duck.setHealth(game.duck.getHealth() + 1);
+			}
+		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+			if (game.duck.getHealth() > 0) {
+				game.duck.setHealth(game.duck.getHealth() - 1);
+			} // tests for health and score. use arrow keys.
+		} else if (Gdx.input.isKeyPressed(Keys.NUM_9)) {
+			game.duck.setStamina(game.duck.getStamina() + 1);
+		} else if (Gdx.input.isKeyPressed(Keys.NUM_0)) {
+			game.duck.setStamina(game.duck.getStamina() - 1);
+		}
 	}
 
 	public void showStamina() {
@@ -35,7 +70,6 @@ public class GameScreen implements Screen {
 		staminaBar.dispose();
 	}
 
-
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -44,7 +78,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		game.duck.getMovement();
+		this.handleInput();
 		game.badies[0].move(game.duck);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
