@@ -26,7 +26,7 @@ public class PlayerDuck extends LiveEntity {
 		this.sprite[this.DOWN] = new Texture("large_duck_down.png");
 		this.sprite[this.LEFT] = new Texture("large_duck_left.png");
 		this.sprite[this.Right] = new Texture("large_duck_right.png");
-		this.setHitbox(new Rectangle(0,0,10,10));
+		this.setHitBox(new Rectangle(0,0,10,10));
 		this.hitbox.setPosition(new Vector2(20, (screenHeight / 2) - (this.sprite[0].getHeight() / 2)));
 		this.setHealth(12);
 		this.setMaxHealth(12);

@@ -12,4 +12,9 @@ public class Portal extends MapFeature{
 	public Map getDestination() {
 		return this.exit;
 	}
+
+	public void setDestination(Map destination) {
+		this.exit = destination;
+		
+	}
 }

@@ -32,7 +32,7 @@ public class LiveEntity extends Entity{
 	public Rectangle getHitbox(){
 		return hitbox;
 	}
-	public void setHitbox(Rectangle hitbox){
+	public void setHitBox(Rectangle hitbox){
 		this.hitbox = hitbox;
 	}
 	public int getMaxHealth() {

@@ -53,6 +53,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render() {
 		//move playerduck
 		duck.getMovement(currentMap);
+		
+		//check if the map should be updated
+		currentMap = currentMap.managePortals(duck);
+		
 		//move enmeyduck
 		badies[0].move(duck);
 		
@@ -80,11 +84,21 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 	}
 	public Map mapGeneration(){
+		//map1
 		MapFeature[] features = new MapFeature[1];
-		features[0] = new MapFeature(new Rectangle().set(100,100,100,100),true,false,false);
+		features[0] = new MapFeature(new Rectangle().set(1000,1000,0,0),true,false,false);
 		Portal[] portals = new Portal[1];
 		portals[0] = new Portal(new Rectangle().set(100, 100, 100, 100),null);
-		Map map = new Map(new Texture("bio-lab-0.png"),features,portals);
+		Map map = new Map(new Texture("bio-lab-1.png"),features,portals);
+		//map2
+		MapFeature[] features2 = new MapFeature[1];
+		features2[0] = new MapFeature(new Rectangle().set(1000,1000,50,100),true,false,false);
+		Portal[] portals2 = new Portal[1];
+		portals2[0] = new Portal(new Rectangle().set(0,0,100,100),map);
+		Map map2 = new Map(new Texture("bio-lab-0.png"),features2,portals2);
+		
+		map.setPortalExit(0, map2);
+		
 		return map;
 		//Rectangle[] a = new Rectangle[1];
 		//a[0] = new Rectangle()

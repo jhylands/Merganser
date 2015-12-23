@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.sprite.PlayerDuck;
 
 public class Map {
 	private Texture background;
@@ -43,9 +44,9 @@ public class Map {
 	}*/
 	
 	//should be in constructor
-	/*public void setPortalExits(Map[] portalExits) {
-		this.portalExits = portalExits;
-	}*/
+	public void setPortalExit(int portal, Map destination) {
+		this.portals[portal].setDestination(destination);
+	}
 	public MapFeature[] getMapFeatures() {
 		return this.features;
 	}
@@ -84,25 +85,23 @@ public class Map {
 		return false;
 	}
 	
-	public boolean shouldChangeMap(Rectangle hitbox){
-		int i = 0;
-		while (i < this.portals.length){
-			if(hitbox.overlaps(this.portals[i].getBox())){
-				return true;
-			}
-		}
-		return false;
-	}
 	
-	//shouldn't the code outside of this be currentMap = currentMap.getPortalMap(index) ?
-	public Map changeMap(Rectangle hitbox){
-		int i = 0;
-		while (i < this.portals.length){
-			if(hitbox.overlaps(portals[i].getBox())){
-				return this.portals[i].getDestination();
+	public Map managePortals(PlayerDuck duck){
+		int change = shouldChangeMap(duck.getHitbox());
+		if(change>-1){
+			//duck.setposition(portal.destinationPosition)
+			return this.portals[change].getDestination();
+		}else{
+			return this;
+		}
+	}
+	private int shouldChangeMap(Rectangle hitbox){
+		for(int i = 0; i < this.portals.length; i++){
+			if(hitbox.overlaps(this.portals[i].getBox())){
+				return i;
 			}
 		}
-		return this;  //this line shouldn't ever be reached, but it's necessary for eclipse
+		return -1;
 	}
 	
 }
