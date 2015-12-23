@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -13,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
+import com.badlogic.gdx.math.Rectangle;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -30,8 +29,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		currentMap = new Map();
-		currentMap.setBackground(new Texture("bio-lab-0.png"));
+		currentMap = this.mapGeneration();
 		duck = new PlayerDuck();
 		heart = new Heart();
 		menu = new Texture("GUI panel.png");
@@ -53,16 +51,21 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		duck.getMovement();
+		//move playerduck
+		duck.getMovement(currentMap);
+		//move enmeyduck
 		badies[0].move(duck);
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		batch.begin();
 		batch.draw(menu, 0, screenHeight - menu.getHeight());
 		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth / 2 - 72, screenHeight - 6);
 		batch.draw(currentMap.getBackground(), 0, 0);
 		batch.draw(duck.getTexture(), duck.getPosition().x, duck.getPosition().y);
 		batch.draw(badies[0].getTexture(), badies[0].getPosition().x, badies[0].getPosition().y);
+		
 		// Needs to pass numbers rather than textures
 		heart.addTextures(duck.getHealth(), duck.getMaxHealth(), batch, screenWidth, screenHeight);
 		
@@ -76,6 +79,16 @@ public class MyGdxGame extends ApplicationAdapter {
 		super.dispose();
 		batch.dispose();
 	}
-	
+	public Map mapGeneration(){
+		MapFeature[] features = new MapFeature[1];
+		features[0] = new MapFeature(new Rectangle().set(100,100,100,100),true,false,false);
+		Portal[] portals = new Portal[1];
+		portals[0] = new Portal(new Rectangle().set(100, 100, 100, 100),null);
+		Map map = new Map(new Texture("bio-lab-0.png"),features,portals);
+		return map;
+		//Rectangle[] a = new Rectangle[1];
+		//a[0] = new Rectangle()
+		//map.setPortals([new Rectangle() ])
+	}
 	
 }

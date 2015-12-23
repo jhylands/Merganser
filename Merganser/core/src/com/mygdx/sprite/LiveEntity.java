@@ -1,6 +1,7 @@
 package com.mygdx.sprite;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class LiveEntity extends Entity{
 	//as a superclass these should be protected rather than private so they can be visible to the subclasses
@@ -8,7 +9,7 @@ public class LiveEntity extends Entity{
 	protected int maxHealth; //for duck, should always be divisible by 4, anything else doesn't matter
 	protected int attackStrength;
 	protected int speed;
-	protected Rectangle hitbox;
+	protected Rectangle hitbox = new Rectangle();
 	
 	public int getHealth() {
 		return health;
@@ -40,6 +41,14 @@ public class LiveEntity extends Entity{
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
-	
+	protected void setPosition(int x, int y){
+		this.hitbox.setPosition(x, y);
+	}
+	protected void setPosition(Vector2 x){
+		this.hitbox.setPosition(x);
+	}
+	public Vector2 getPosition(){
+		return this.hitbox.getPosition(new Vector2());
+	}
 
 }

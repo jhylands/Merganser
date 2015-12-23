@@ -5,86 +5,62 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Map {
 	private Texture background;
-	private Rectangle[] portals;  //portals take you to a different map
-	private Map[] portalExits;    //must use the same indices as portals
-	                              //|-this is annoying and can be removed, but requires a Portal class
-	private Rectangle[] walls;    //walls impede movement
+ 
+	/*private Rectangle[] walls;    //walls impede movement
 	private Rectangle[] blocks;   //blocks impede movement, unless you're flying
 	private Rectangle[] liquids;  //liquids cause you to be swimming, if you can swim
-	
+	*/
+	private MapFeature[] features;
+	private Portal[] portals;//portals take you to a different map
 	//swimming and flying will be needed later to calculate stamina use
+	
+	public Map(Texture background, MapFeature[] features, Portal[] portals){
+		this.background = background;
+		this.features = features;
+		this.portals = portals;
+	}
 	
 	public Texture getBackground() {
 		return background;
 	}
+	
+	//should this be included in the constructor?
 	public void setBackground(Texture background) {
 		this.background = background;
 	}
-	public Rectangle[] getPortals() {
-		return portals;
+	public Rectangle getPortalBox(int portalNumber) {
+		return portals[portalNumber].getBox();
 	}
-	public void setPortals(Rectangle[] portals) {
+	public Map getPortalDestination(int portalNumber){
+		return portals[portalNumber].getDestination();
+	}
+	public void setPortals(Portal[] portals) {
 		this.portals = portals;
 	}
+	/*Why would you want all the exits
 	public Map[] getPortalExits() {
 		return portalExits;
-	}
-	public void setPortalExits(Map[] portalExits) {
+	}*/
+	
+	//should be in constructor
+	/*public void setPortalExits(Map[] portalExits) {
 		this.portalExits = portalExits;
+	}*/
+	public MapFeature[] getMapFeatures() {
+		return this.features;
 	}
-	public Rectangle[] getWalls() {
-		return walls;
-	}
+	/*Should this be in the constructor
 	public void setWalls(Rectangle[] walls) {
 		this.walls = walls;
-	}
-	public Rectangle[] getBlocks() {
-		return blocks;
-	}
-	public void setBlocks(Rectangle[] blocks) {
-		this.blocks = blocks;
-	}
-	
+	}*/
+
 	
 	public boolean validSpace(Rectangle hitbox, boolean flying, boolean canSwim){
-		if(flying == true){
-			int i = 0;
-			while (i < this.walls.length){
-				if(hitbox.overlaps(this.walls[i])){
-					return false;
-				}
-			}
-			return true;
-		} else {
-			int i = 0;
-			while (i < this.blocks.length){
-				if(hitbox.overlaps(this.blocks[i])){
-					return false;
-				}
-			}
-			i = 0;
-			if(canSwim == false){
-				while (i < this.liquids.length){
-					if(hitbox.overlaps(this.liquids[i])){
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-	}
-	
-	public boolean canLand(Rectangle hitbox, boolean canSwim){
-		int i = 0;
-		while (i < this.blocks.length){
-			if(hitbox.overlaps(this.blocks[i])){
-				return false;
-			}
-		}
-		if(canSwim == false){
-			i = 0;
-			while (i < this.liquids.length){
-				if(hitbox.overlaps(this.liquids[i])){
+		for(int i=0;i<features.length;i++){
+			MapFeature feature = this.features[i];
+			if(hitbox.overlaps(feature.getBox())){
+				//this needs explaining
+				if((feature.groundImpeedence && !flying) || (feature.flightImpeedence && flying) || (feature.isWater &&  !canSwim)){
 					return false;
 				}
 			}
@@ -92,11 +68,17 @@ public class Map {
 		return true;
 	}
 	
+	public boolean canLand(Rectangle hitbox, boolean canSwim){
+		return this.validSpace(hitbox, false, canSwim);
+	}
+	
 	public boolean isSwimming(Rectangle hitbox){   //Only use this if not flying
 		int i = 0;
-		while (i < this.liquids.length){
-			if(hitbox.overlaps(this.liquids[i])){
-				return true;
+		while (i < this.features.length){
+			if(this.features[i].isWater){
+				if(hitbox.overlaps(this.features[i].getBox())){
+					return true;
+				}
 			}
 		}
 		return false;
@@ -105,18 +87,19 @@ public class Map {
 	public boolean shouldChangeMap(Rectangle hitbox){
 		int i = 0;
 		while (i < this.portals.length){
-			if(hitbox.overlaps(this.portals[i])){
+			if(hitbox.overlaps(this.portals[i].getBox())){
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	//shouldn't the code outside of this be currentMap = currentMap.getPortalMap(index) ?
 	public Map changeMap(Rectangle hitbox){
 		int i = 0;
 		while (i < this.portals.length){
-			if(hitbox.overlaps(portals[i])){
-				return this.portalExits[i];
+			if(hitbox.overlaps(portals[i].getBox())){
+				return this.portals[i].getDestination();
 			}
 		}
 		return this;  //this line shouldn't ever be reached, but it's necessary for eclipse
