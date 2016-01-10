@@ -8,10 +8,10 @@ public class Entity {
 	protected int rotation = 0;
 	protected Texture[] sprite;
 	public String name;
-	protected int UP =0;
-	protected int Right = 1;
-	protected int DOWN = 2;
-	protected int LEFT = 3;
+	public int UP =0;
+	public int Right = 1;
+	public int DOWN = 2;
+	public int LEFT = 3;
 	
 	public Vector2 getPosition(){
 		return new Vector2(this.position.x,this.position.y);//to return by value rather than by reference
@@ -30,11 +30,16 @@ public class Entity {
 	public int getHeight(){
 		return this.sprite[this.rotation].getHeight();
 	}
+
 	public int getHeight(int sprite){
 		assert(this.sprite.length>sprite);
 		return this.sprite[sprite].getHeight();
 	}
-	protected void setRotation(int rotation){
+	public void setRotation(int rotation){
 		this.rotation = rotation;
+	}
+
+	public int getRotation() {
+		return rotation;
 	}
 }

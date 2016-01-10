@@ -41,10 +41,10 @@ public class LiveEntity extends Entity{
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
-	protected void setPosition(int x, int y){
+	public void setPosition(int x, int y){
 		this.hitbox.setPosition(x, y);
 	}
-	protected void setPosition(Vector2 x){
+	public void setPosition(Vector2 x){
 		this.hitbox.setPosition(x);
 	}
 	public Vector2 getPosition(){

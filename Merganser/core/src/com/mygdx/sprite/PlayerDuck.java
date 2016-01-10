@@ -19,6 +19,13 @@ public class PlayerDuck extends LiveEntity {
 	private boolean canSwim = true;
 	//private Vector2 position <-not needed because position in stored in hitBox inherited from liveEntity
 	
+	public boolean isflying(){
+		return flying;
+	}
+	
+	public boolean canswim(){
+		return canSwim;
+	}
 	
 	public PlayerDuck() {
 		this.sprite = new Texture[4];
@@ -33,55 +40,15 @@ public class PlayerDuck extends LiveEntity {
 		this.speed=2;
 	}
 	
-	private void move(Vector2 positionChange,int rotation, Map map){
-		//create a tempry box to hold the new state
-		Rectangle testBox = new Rectangle();
-		//set the tempery box to the current box for the playerduck
-		testBox.set(0,0,this.getWidth(rotation),this.getHeight(rotation));
-		//add the movement to the tempery box
-		testBox.setPosition(this.getPosition().add(positionChange));
-		if(map.validSpace(testBox, this.flying, this.canSwim)){
-			//update the playerduck's position with that of the temperybox
-			this.setPosition(testBox.getPosition(new Vector2()));
-			this.setRotation(rotation);
-		}
+	public void setposition(int x, int y){
+		this.position.set(x, y);
 	}
 	
-
-	//why does the name of this void function start with get?
-	public void getMovement(Map map) {
-		if (Gdx.input.isKeyPressed(Keys.W) ) {
-			this.move(new Vector2(0,this.speed), this.UP, map);
-		}else if (Gdx.input.isKeyPressed(Keys.S) ) {
-			this.move(new Vector2(0,-this.speed), this.DOWN, map);
-		}else if (Gdx.input.isKeyPressed(Keys.A) ) {
-			this.move(new Vector2(-this.speed,0), this.LEFT, map);
-		}else if (Gdx.input.isKeyPressed(Keys.D)) {
-			this.move(new Vector2(this.speed,0), this.Right, map);
-		}
-		
-		
-		//other keyinputs
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) ) {
-			score += 1;
-		}else if (Gdx.input.isKeyPressed(Keys.LEFT) ) {
-			score -= 1;
-		}else if (Gdx.input.isKeyPressed(Keys.UP) ) {
-			if(this.getHealth() < this.getMaxHealth()){
-				this.setHealth(this.getHealth() + 1);
-			}
-		}else if (Gdx.input.isKeyPressed(Keys.DOWN) ) {
-			if(this.getHealth() > 0){
-				this.setHealth(this.getHealth() - 1);
-			} //tests for health and score. use arrow keys.
-		}
-		else if(Gdx.input.isKeyPressed(Keys.NUM_9)){
-			this.setStamina(stamina += 1);
-		}
-		else if(Gdx.input.isKeyPressed(Keys.NUM_0)){
-			this.setStamina(stamina -= 1);
-		}
+	public void incPosition(int x, int y){
+		this.position.x += x;
+		this.position.y += y;
 	}
+	
 
 	public int getScore() {
 		return score;
@@ -103,7 +70,13 @@ public class PlayerDuck extends LiveEntity {
 		this.stamina = stamina;
 	}
 	
+	public int getSpriteWidth(int i){
+		return this.sprite[i].getWidth();
+	}
 	
+	public int getSpriteHeight(int i){
+		return this.sprite[i].getHeight();
+	}
 	
 	
 }

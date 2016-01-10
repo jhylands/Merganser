@@ -1,9 +1,8 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,14 +12,13 @@ import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MyGdxGame extends Game {
 	SpriteBatch batch;
 	Map currentMap;
 	Heart heart;
 	PlayerDuck duck;
 	BitmapFont myFont;
-	Texture menu;
-	StaminaBar pbar;
+	Texture menu, play, how, quit, stam;
 	Repeatable[] badies;
 
 	float screenWidth;
@@ -33,11 +31,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		duck = new PlayerDuck();
 		heart = new Heart();
 		menu = new Texture("GUI panel.png");
-		pbar = new StaminaBar();
 		badies = new Repeatable[1];
 		badies[0] = new Repeatable(1);
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		
+		how = new Texture(Gdx.files.internal("Text/How To.png"), true);
+		play = new Texture(Gdx.files.internal("Text/Play.png"), true);
+		quit = new Texture(Gdx.files.internal("Text/Quit.png"), true);
 
 		// FONT
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
@@ -47,34 +48,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		myFont = generator.generateFont(parameter);
 		myFont.setColor(Color.WHITE);
 		generator.dispose();
+		
+		this.setScreen(new MainMenuScreen(this));
 	}
 
 	@Override
 	public void render() {
-		//move playerduck
-		duck.getMovement(currentMap);
-		
-		//check if the map should be updated
-		currentMap = currentMap.managePortals(duck);
-		
-		//move enmeyduck
-		badies[0].move(duck);
-		
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		batch.draw(menu, 0, screenHeight - menu.getHeight());
-		myFont.draw(batch, String.format("%06d", duck.getScore()), screenWidth / 2 - 72, screenHeight - 6);
-		batch.draw(currentMap.getBackground(), 0, 0);
-		batch.draw(duck.getTexture(), duck.getPosition().x, duck.getPosition().y);
-		batch.draw(badies[0].getTexture(), badies[0].getPosition().x, badies[0].getPosition().y);
-		
-		// Needs to pass numbers rather than textures
-		heart.addTextures(duck.getHealth(), duck.getMaxHealth(), batch, screenWidth, screenHeight);
-		
-		batch.draw(pbar.getTexture(duck), 3, screenHeight - 18);
-		batch.end();
+		super.render();
 	}
 
 	@Override
