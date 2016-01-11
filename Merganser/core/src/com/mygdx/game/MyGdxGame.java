@@ -36,10 +36,6 @@ public class MyGdxGame extends Game {
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		
-		how = new Texture(Gdx.files.internal("Text/How To.png"), true);
-		play = new Texture(Gdx.files.internal("Text/Play.png"), true);
-		quit = new Texture(Gdx.files.internal("Text/Quit.png"), true);
-
 		// FONT
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
