@@ -20,6 +20,7 @@ public class MyGdxGame extends Game {
 	BitmapFont myFont;
 	Texture menu, play, how, quit, stam;
 	Repeatable[] badies;
+	GameScreen mainGame;
 
 	float screenWidth;
 	float screenHeight;
@@ -44,6 +45,7 @@ public class MyGdxGame extends Game {
 		myFont = generator.generateFont(parameter);
 		myFont.setColor(Color.WHITE);
 		generator.dispose();
+		mainGame = new GameScreen(this);
 		
 		this.setScreen(new MainMenuScreen(this));
 	}

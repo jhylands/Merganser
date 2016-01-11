@@ -88,7 +88,7 @@ public class MainMenuScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			switch (currentMenuItem) {
 			case 0:
-				game.setScreen(new GameScreen(game));
+				game.setScreen(game.mainGame);
 				break;
 			case 1:
 				System.out.println("TO DO ...");

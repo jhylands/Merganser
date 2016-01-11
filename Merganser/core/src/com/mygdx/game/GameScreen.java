@@ -67,6 +67,9 @@ public class GameScreen implements Screen {
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_0)) {
 			game.duck.setStamina(game.duck.getStamina() + 1);
 		}
+		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			game.setScreen(new MainMenuScreen(game));
+		}
 	}
 
 	public void showStamina() {
