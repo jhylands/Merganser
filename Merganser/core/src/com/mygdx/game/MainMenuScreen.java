@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+
 
 public class MainMenuScreen implements Screen {
 
@@ -33,13 +35,13 @@ public class MainMenuScreen implements Screen {
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
 		FreeTypeFontParameter parameter1 = new FreeTypeFontParameter();
 		parameter1.size = 25;
-		parameter1.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
+		parameter1.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-|";
 
 		titleFont = generator.generateFont(parameter);
 		menuFont = generator.generateFont(parameter1);
 		titleFont.setColor(Color.WHITE);
 
-		menuItem = new String[] { "Play", "...", "Quit" };
+		menuItem = new String[] { "Play | Resume", "...", "Quit" };
 
 		generator.dispose();
 	}
@@ -54,10 +56,13 @@ public class MainMenuScreen implements Screen {
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		handleInput();
+		
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		sb.begin();
 
-		titleFont.draw(sb, gameTitle, (game.screenWidth - titleFont.getSpaceWidth() * gameTitle.length()) / 2, 240);
+		titleFont.draw(sb, gameTitle, (game.screenWidth - (titleFont.getSpaceWidth() * gameTitle.length())) / 2, 240);
 
 		for (int i = 0; i < menuItem.length; i++) {
 			if (currentMenuItem == i) {
@@ -65,7 +70,7 @@ public class MainMenuScreen implements Screen {
 			} else {
 				menuFont.setColor(Color.WHITE);
 			}
-			menuFont.draw(sb, menuItem[i], (game.screenWidth - menuFont.getSpaceWidth() * menuItem[i].length()) / 2, 180 - 35 * i);
+			menuFont.draw(sb, menuItem[i], (game.screenWidth - (menuFont.getSpaceWidth() * menuItem[i].length()))/ 2, 180 - 35 * i);
 		}
 
 		sb.end();
