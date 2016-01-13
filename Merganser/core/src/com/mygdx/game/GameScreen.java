@@ -99,7 +99,7 @@ public class GameScreen implements Screen {
 		this.handleInput(game.currentMap);
 		game.currentObjective = game.currentObjective.isComplete(game.currentMap);
 		game.currentMap = game.currentMap.managePortals(game.duck);
-		game.badies[0].move(game.duck);
+		game.badies[0].move(game.duck , game.currentMap);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		game.batch.begin();

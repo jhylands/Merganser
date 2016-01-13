@@ -28,7 +28,7 @@ public class MapLoader {
 	          	  //get the saxBuilder to create a document from the file connection
 		          Document document = saxBuilder.build(inputFile);
 		          //root element should be Maps
-		          System.out.println(document.getRootElement().getName()=="Maps");
+		          //System.out.println(document.getRootElement().getName()=="Maps");
 		          //get a list of the maps contained in the maps file
 		          List<Element> maps = document.getRootElement().getChildren();
 		          //create Structure to hold the maps needs to be update to AVL tree for faster linking but currently uses integer references which are faster anyway even if less user friendly
@@ -47,6 +47,7 @@ public class MapLoader {
 			             //initiate the array of MapFeatures to be passed to the map constructor
 			             arrFeatures = new MapFeature[features.size()];
 			             //parse the xml into MapFeature type
+			             System.out.println(features.get(0).getChild("groundImpeedence").getText());
 			             for(int featureIterator = 0; featureIterator < features.size(); featureIterator++){
 			            	 Element feature = features.get(featureIterator);
 			            	 arrFeatures[featureIterator] = new MapFeature(element2rectangle(feature),
@@ -100,8 +101,9 @@ public class MapLoader {
 		      return arrMaps;
 		}
 		
+		//requires data validation!
 		private Boolean Str2Bool(String text){
-			return text.toLowerCase()=="true";
+			return Integer.parseInt(text)>0;
 		}
 		private Rectangle element2rectangle(Element elm){
 			System.out.println(elm.getText()); //ChildText("x"));

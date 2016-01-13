@@ -45,20 +45,10 @@ public class LiveEntity extends Entity{
 	//use getPosition inherited from enitity 
 	public boolean moveIfValid(int direction, Map map){
 		setRotation(direction);
-		switch(direction){
-		case 0:
-			return moveIfValid(new Vector2(0,1),map);
-		case 1:
-			return moveIfValid(new Vector2(1,0),map);
-		case 2:
-			return moveIfValid(new Vector2(0,-1), map);
-		case 3:
-			return moveIfValid(new Vector2(-1,0), map);
-		}
-		return false;
+		return moveIfValid(direction2Vector(direction).scl(speed),map);
 	}
 	
-	protected boolean moveIfValid(Vector2 v, Map map){
+	public boolean moveIfValid(Vector2 v, Map map){
 		Vector2 newPosition;
 		newPosition = v.add(this.getPosition());
 		if(map.validSpace(this.getHypertheticalHitBox(newPosition), flying, canSwim)){

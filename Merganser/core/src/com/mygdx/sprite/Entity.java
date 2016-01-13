@@ -14,12 +14,26 @@ public class Entity {
 	public int DOWN = 2;
 	public int LEFT = 3;
 	
+	
+	public Vector2 direction2Vector(int direction){
+		switch(direction){
+		case 0:
+			return new Vector2(0,1);
+		case 1:
+			return new Vector2(1,0);
+		case 2:
+			return new Vector2(0,-1);
+		case 3:
+			return new Vector2(-1,0);
+		}
+		return new Vector2(0,0);
+	}
+	
 	public Rectangle getHitBox(){
 		//update the hitbox for current values
 		this.hitbox.setSize(this.getWidth(), this.getHeight());
 		return hitbox;
 	}
-	
 	protected Rectangle getHypertheticalHitBox(Vector2 position){
 		//local position not to be confused with classwide position
 		return new Rectangle(position.x,position.y,getWidth(),getHeight());

@@ -33,7 +33,7 @@ public class PlayerDuck extends LiveEntity {
 		this.setPosition(new Vector2(20, (screenHeight / 2) - (this.getHeight() / 2)));
 		this.setHealth(12);
 		this.setMaxHealth(12);
-		this.speed=2;
+		this.speed=3;
 		this.quack = Gdx.audio.newSound(Gdx.files.internal("duckQuack.mp3"));
 	}
 

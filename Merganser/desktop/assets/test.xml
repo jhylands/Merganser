@@ -4,9 +4,9 @@
 		<background>bio-lab-1.png</background>
 		<MapFeatures>
 			<MapFeature>
-				<groundImpeedence>false</groundImpeedence>
-				<flightImpeedence>false</flightImpeedence>
-				<isWater>false</isWater>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>0</flightImpeedence>
+				<isWater>0</isWater>
 				<x>100</x>
 				<y>100</y>
 				<width>100</width>
@@ -19,9 +19,9 @@
 		<background>bio-lab-0.png</background>
 		<MapFeatures>
 			<MapFeature>
-				<groundImpeedence>false</groundImpeedence>
-				<flightImpeedence>false</flightImpeedence>
-				<isWater>false</isWater>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>0</flightImpeedence>
+				<isWater>0</isWater>
 				<x>0</x>
 				<y>0</y>
 				<width>100</width>

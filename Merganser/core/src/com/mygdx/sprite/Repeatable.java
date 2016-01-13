@@ -2,9 +2,12 @@ package com.mygdx.sprite;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Map;
 
 public class Repeatable extends LiveEntity{
 	protected int attack;
+	//sight2 is the distance of the sight squared 
+	public int sight2 = 10000;
 	
 	public Repeatable(int speed){
 		this.sprite = new Texture[4];
@@ -18,9 +21,9 @@ public class Repeatable extends LiveEntity{
 	
 
 	// update the ducks position by the direction towards the player multiplied by the ducks speed
-	public void move(PlayerDuck duck){
-		if(duck.getPosition().sub(this.getPosition()).len2()<10000){
-			this.changePosition( this.findDirection(duck).scl(this.speed) );
+	public void move(PlayerDuck duck, Map map){
+		if(duck.getPosition().sub(this.getPosition()).len2()<sight2){
+			this.moveIfValid( this.findDirection(duck).scl(this.speed), map );
 		}
 	}
 	

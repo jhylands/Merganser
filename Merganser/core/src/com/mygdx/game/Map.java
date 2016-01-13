@@ -67,11 +67,13 @@ public class Map {
 			MapFeature feature = this.features[i];
 			if(hitbox.overlaps(feature.getBox())){
 				//this needs explaining
+				System.out.println(feature.groundImpeedence);
 				if((feature.groundImpeedence && !flying) || (feature.flightImpeedence && flying) || (feature.isWater &&  !canSwim)){
 					return false;
 				}
 			}
 		}
+
 		return true;
 	}
 	
