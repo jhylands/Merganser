@@ -97,8 +97,7 @@ public class MapScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		game.getMyFont().dispose();
-		game.getStam().dispose();
+		game.myFont.dispose();
 		sb1.dispose();
 	}
 

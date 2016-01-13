@@ -3,10 +3,14 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
@@ -18,7 +22,9 @@ public class GameScreen implements Screen {
 	private MyGdxGame game;
 	private int barHeight = 14;
 	private int barWidth = 100;
-	public SpriteBatch batch;
+	private SpriteBatch batch;
+	private BitmapFont myFont;
+	private Texture stam;
 
 	public GameScreen(MyGdxGame game) {
 		this.game = game;
@@ -93,8 +99,8 @@ public class GameScreen implements Screen {
 		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
 		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
 		// Export pixmap to texture
-		game.stam = null;
-		game.stam = new Texture(staminaBar);
+		stam = null;
+		stam = new Texture(staminaBar);
 		// Dispose of pixmap as no longer needed
 		staminaBar.dispose();
 	}
@@ -125,9 +131,9 @@ public class GameScreen implements Screen {
 		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.SCREENWIDTH,
 				game.SCREENHEIGHT);
 		showStamina();
-		batch.draw(game.stam, 3, game.SCREENHEIGHT - 18);
+		batch.draw(stam, 3, game.SCREENHEIGHT - 18);
 		batch.end();
-		game.stam.dispose();
+		stam.dispose();
 
 	}
 
@@ -161,7 +167,7 @@ public class GameScreen implements Screen {
 		this.dispose();
 		batch.dispose();
 		game.myFont.dispose();
-		game.stam.dispose();
+		stam.dispose();
 	}
 
 }

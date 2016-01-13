@@ -24,10 +24,6 @@ public class MyGdxGame extends Game {
 	public Heart heart;
 	public PlayerDuck duck;
 	public BitmapFont myFont;
-	public Texture menu;
-	public Texture stam;
-	public Texture globmap1;
-	public Texture globmap2;
 	public Repeatable[] badies;
 	public GameScreen mainGame;
 	public String[] objective = new String[]{"defeat10", "score500"};
@@ -88,12 +84,14 @@ public class MyGdxGame extends Game {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 14;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
-		setMyFont(generator.generateFont(parameter));
-		getMyFont().setColor(Color.WHITE);
+		myFont = generator.generateFont(parameter);
+		myFont.setColor(Color.WHITE);
 		generator.dispose();
 		
 		// Create a GameScreen so we can reference to it from different screens
 		setMainGame(new GameScreen(this));
+		
+		
 		
 		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(new MainMenuScreen(this));
@@ -162,14 +160,6 @@ public class MyGdxGame extends Game {
 		this.SCREENWIDTH = screenWidth;
 	}
 
-	public Texture getStam() {
-		return stam;
-	}
-
-	public void setStam(Texture stam) {
-		this.stam = stam;
-	}
-
 	public Map getCurrentMap() {
 		return currentMap;
 	}
@@ -194,25 +184,6 @@ public class MyGdxGame extends Game {
 		this.badies = badies;
 	}
 
-	public BitmapFont getMyFont() {
-		return myFont;
-	}
-
-	public void setMyFont(BitmapFont myFont) {
-		this.myFont = myFont;
-	}
-
-	public Texture getMenu() {
-		return menu;
-	}
-
-	public void setMenu(Texture menu) {
-		this.menu = menu;
-	}
-
-	public Heart getHeart() {
-		return heart;
-	}
 
 	public void setHeart(Heart heart) {
 		this.heart = heart;
@@ -224,26 +195,6 @@ public class MyGdxGame extends Game {
 
 	public void setMainGame(GameScreen mainGame) {
 		this.mainGame = mainGame;
-	}
-
-	public Texture getGlobmap1() {
-		return globmap1;
-	}
-
-	public void setGlobmap1(Texture globmap1) {
-		this.globmap1 = globmap1;
-	}
-
-	public Texture getGlobmap2() {
-		return globmap2;
-	}
-
-	public void setGlobmap2(Texture globmap2) {
-		this.globmap2 = globmap2;
-	}
-
-	public String[] getObjective() {
-		return objective;
 	}
 
 	public void setObjective(String[] objective) {
