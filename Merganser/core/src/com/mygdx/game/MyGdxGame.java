@@ -19,7 +19,7 @@ import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
 
 public class MyGdxGame extends Game {
-	public SpriteBatch batch;
+	
 	public Map currentMap;
 	public Heart heart;
 	public PlayerDuck duck;
@@ -54,9 +54,6 @@ public class MyGdxGame extends Game {
 		assetManager.load("Heart_4.png", Texture.class);
 		assetManager.finishLoading();
 		
-		// Create a SpriteBatch to allow drawing of Sprite
-		setBatch(new SpriteBatch());
-		
 		// Init map - load map from XML Map loader
 		maps = this.mapGeneration();
 		
@@ -68,11 +65,6 @@ public class MyGdxGame extends Game {
 		
 		// Create Hearts
 		heart = new Heart(assetManager);
-		
-		// Might not actually need these anymore and can just get them from where needed
-		setMenu(assetManager.get("GUI panel.png", Texture.class));
-		setGlobmap1(assetManager.get("map1.png", Texture.class));
-		setGlobmap2(assetManager.get("map2.png", Texture.class));
 		
 		setBadies(new Repeatable[1]);
 		getBadies()[0] = new Repeatable(1);
@@ -117,8 +109,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-		// Dispose of batch when function called as not disposed automatically
-		getBatch().dispose();
 	}
 
 	public Map[] mapGeneration(){
@@ -202,14 +192,6 @@ public class MyGdxGame extends Game {
 
 	public void setBadies(Repeatable[] badies) {
 		this.badies = badies;
-	}
-
-	public SpriteBatch getBatch() {
-		return batch;
-	}
-
-	public void setBatch(SpriteBatch batch) {
-		this.batch = batch;
 	}
 
 	public BitmapFont getMyFont() {
