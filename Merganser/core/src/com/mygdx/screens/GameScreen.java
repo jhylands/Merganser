@@ -41,11 +41,11 @@ public class GameScreen implements Screen {
 		}
 		
 		//control of other features for testing
-		inputTests();
+		//inputTests();
 	}
 
 	//function contsining keys that are not required in the game but are used for other testing
-	private void inputTests() {
+	/*private void inputTests() {
 		if (Gdx.input.isKeyPressed(Keys.RIGHT)
 				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
 			game.duck.addScore(1);
@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
 			game.setScreen(new ObjectiveScreen(game));
 		}
 		
-	}
+	}*/
 
 	public void showStamina() {
 		// Create a pixmap to draw new stamina bar from the current stamina
@@ -105,17 +105,17 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		game.batch.begin();
-		game.batch.draw(game.menu, 0, game.screenHeight - game.menu.getHeight());
-		game.myFont.draw(game.batch, String.format("%06d", game.duck.getScore()), game.screenWidth / 2 - 72,
-				game.screenHeight - 6);
+		game.batch.draw(game.menu, 0, game.SCREENHEIGHT - game.menu.getHeight());
+		game.myFont.draw(game.batch, String.format("%06d", game.duck.getScore()), game.SCREENWIDTH / 2 - 72,
+				game.SCREENHEIGHT - 6);
 		game.batch.draw(game.currentMap.getBackground(), 0, 0);
 		game.batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
 		game.batch.draw(game.badies[0].getTexture(), game.badies[0].getPosition().x, game.badies[0].getPosition().y);
 		// Needs to pass numbers rather than textures
-		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), game.batch, game.screenWidth,
-				game.screenHeight);
+		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), game.batch, game.SCREENWIDTH,
+				game.SCREENHEIGHT);
 		showStamina();
-		game.batch.draw(game.stam, 3, game.screenHeight - 18);
+		game.batch.draw(game.stam, 3, game.SCREENHEIGHT - 18);
 		game.batch.end();
 		game.stam.dispose();
 

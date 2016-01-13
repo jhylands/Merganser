@@ -19,24 +19,24 @@ import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
 
 public class MyGdxGame extends Game {
-	private SpriteBatch batch;
+	public SpriteBatch batch;
 	public Map currentMap;
-	private Heart heart;
+	public Heart heart;
 	public PlayerDuck duck;
-	private BitmapFont myFont;
-	private Texture menu;
-	private Texture stam;
-	private Texture globmap1;
-	private Texture globmap2;
-	private Repeatable[] badies;
-	private GameScreen mainGame;
-	private String[] objective = new String[]{"defeat10", "score500"};
-	private Map[] maps;
-	private float SCREENWIDTH;
-	private float SCREENHEIGHT;
-	private Objective currentObjective;
-	private AssetManager assetManager;
-	private ArrayList<Objective> objectives;
+	public BitmapFont myFont;
+	public Texture menu;
+	public Texture stam;
+	public Texture globmap1;
+	public Texture globmap2;
+	public Repeatable[] badies;
+	public GameScreen mainGame;
+	public String[] objective = new String[]{"defeat10", "score500"};
+	public Map[] maps;
+	public float SCREENWIDTH;
+	public float SCREENHEIGHT;
+	public Objective currentObjective;
+	public AssetManager assetManager;
+	public ArrayList<Objective> objectives;
 
 	@Override
 	public void create() {
