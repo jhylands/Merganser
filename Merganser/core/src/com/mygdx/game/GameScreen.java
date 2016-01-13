@@ -34,6 +34,9 @@ public class GameScreen implements Screen {
 		}
 	
 	private void handleInput(Map map) {
+		if (Gdx.input.isKeyJustPressed(Keys.Q)){
+			game.duck.quack();
+		}
 		if (Gdx.input.isKeyPressed(Keys.W)
 				&& (game.duck.getPosition().y < (game.screenHeight - 21 - game.duck.getSpriteHeight(0)))) {
 			this.move(new Vector2(0,game.duck.getSpeed()), game.duck.UP, map);

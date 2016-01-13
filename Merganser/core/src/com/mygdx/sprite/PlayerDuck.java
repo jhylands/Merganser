@@ -4,6 +4,7 @@ import java.io.Console;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +18,8 @@ public class PlayerDuck extends LiveEntity {
 	private int stamina = 100;
 	private boolean flying = false;
 	private boolean canSwim = true;
+	private Sound quack = null;
+	
 	//private Vector2 position <-not needed because position in stored in hitBox inherited from liveEntity
 	
 	public boolean isflying(){
@@ -38,6 +41,7 @@ public class PlayerDuck extends LiveEntity {
 		this.setHealth(12);
 		this.setMaxHealth(12);
 		this.speed=2;
+		this.quack = Gdx.audio.newSound(Gdx.files.internal("quack.mp3"));
 	}
 	
 	public void setposition(int x, int y){
@@ -76,6 +80,10 @@ public class PlayerDuck extends LiveEntity {
 	
 	public int getSpriteHeight(int i){
 		return this.sprite[i].getHeight();
+	}
+
+	public void quack() {
+		this.quack.play();
 	}
 	
 	
