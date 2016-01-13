@@ -13,6 +13,15 @@
 				<height>100</height>
 			</MapFeature>
 		</MapFeatures>
+		<MapPortals>
+			<MapPortal>
+				<x>200</x>
+				<y>100</y>
+				<width>100</width>
+				<height>100</height>
+				<toRef>1</toRef>
+			</MapPortal>
+		</MapPortals>
 	</Map>
 	<Map>
 		<name>Map2</name>

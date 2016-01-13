@@ -9,10 +9,19 @@
 				<isWater>0</isWater>
 				<x>100</x>
 				<y>100</y>
-				<width>1000</width>
-				<height>1000</height>
+				<width>100</width>
+				<height>100</height>
 			</MapFeature>
 		</MapFeatures>
+		<MapPortals>
+			<MapPortal>
+				<x>200</x>
+				<y>100</y>
+				<width>100</width>
+				<height>100</height>
+				<toRef>2</toRef>
+			</MapPortal>
+		</MapPortals>
 	</Map>
 	<Map>
 		<name>Map2</name>

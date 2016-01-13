@@ -76,18 +76,21 @@ public class MapLoader {
 		             String TexLoc = "bio-lab-1.png"; //map.getChildText("background");
 		             System.out.println(TexLoc);
 		             Texture mapTex = new Texture("bio-lab-1.png");
-		             arrMaps[mapIterator] = new Map(mapTex,arrFeatures,arrPortals);
+		             arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex,arrFeatures,arrPortals);
 		             
 		          }//end MAP loop
 		          
 		          //loop through updating the links
 		          for(int mapIterator=0; mapIterator<arrMaps.length; mapIterator++){
 		        	  //given a map 'map'
-		        	  //for each portal in 'map'
+		        	  
+		        	  //get total portals
 		        	  int NoOfPortals = arrMaps[mapIterator].getPortalNo();
+		        	  
 		        	  int[] portalRefs = new int[NoOfPortals];
+		        	//for each portal in 'map'
 		        	  for(int portalIterator=0; portalIterator<NoOfPortals;portalIterator++){
-		        		  arrMaps[mapIterator].setPortalExit(portalIterator, arrMaps[portalRefs[portalIterator]]);
+		        		  arrMaps[mapIterator].setPortalExit(portalIterator, arrMaps[arrMaps[mapIterator].getPortalRefs()[portalIterator]]);
 		        	  }
 		        	  
 		          }
