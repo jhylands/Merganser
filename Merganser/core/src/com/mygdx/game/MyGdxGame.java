@@ -1,7 +1,10 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,59 +12,102 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.input.MapLoader;
+import com.mygdx.screens.GameScreen;
+import com.mygdx.screens.MainMenuScreen;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
 
 public class MyGdxGame extends Game {
-	SpriteBatch batch;
-	Map currentMap;
-	Heart heart;
-	PlayerDuck duck;
-	BitmapFont myFont;
-	Texture menu, stam, globmap1, globmap2;
-	Repeatable[] badies;
-	GameScreen mainGame;
-	String[] objective = new String[]{"defeat10", "score500"};
-	Map[] maps;
-	float screenWidth;
-	float screenHeight;
-	Objective currentObjective; 
+	private SpriteBatch batch;
+	private Map currentMap;
+	private Heart heart;
+	private PlayerDuck duck;
+	private BitmapFont myFont;
+	private Texture menu;
+	private Texture stam;
+	private Texture globmap1;
+	private Texture globmap2;
+	private Repeatable[] badies;
+	private GameScreen mainGame;
+	private String[] objective = new String[]{"defeat10", "score500"};
+	private Map[] maps;
+	private float SCREENWIDTH;
+	private float SCREENHEIGHT;
+	private Objective currentObjective;
+	private AssetManager assetManager;
+	private ArrayList<Objective> objectives;
 
 	@Override
 	public void create() {
-		batch = new SpriteBatch();
+		/**
+		 * AssetManager implementation to allow loading of textures into game
+		 */
+		assetManager = new AssetManager();
+		assetManager.load("GUI panel.png", Texture.class);
+		assetManager.load("map1.png", Texture.class);
+		assetManager.load("map2.png", Texture.class);
+		assetManager.load("Heart_0.png", Texture.class);
+		assetManager.load("Heart_1.png", Texture.class);
+		assetManager.load("Heart_2.png", Texture.class);
+		assetManager.load("Heart_3.png", Texture.class);
+		assetManager.load("Heart_4.png", Texture.class);
+		assetManager.finishLoading();
+		
+		// Create a SpriteBatch to allow drawing of Sprite
+		setBatch(new SpriteBatch());
+		
+		// Init map - load map from XML Map loader
 		maps = this.mapGeneration();
-		currentMap = maps[0];
-		duck = new PlayerDuck();
-		heart = new Heart();
-		menu = new Texture("GUI panel.png");
-		globmap1 = new Texture("map1.png");
-		globmap2 = new Texture("map2.png");
-		badies = new Repeatable[1];
-		badies[0] = new Repeatable(1);
-		screenWidth = Gdx.graphics.getWidth();
-		screenHeight = Gdx.graphics.getHeight();
 		
-		Objective objective1 = new Objective(this, maps[1], "Go outside", 1000);
-		Objective objective2 = new Objective(this, maps[0], "Go inside", 1000);
-		objective1.setNextObjective(objective2);
-		objective2.setNextObjective(objective1);
+		// Set the current map
+		setCurrentMap(maps[0]);
 		
-		currentObjective = objective1;
+		// Create a new PlayerDuck - contains all of the information for the users duck
+		setDuck(new PlayerDuck());
 		
-		// FONT
+		// Create Hearts
+		heart = new Heart(assetManager);
+		
+		// Might not actually need these anymore and can just get them from where needed
+		setMenu(assetManager.get("GUI panel.png", Texture.class));
+		setGlobmap1(assetManager.get("map1.png", Texture.class));
+		setGlobmap2(assetManager.get("map2.png", Texture.class));
+		
+		setBadies(new Repeatable[1]);
+		getBadies()[0] = new Repeatable(1);
+		
+		// SET ScreenWidth and ScreenHeight
+		setScreenWidth(Gdx.graphics.getWidth());
+		setScreenHeight(Gdx.graphics.getHeight());
+		
+		// Create some test objectives into an ArrayList
+		setObjectives(new ArrayList<Objective>());
+		getObjectives().add(new Objective(this, maps[1], "Go outside", 100));
+		getObjectives().add(new Objective(this, maps[0], "Go inside", 100));
+		getObjectives().get(0).setNextObjective(getObjectives().get(1));
+		getObjectives().get(1).setNextObjective(getObjectives().get(0));
+		
+		// Set current objective as objective1. Allows an objective for when the game starts
+		setCurrentObjective(getObjectives().get(0));
+		
+		// FONT Generation for Score
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 14;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
-		myFont = generator.generateFont(parameter);
-		myFont.setColor(Color.WHITE);
+		setMyFont(generator.generateFont(parameter));
+		getMyFont().setColor(Color.WHITE);
 		generator.dispose();
-		mainGame = new GameScreen(this);
 		
+		// Create a GameScreen so we can reference to it from different screens
+		setMainGame(new GameScreen(this));
+		
+		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(new MainMenuScreen(this));
 	}
+
+
 
 	@Override
 	public void render() {
@@ -70,9 +116,9 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		super.dispose();
-		batch.dispose();
+		// Dispose of batch when function called as not disposed automatically
+		getBatch().dispose();
 	}
 
 	public Map[] mapGeneration(){
@@ -96,6 +142,142 @@ public class MyGdxGame extends Game {
 		//Rectangle[] a = new Rectangle[1];
 		//a[0] = new Rectangle()
 		//map.setPortals([new Rectangle() ])
+	}
+
+	public PlayerDuck getDuck() {
+		return duck;
+	}
+
+	public void setDuck(PlayerDuck duck) {
+		this.duck = duck;
+	}
+	
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
+
+	public float getScreenHeight() {
+		return SCREENHEIGHT;
+	}
+
+	public void setScreenHeight(float screenHeight) {
+		this.SCREENHEIGHT = screenHeight;
+	}
+
+	public float getScreenWidth() {
+		return SCREENWIDTH;
+	}
+
+	public void setScreenWidth(float screenWidth) {
+		this.SCREENWIDTH = screenWidth;
+	}
+
+	public Texture getStam() {
+		return stam;
+	}
+
+	public void setStam(Texture stam) {
+		this.stam = stam;
+	}
+
+	public Map getCurrentMap() {
+		return currentMap;
+	}
+
+	public void setCurrentMap(Map currentMap) {
+		this.currentMap = currentMap;
+	}
+
+	public Objective getCurrentObjective() {
+		return currentObjective;
+	}
+
+	public void setCurrentObjective(Objective currentObjective) {
+		this.currentObjective = currentObjective;
+	}
+
+	public Repeatable[] getBadies() {
+		return badies;
+	}
+
+	public void setBadies(Repeatable[] badies) {
+		this.badies = badies;
+	}
+
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+
+	public void setBatch(SpriteBatch batch) {
+		this.batch = batch;
+	}
+
+	public BitmapFont getMyFont() {
+		return myFont;
+	}
+
+	public void setMyFont(BitmapFont myFont) {
+		this.myFont = myFont;
+	}
+
+	public Texture getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Texture menu) {
+		this.menu = menu;
+	}
+
+	public Heart getHeart() {
+		return heart;
+	}
+
+	public void setHeart(Heart heart) {
+		this.heart = heart;
+	}
+
+	public GameScreen getMainGame() {
+		return mainGame;
+	}
+
+	public void setMainGame(GameScreen mainGame) {
+		this.mainGame = mainGame;
+	}
+
+	public Texture getGlobmap1() {
+		return globmap1;
+	}
+
+	public void setGlobmap1(Texture globmap1) {
+		this.globmap1 = globmap1;
+	}
+
+	public Texture getGlobmap2() {
+		return globmap2;
+	}
+
+	public void setGlobmap2(Texture globmap2) {
+		this.globmap2 = globmap2;
+	}
+
+	public String[] getObjective() {
+		return objective;
+	}
+
+	public void setObjective(String[] objective) {
+		this.objective = objective;
+	}
+
+
+
+	public ArrayList<Objective> getObjectives() {
+		return objectives;
+	}
+
+
+
+	public void setObjectives(ArrayList<Objective> objectives) {
+		this.objectives = objectives;
 	}
 	
 }

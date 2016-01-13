@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.mygdx.game.MyGdxGame;
 
 
 public class MainMenuScreen implements Screen {
@@ -62,7 +63,7 @@ public class MainMenuScreen implements Screen {
 
 		sb.begin();
 
-		titleFont.draw(sb, gameTitle, (game.screenWidth - (titleFont.getSpaceWidth() * gameTitle.length())) / 2, 240);
+		titleFont.draw(sb, gameTitle, (game.getScreenWidth() - (titleFont.getSpaceWidth() * gameTitle.length())) / 2, 240);
 
 		for (int i = 0; i < menuItem.length; i++) {
 			if (currentMenuItem == i) {
@@ -70,7 +71,7 @@ public class MainMenuScreen implements Screen {
 			} else {
 				menuFont.setColor(Color.WHITE);
 			}
-			menuFont.draw(sb, menuItem[i], (game.screenWidth - (menuFont.getSpaceWidth() * menuItem[i].length()))/ 2, 180 - 35 * i);
+			menuFont.draw(sb, menuItem[i], (game.getScreenWidth() - (menuFont.getSpaceWidth() * menuItem[i].length()))/ 2, 180 - 35 * i);
 		}
 
 		sb.end();
@@ -93,7 +94,7 @@ public class MainMenuScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			switch (currentMenuItem) {
 			case 0:
-				game.setScreen(game.mainGame);
+				game.setScreen(game.getMainGame());
 				break;
 			case 1:
 				game.setScreen(new MapScreen(game));

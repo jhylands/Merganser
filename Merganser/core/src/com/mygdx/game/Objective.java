@@ -51,7 +51,7 @@ public class Objective {
 	
 	public Objective isComplete(Map currentMap){
 		if(currentMap == targetMap){
-			game.duck.addScore(pointsValue);
+			game.getDuck().addScore(pointsValue);
 			return nextObjective;
 		}
 		else{
