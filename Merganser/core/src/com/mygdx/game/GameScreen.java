@@ -19,49 +19,44 @@ public class GameScreen implements Screen {
 	public GameScreen(MyGdxGame game) {
 		this.game = game;
 	}
-
-	private void move(Vector2 positionChange,int rotation, Map map){
-		//create a tempry box to hold the new state
-		Rectangle testBox = new Rectangle();
-		//set the tempery box to the current box for the playerduck
-		testBox.set(0,0,game.duck.getWidth(rotation),game.duck.getHeight(rotation));
-		//add the movement to the tempery box
-		testBox.setPosition(game.duck.getPosition().add(positionChange));
-		if(map.validSpace(testBox, game.duck.isflying(), game.duck.canswim())){
-			//update the playerduck's position with that of the temperybox
-			game.duck.setPosition(testBox.getPosition(new Vector2()));
-			game.duck.setRotation(rotation);}
-		}
 	
 	private void handleInput(Map map) {
+		
+		//quack
 		if (Gdx.input.isKeyJustPressed(Keys.Q)){
 			game.duck.quack();
 		}
-		if (Gdx.input.isKeyPressed(Keys.W)
-				&& (game.duck.getPosition().y < (game.screenHeight - 21 - game.duck.getSpriteHeight(0)))) {
-			this.move(new Vector2(0,game.duck.getSpeed()), game.duck.UP, map);
-		} else if (Gdx.input.isKeyPressed(Keys.S) && (game.duck.getPosition().y > 0)) {
-			this.move(new Vector2(0,-(game.duck.getSpeed())), game.duck.DOWN, map);
-		} else if (Gdx.input.isKeyPressed(Keys.A) && (game.duck.getPosition().x > 0)) {
-			this.move(new Vector2(-(game.duck.getSpeed()),0), game.duck.LEFT, map);
-		} else if (Gdx.input.isKeyPressed(Keys.D)
-				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
-			this.move(new Vector2(game.duck.getSpeed(),0), game.duck.Right, map);
-		} 
 		
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT)
-				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+		//duck movement
+		if (Gdx.input.isKeyPressed(Keys.W)) {
+			game.duck.moveIfValid(game.duck.UP, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.S)) {
+			game.duck.moveIfValid( game.duck.DOWN, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.A)) {
+			game.duck.moveIfValid( game.duck.LEFT, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.D)) {
+			game.duck.moveIfValid(game.duck.RIGHT, game.currentMap);
+		}
+		
+		//control of other features for testing
+		inputTests();
+	}
+
+	//function contsining keys that are not required in the game but are used for other testing
+	private void inputTests() {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
 			game.duck.addScore(1);
 		} else if (Gdx.input.isKeyPressed(Keys.LEFT)
-				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
 			game.duck.addScore(-1);
 		} else if (Gdx.input.isKeyPressed(Keys.UP)
-				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
 			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
 				game.duck.setHealth(game.duck.getHealth() + 1);
 			}
 		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
-				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getSpriteWidth(3)))) {
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
 			if (game.duck.getHealth() > 0) {
 				game.duck.setHealth(game.duck.getHealth() - 1);
 			} // tests for health and score. use arrow keys.
@@ -76,6 +71,7 @@ public class GameScreen implements Screen {
 		else if(Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(new ObjectiveScreen(game));
 		}
+		
 	}
 
 	public void showStamina() {

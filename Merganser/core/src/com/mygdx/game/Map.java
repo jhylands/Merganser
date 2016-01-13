@@ -93,7 +93,7 @@ public class Map {
 	
 	
 	public Map managePortals(PlayerDuck duck){
-		int change = shouldChangeMap(duck.getHitbox());
+		int change = shouldChangeMap(duck.getHitBox());
 		if(change>-1){
 			//duck.setposition(portal.destinationPosition)
 			return this.portals[change].getDestination();

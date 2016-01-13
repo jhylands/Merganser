@@ -50,8 +50,8 @@ public class MapLoader {
 			             for(int featureIterator = 0; featureIterator < features.size(); featureIterator++){
 			            	 Element feature = features.get(featureIterator);
 			            	 arrFeatures[featureIterator] = new MapFeature(element2rectangle(feature),
-			            			 Str2Bool(feature.getChildText("groundImpedence")),
-			            			 Str2Bool(feature.getChildText("flightImpedence")),
+			            			 Str2Bool(feature.getChildText("groundImpeedence")),
+			            			 Str2Bool(feature.getChildText("flightImpeedence")),
 			            			 Str2Bool(feature.getChildText("isWater")) );
 			             }
 		             }else{
@@ -104,7 +104,11 @@ public class MapLoader {
 			return text.toLowerCase()=="true";
 		}
 		private Rectangle element2rectangle(Element elm){
-			return new Rectangle().set(Integer.parseInt(elm.getChild("x").getText()),Integer.parseInt(elm.getChild("y").getText()),Integer.parseInt(elm.getChild("width").getText()),Integer.parseInt(elm.getChild("height").getText()) );
+			System.out.println(elm.getText()); //ChildText("x"));
+			return new Rectangle().set(Integer.parseInt(elm.getChildText("x")),
+					Integer.parseInt(elm.getChildText("y")),
+					Integer.parseInt(elm.getChildText("width")),
+					Integer.parseInt(elm.getChildText("height")) );
 		}
 
 }
