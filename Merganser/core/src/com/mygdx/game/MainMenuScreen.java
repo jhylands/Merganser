@@ -96,7 +96,7 @@ public class MainMenuScreen implements Screen {
 				game.setScreen(game.mainGame);
 				break;
 			case 1:
-				System.out.println("TO DO ...");
+				game.setScreen(new MapScreen(game));
 				break;
 			case 2:
 				Gdx.app.exit();
