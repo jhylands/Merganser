@@ -23,7 +23,6 @@ public class GameScreen implements Screen {
 	private int barHeight = 14;
 	private int barWidth = 100;
 	private SpriteBatch batch;
-	private BitmapFont myFont;
 	private Texture stam;
 
 	public GameScreen(MyGdxGame game) {
@@ -53,13 +52,13 @@ public class GameScreen implements Screen {
 			game.duck.moveIfValid(game.duck.RIGHT, game.currentMap);
 		} else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
-		} 
-		
+		}
+
 		// If O pressed then go to objective screen
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(game.getObjScreen());
-		} 
-		
+		}
+
 		// If M pressed then go to Map Screen
 		if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMapScreen());
@@ -72,24 +71,31 @@ public class GameScreen implements Screen {
 	// function contsining keys that are not required in the game but are used
 	// for other testing
 
-	// private void inputTests() { if (Gdx.input.isKeyPressed(Keys.RIGHT) &&
-	// (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3))))
-	// { game.duck.addScore(1); } else if (Gdx.input.isKeyPressed(Keys.LEFT) &&
-	// (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3))))
-	// { game.duck.addScore(-1); } else if (Gdx.input.isKeyPressed(Keys.UP) &&
-	// (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3))))
-	// { if (game.duck.getHealth() < game.duck.getMaxHealth()) {
-	// game.duck.setHealth(game.duck.getHealth() + 1); } } else if
-	// (Gdx.input.isKeyPressed(Keys.DOWN) && (game.duck.getPosition().x <
-	// (game.screenWidth - game.duck.getWidth(3)))) { if (game.duck.getHealth()
-	// > 0) { game.duck.setHealth(game.duck.getHealth() - 1); } // tests for
-	// health and score. use arrow keys. } else if
-	// (Gdx.input.isKeyPressed(Keys.NUM_9)) {
-	// game.duck.setStamina(game.duck.getStamina() - 1); } else if
-	// (Gdx.input.isKeyPressed(Keys.NUM_0)) {
-	// game.duck.setStamina(game.duck.getStamina() + 1); }
-	//
-	// }
+	private void inputTests() {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)
+				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+			game.duck.addScore(1);
+		} else if (Gdx.input.isKeyPressed(Keys.LEFT)
+				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+			game.duck.addScore(-1);
+		} else if (Gdx.input.isKeyPressed(Keys.UP)
+				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
+				game.duck.setHealth(game.duck.getHealth() + 1);
+			}
+		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
+				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+			if (game.duck.getHealth() > 0) {
+				game.duck.setHealth(game.duck.getHealth() - 1);
+			}
+			// tests for health and score. use arrow keys.
+		} else if (Gdx.input.isKeyPressed(Keys.NUM_9)) {
+			game.duck.setStamina(game.duck.getStamina() - 1);
+		} else if (Gdx.input.isKeyPressed(Keys.NUM_0)) {
+			game.duck.setStamina(game.duck.getStamina() + 1);
+		}
+
+	}
 
 	public void showStamina() {
 		// Create a pixmap to draw new stamina bar from the current stamina
@@ -167,7 +173,6 @@ public class GameScreen implements Screen {
 		this.dispose();
 		batch.dispose();
 		game.myFont.dispose();
-		stam.dispose();
 	}
 
 }

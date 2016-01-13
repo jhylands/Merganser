@@ -52,6 +52,8 @@ public class MyGdxGame extends Game {
 		assetManager.load("Heart_2.png", Texture.class);
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
+		assetManager.load("bio-lab-0.png", Texture.class);
+		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.finishLoading();
 		
 		// Init map - load map from XML Map loader
@@ -116,7 +118,7 @@ public class MyGdxGame extends Game {
 	}
 
 	public Map[] mapGeneration(){
-		MapLoader loader = new MapLoader();
+		MapLoader loader = new MapLoader(this);
 		Map[] maps = new Map[2];
 		/*//map1
 		MapFeature[] features = new MapFeature[1];
