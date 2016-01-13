@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
@@ -44,6 +45,11 @@ public class MapScreen implements Screen {
 		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
 		}
+		
+		else if(Gdx.input.isKeyJustPressed(Keys.M)) {
+			game.setScreen(game.mainGame);
+		}
+		
 	}
 	
 	public void create() {
@@ -56,10 +62,10 @@ public class MapScreen implements Screen {
 		handleInput();
 		sb1.begin();
 		if (currentMap == 0){
-			sb1.draw(game.getGlobmap1(), 0, 0);
+			sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
 		}
 		else if (currentMap == 1){
-			sb1.draw(game.getGlobmap2(), 0, 0);
+			sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
 		}
 		sb1.end();
 	}
