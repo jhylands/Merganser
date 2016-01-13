@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class Button extends Rectangle {
 
-	Texture texture;
-	long time = TimeUtils.millis();
-	SpriteBatch button;
+	private Texture texture;
+	private long time = TimeUtils.millis();
+	private SpriteBatch button;
 
 	public Button(Texture texture, int x, int y, int width, int height) {
 		this.texture = texture;

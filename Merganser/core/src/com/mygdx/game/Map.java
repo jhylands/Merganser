@@ -38,10 +38,7 @@ public class Map {
 	public void setPortals(Portal[] portals) {
 		this.portals = portals;
 	}
-	/*Why would you want all the exits
-	public Map[] getPortalExits() {
-		return portalExits;
-	}*/
+
 	
 	//should be in constructor
 	public void setPortalExit(int portal, Map destination) {
@@ -50,11 +47,20 @@ public class Map {
 	public MapFeature[] getMapFeatures() {
 		return this.features;
 	}
-	/*Should this be in the constructor
-	public void setWalls(Rectangle[] walls) {
-		this.walls = walls;
-	}*/
 
+	//function gets a list of references to set up the map graph
+	public int[] getPortalRef(){
+		int[] references = new int[this.portals.length];
+		for(int i=0; i<references.length;i++){
+			references[i] = this.portals[i].getRef();
+		}
+		return references;
+	}
+	
+	public int getPortalNo(){
+		return this.portals.length;
+	}
+	
 	
 	public boolean validSpace(Rectangle hitbox, boolean flying, boolean canSwim){
 		for(int i=0;i<features.length;i++){

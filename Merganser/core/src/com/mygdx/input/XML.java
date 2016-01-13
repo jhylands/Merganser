@@ -13,7 +13,8 @@ import org.jdom2.input.SAXBuilder;
 
 public class XML {
    public static void main(String[] args) {
-      try {
+	  
+      /*try {
          File inputFile = new File("assets/test.xml");
 
          SAXBuilder saxBuilder = new SAXBuilder();
@@ -46,6 +47,6 @@ public class XML {
          e.printStackTrace();
       }catch(IOException ioe){
          ioe.printStackTrace();
-      }
+      }*/
    }
 }

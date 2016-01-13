@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.mygdx.input.MapLoader;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
@@ -62,6 +63,8 @@ public class MyGdxGame extends Game {
 		batch.dispose();
 	}
 	public Map mapGeneration(){
+		 MapLoader loader = new MapLoader();
+		  loader.loadXML("assets/test.xml");
 		//map1
 		MapFeature[] features = new MapFeature[1];
 		features[0] = new MapFeature(new Rectangle().set(1000,1000,0,0),true,false,false);
@@ -77,7 +80,7 @@ public class MyGdxGame extends Game {
 		
 		map.setPortalExit(0, map2);
 		
-		return map;
+		return loader.loadXML("assets/test.xml")[0];
 		//Rectangle[] a = new Rectangle[1];
 		//a[0] = new Rectangle()
 		//map.setPortals([new Rectangle() ])
