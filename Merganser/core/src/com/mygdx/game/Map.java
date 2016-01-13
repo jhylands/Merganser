@@ -116,5 +116,13 @@ public class Map {
 		}
 		return -1;
 	}
+
+	public Vector2 getGlobalPosition() {
+		return globalPosition;
+	}
+
+	public void setGlobalPosition(Vector2 globalPosition) {
+		this.globalPosition = globalPosition;
+	}
 	
 }
