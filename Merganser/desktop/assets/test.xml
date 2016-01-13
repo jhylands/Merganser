@@ -19,9 +19,17 @@
 				<y>100</y>
 				<width>100</width>
 				<height>100</height>
-				<toRef>1</toRef>
+				<to>
+					<ref>1</ref>
+					<x>100</x>
+					<y>100</y>
+				</to>
 			</MapPortal>
 		</MapPortals>
+		<globalPosition>
+			<x>0</x>
+			<y>0</y>
+		</globalPosition>
 	</Map>
 	<Map>
 		<name>Map2</name>
@@ -37,6 +45,10 @@
 				<height>100</height>
 			</MapFeature>
 		</MapFeatures>
+		<globalPosition>
+			<x>0</x>
+			<y>0</y>
+		</globalPosition>
 	</Map>
 </Maps>
 

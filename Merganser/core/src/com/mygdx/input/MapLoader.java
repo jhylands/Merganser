@@ -1,6 +1,7 @@
 package com.mygdx.input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 import com.mygdx.game.MapFeature;
 import com.mygdx.game.Portal;
@@ -66,7 +67,7 @@ public class MapLoader {
 			             arrPortals = new Portal[portals.size()];
 			             for(int portalIterator = 0; portalIterator < portals.size(); portalIterator++){
 			            	 Element portal = portals.get(portalIterator);
-			            	 arrPortals[portalIterator] = new Portal(element2rectangle(portal), Integer.parseInt(portal.getChildText("toRef")));
+			            	 arrPortals[portalIterator] = new Portal(element2rectangle(portal), Integer.parseInt(portal.getChild("to").getChildText("ref")), portal2Vector(portal));
 			             }
 		             }else{
 		            	 arrPortals = new Portal[0];
@@ -74,7 +75,7 @@ public class MapLoader {
 		             
 		             //add this map to the maps array
 		             Texture mapTex = new Texture(map.getChildText("background"));
-		             arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex,arrFeatures,arrPortals);
+		             arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex,arrFeatures,arrPortals,getGlobal(map));
 		             
 		          }//end MAP loop
 		          
@@ -112,6 +113,19 @@ public class MapLoader {
 					Integer.parseInt(elm.getChildText("y")),
 					Integer.parseInt(elm.getChildText("width")),
 					Integer.parseInt(elm.getChildText("height")) );
+		}
+		
+		private Vector2 portal2Vector(Element portal){
+			return getVector(portal.getChild("to"));
+		}
+		private Vector2 getVector(Element elm){
+			return new Vector2(Integer.parseInt(elm.getChildText("x")),
+					Integer.parseInt(elm.getChildText("y")));
+		}
+		
+		private Vector2 getGlobal(Element map){
+			return getVector(map.getChild("globalPosition"));
+			
 		}
 
 }

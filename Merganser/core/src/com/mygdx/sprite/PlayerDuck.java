@@ -37,6 +37,9 @@ public class PlayerDuck extends LiveEntity {
 		this.quack = Gdx.audio.newSound(Gdx.files.internal("duckQuack.mp3"));
 	}
 
+	public void portalJumpTo(Vector2 v){
+		this.setPosition(v);
+	}
 	public int getScore() {
 		return score;
 	}

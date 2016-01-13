@@ -11,10 +11,10 @@ public class Repeatable extends LiveEntity{
 	
 	public Repeatable(int speed){
 		this.sprite = new Texture[4];
-		this.sprite[0] = new Texture("large_duck.png");
-		this.sprite[1] = new Texture("large_duck_down.png");
-		this.sprite[2] = new Texture("large_duck_left.png");
-		this.sprite[3] = new Texture("large_duck_right.png");
+		this.sprite[0] = new Texture("goose_up.png");
+		this.sprite[1] = new Texture("goose_down.png");
+		this.sprite[2] = new Texture("goose_left.png");
+		this.sprite[3] = new Texture("goose_right.png");
 		this.speed = speed;
 		this.setPosition(new Vector2(50,50));
 	}

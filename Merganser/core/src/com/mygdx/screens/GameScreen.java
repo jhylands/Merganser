@@ -104,15 +104,12 @@ public class GameScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
 	@Override
 	public void render(float delta) {
 		this.handleInput(game.currentMap);
 		game.currentObjective = game.currentObjective.isComplete(game.currentMap);
 		game.currentMap = game.currentMap.managePortals(game.duck);
 		game.badies[0].move(game.duck, game.currentMap);
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.SCREENHEIGHT - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());

@@ -19,7 +19,11 @@
 				<y>100</y>
 				<width>100</width>
 				<height>100</height>
-				<toRef>2</toRef>
+				<to>
+					<ref>1</ref>
+					<x>100</x>
+					<y>100</y>
+				</to>
 			</MapPortal>
 		</MapPortals>
 	</Map>

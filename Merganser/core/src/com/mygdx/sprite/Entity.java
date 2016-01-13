@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
-	private Rectangle hitbox = new Rectangle();
+	private Rectangle hitbox = new Rectangle(0,0,0,0);
 	protected int rotation = 0;
 	protected Texture[] sprite;
 	public String name;
