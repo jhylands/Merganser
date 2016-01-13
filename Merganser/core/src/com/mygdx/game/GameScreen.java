@@ -70,6 +70,9 @@ public class GameScreen implements Screen {
 		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
 		}
+		else if(Gdx.input.isKeyJustPressed(Keys.O)) {
+			game.setScreen(new ObjectiveScreen(game));
+		}
 	}
 
 	public void showStamina() {
@@ -95,6 +98,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		this.handleInput(game.currentMap);
+		game.currentObjective = game.currentObjective.isComplete(game.currentMap);
 		game.currentMap = game.currentMap.managePortals(game.duck);
 		game.badies[0].move(game.duck);
 		Gdx.gl.glClearColor(0, 0, 0, 1);

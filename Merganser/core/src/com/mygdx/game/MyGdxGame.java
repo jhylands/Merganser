@@ -19,24 +19,36 @@ public class MyGdxGame extends Game {
 	Heart heart;
 	PlayerDuck duck;
 	BitmapFont myFont;
-	Texture menu, play, how, quit, stam;
+	Texture menu, stam, globmap1, globmap2;
 	Repeatable[] badies;
 	GameScreen mainGame;
-
+	String[] objective = new String[]{"defeat10", "score500"};
+	Map[] maps;
 	float screenWidth;
 	float screenHeight;
+	Objective currentObjective; 
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		currentMap = this.mapGeneration();
+		maps = this.mapGeneration();
+		currentMap = maps[0];
 		duck = new PlayerDuck();
 		heart = new Heart();
 		menu = new Texture("GUI panel.png");
+		globmap1 = new Texture("map1.png");
+		globmap2 = new Texture("map2.png");
 		badies = new Repeatable[1];
 		badies[0] = new Repeatable(1);
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		
+		Objective objective1 = new Objective(this, maps[1], "Go outside", 1000);
+		Objective objective2 = new Objective(this, maps[0], "Go inside", 1000);
+		objective1.setNextObjective(objective2);
+		objective2.setNextObjective(objective1);
+		
+		currentObjective = objective1;
 		
 		// FONT
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
@@ -62,24 +74,23 @@ public class MyGdxGame extends Game {
 		super.dispose();
 		batch.dispose();
 	}
-	public Map mapGeneration(){
-		 MapLoader loader = new MapLoader();
-		  loader.loadXML("assets/test.xml");
+
+	public Map[] mapGeneration(){
+		Map[] maps = new Map[2];
 		//map1
 		MapFeature[] features = new MapFeature[1];
 		features[0] = new MapFeature(new Rectangle().set(1000,1000,0,0),true,false,false);
 		Portal[] portals = new Portal[1];
 		portals[0] = new Portal(new Rectangle().set(100, 100, 100, 100),null);
-		Map map = new Map(new Texture("bio-lab-1.png"),features,portals);
+		maps[0]= new Map(new Texture("bio-lab-1.png"),features,portals);
 		//map2
 		MapFeature[] features2 = new MapFeature[1];
 		features2[0] = new MapFeature(new Rectangle().set(1000,1000,50,100),true,false,false);
 		Portal[] portals2 = new Portal[1];
-		portals2[0] = new Portal(new Rectangle().set(0,0,100,100),map);
-		Map map2 = new Map(new Texture("bio-lab-0.png"),features2,portals2);
+		portals2[0] = new Portal(new Rectangle().set(0,0,100,100),maps[0]);
+		maps[1] = new Map(new Texture("bio-lab-0.png"),features2,portals2);
 		
-		map.setPortalExit(0, map2);
-		
+		maps[0].setPortalExit(0, maps[1]);
 		return loader.loadXML("assets/test.xml")[0];
 		//Rectangle[] a = new Rectangle[1];
 		//a[0] = new Rectangle()

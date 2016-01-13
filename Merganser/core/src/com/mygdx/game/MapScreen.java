@@ -1,19 +1,66 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class MapScreen implements Screen {
 
+	private MyGdxGame game;
+	private int currentMap;
+	private SpriteBatch sb1;
+
+	public MapScreen(MyGdxGame game) {
+		this.game = game;
+		this.currentMap = 0;
+		create();
+	}
+	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	public void handleInput(){
+		if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+			if (currentMap == 1) {
+				currentMap--;
+			}
+		}
+
+		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+			if (currentMap == 0) {
+				currentMap++;
+			}
+		}
+		
+		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			game.setScreen(new MainMenuScreen(game));
+		}
+	}
+	
+	public void create() {
+		sb1 = new SpriteBatch();
+	}
+	
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		
+		handleInput();
+		sb1.begin();
+		if (currentMap == 0){
+			sb1.draw(game.globmap1, 0, 0);
+		}
+		else if (currentMap == 1){
+			sb1.draw(game.globmap2, 0, 0);
+		}
+		sb1.end();
 	}
 
 	@Override
@@ -43,7 +90,9 @@ public class MapScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		game.myFont.dispose();
+		game.stam.dispose();
+		sb1.dispose();
 	}
 
 }
