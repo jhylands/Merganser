@@ -98,7 +98,6 @@ public class Map {
 		int change = shouldChangeMap(duck.getHitBox());
 		if(change>-1){
 			//duck.setposition(portal.destinationPosition)
-			System.out.println(this.portals[change].getDestination().name);
 			return this.portals[change].getDestination();
 		}else{
 			return this;

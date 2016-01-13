@@ -73,9 +73,7 @@ public class MapLoader {
 		             }
 		             
 		             //add this map to the maps array
-		             String TexLoc = "bio-lab-1.png"; //map.getChildText("background");
-		             System.out.println(TexLoc);
-		             Texture mapTex = new Texture("bio-lab-1.png");
+		             Texture mapTex = new Texture(map.getChildText("background"));
 		             arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex,arrFeatures,arrPortals);
 		             
 		          }//end MAP loop
