@@ -1,25 +1,24 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 
 public class MapScreen implements Screen {
 
 	private MyGdxGame game;
-	private int currentMap;
+	private int currentGlobalMap;
+	private Vector2 globalMapPosition;
 	private SpriteBatch sb1;
 
 	public MapScreen(MyGdxGame game) {
 		this.game = game;
-		this.currentMap = 0;
+		this.currentGlobalMap = 0;
+		this.globalMapPosition = game.currentMap.getGlobalPosition();
 		create();
 	}
 	
@@ -31,14 +30,14 @@ public class MapScreen implements Screen {
 
 	public void handleInput(){
 		if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-			if (currentMap == 1) {
-				currentMap--;
+			if (currentGlobalMap == 1) {
+				currentGlobalMap--;
 			}
 		}
 
 		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-			if (currentMap == 0) {
-				currentMap++;
+			if (currentGlobalMap == 0) {
+				currentGlobalMap++;
 			}
 		}
 		
@@ -61,12 +60,17 @@ public class MapScreen implements Screen {
 		// TODO Auto-generated method stub
 		handleInput();
 		sb1.begin();
-		if (currentMap == 0){
+		if (currentGlobalMap == 0){
 			sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
 		}
-		else if (currentMap == 1){
+		else if (currentGlobalMap == 1){
 			sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
 		}
+		
+		
+		sb1.draw(game.getAssetManager().get("large_duck.png", Texture.class), globalMapPosition.x, globalMapPosition.y);
+		
+		
 		sb1.end();
 	}
 

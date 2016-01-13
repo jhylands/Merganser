@@ -22,6 +22,7 @@ public class Map {
 		this.background = background;
 		this.features = features;
 		this.portals = portals;
+		this.globalPosition = globalPosition;
 	}
 	
 	public Texture getBackground() {

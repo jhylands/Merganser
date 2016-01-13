@@ -27,8 +27,8 @@
 			</MapPortal>
 		</MapPortals>
 		<globalPosition>
-			<x>0</x>
-			<y>0</y>
+			<x>150</x>
+			<y>150</y>
 		</globalPosition>
 	</Map>
 	<Map>
@@ -46,8 +46,8 @@
 			</MapFeature>
 		</MapFeatures>
 		<globalPosition>
-			<x>0</x>
-			<y>0</y>
+			<x>150</x>
+			<y>150</y>
 		</globalPosition>
 	</Map>
 </Maps>
