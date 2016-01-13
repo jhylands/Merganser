@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.mygdx.input.MapLoader;
 import com.mygdx.screens.GameScreen;
 import com.mygdx.screens.MainMenuScreen;
+import com.mygdx.screens.MapScreen;
+import com.mygdx.screens.ObjectiveScreen;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 import com.badlogic.gdx.math.Rectangle;
@@ -24,19 +26,17 @@ public class MyGdxGame extends Game {
 	public Heart heart;
 	public PlayerDuck duck;
 	public BitmapFont myFont;
-	public Texture menu;
-	public Texture stam;
-	public Texture globmap1;
-	public Texture globmap2;
 	public Repeatable[] badies;
 	public GameScreen mainGame;
-	public String[] objective = new String[]{"defeat10", "score500"};
 	public Map[] maps;
-	public float SCREENWIDTH;
-	public float SCREENHEIGHT;
-	public Objective currentObjective;
-	public AssetManager assetManager;
-	public ArrayList<Objective> objectives;
+	private float SCREENWIDTH;
+	private float SCREENHEIGHT;
+	private Objective currentObjective;
+	private AssetManager assetManager;
+	private ArrayList<Objective> objectives;
+	private MainMenuScreen mainMenu;
+	private ObjectiveScreen objScreen;
+	private MapScreen mapScreen;
 
 	@Override
 	public void create() {
@@ -52,6 +52,8 @@ public class MyGdxGame extends Game {
 		assetManager.load("Heart_2.png", Texture.class);
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
+		assetManager.load("bio-lab-0.png", Texture.class);
+		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.finishLoading();
 		
 		// Init map - load map from XML Map loader
@@ -61,7 +63,7 @@ public class MyGdxGame extends Game {
 		setCurrentMap(maps[0]);
 		
 		// Create a new PlayerDuck - contains all of the information for the users duck
-		setDuck(new PlayerDuck());
+		duck = new PlayerDuck();
 		
 		// Create Hearts
 		heart = new Heart(assetManager);
@@ -70,8 +72,8 @@ public class MyGdxGame extends Game {
 		getBadies()[0] = new Repeatable(1);
 		
 		// SET ScreenWidth and ScreenHeight
-		setScreenWidth(Gdx.graphics.getWidth());
-		setScreenHeight(Gdx.graphics.getHeight());
+		SCREENWIDTH = Gdx.graphics.getWidth();
+		SCREENHEIGHT = Gdx.graphics.getHeight();
 		
 		// Create some test objectives into an ArrayList
 		setObjectives(new ArrayList<Objective>());
@@ -88,15 +90,19 @@ public class MyGdxGame extends Game {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 14;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
-		setMyFont(generator.generateFont(parameter));
-		getMyFont().setColor(Color.WHITE);
+		myFont = generator.generateFont(parameter);
+		myFont.setColor(Color.WHITE);
 		generator.dispose();
 		
 		// Create a GameScreen so we can reference to it from different screens
 		setMainGame(new GameScreen(this));
+		setMainMenu(new MainMenuScreen(this));
+		setMapScreen(new MapScreen(this));
+		setObjScreen(new ObjectiveScreen(this));
+		
 		
 		// Set current screen to MainMenu Screen (screen that first loads)
-		this.setScreen(new MainMenuScreen(this));
+		this.setScreen(getMainMenu());
 	}
 
 
@@ -112,7 +118,7 @@ public class MyGdxGame extends Game {
 	}
 
 	public Map[] mapGeneration(){
-		MapLoader loader = new MapLoader();
+		MapLoader loader = new MapLoader(this);
 		Map[] maps = new Map[2];
 		/*//map1
 		MapFeature[] features = new MapFeature[1];
@@ -137,10 +143,6 @@ public class MyGdxGame extends Game {
 	public PlayerDuck getDuck() {
 		return duck;
 	}
-
-	public void setDuck(PlayerDuck duck) {
-		this.duck = duck;
-	}
 	
 	public AssetManager getAssetManager() {
 		return assetManager;
@@ -150,24 +152,8 @@ public class MyGdxGame extends Game {
 		return SCREENHEIGHT;
 	}
 
-	public void setScreenHeight(float screenHeight) {
-		this.SCREENHEIGHT = screenHeight;
-	}
-
 	public float getScreenWidth() {
 		return SCREENWIDTH;
-	}
-
-	public void setScreenWidth(float screenWidth) {
-		this.SCREENWIDTH = screenWidth;
-	}
-
-	public Texture getStam() {
-		return stam;
-	}
-
-	public void setStam(Texture stam) {
-		this.stam = stam;
 	}
 
 	public Map getCurrentMap() {
@@ -194,26 +180,6 @@ public class MyGdxGame extends Game {
 		this.badies = badies;
 	}
 
-	public BitmapFont getMyFont() {
-		return myFont;
-	}
-
-	public void setMyFont(BitmapFont myFont) {
-		this.myFont = myFont;
-	}
-
-	public Texture getMenu() {
-		return menu;
-	}
-
-	public void setMenu(Texture menu) {
-		this.menu = menu;
-	}
-
-	public Heart getHeart() {
-		return heart;
-	}
-
 	public void setHeart(Heart heart) {
 		this.heart = heart;
 	}
@@ -226,40 +192,48 @@ public class MyGdxGame extends Game {
 		this.mainGame = mainGame;
 	}
 
-	public Texture getGlobmap1() {
-		return globmap1;
-	}
-
-	public void setGlobmap1(Texture globmap1) {
-		this.globmap1 = globmap1;
-	}
-
-	public Texture getGlobmap2() {
-		return globmap2;
-	}
-
-	public void setGlobmap2(Texture globmap2) {
-		this.globmap2 = globmap2;
-	}
-
-	public String[] getObjective() {
-		return objective;
-	}
-
-	public void setObjective(String[] objective) {
-		this.objective = objective;
-	}
-
-
-
 	public ArrayList<Objective> getObjectives() {
 		return objectives;
 	}
 
-
-
 	public void setObjectives(ArrayList<Objective> objectives) {
 		this.objectives = objectives;
+	}
+
+
+
+	public MapScreen getMapScreen() {
+		return mapScreen;
+	}
+
+
+
+	public void setMapScreen(MapScreen mapScreen) {
+		this.mapScreen = mapScreen;
+	}
+
+
+
+	public ObjectiveScreen getObjScreen() {
+		return objScreen;
+	}
+
+
+
+	public void setObjScreen(ObjectiveScreen objScreen) {
+		this.objScreen = objScreen;
+	}
+
+
+
+	public MainMenuScreen getMainMenu() {
+		return mainMenu;
+	}
+
+
+
+	public void setMainMenu(MainMenuScreen mainMenu) {
+		this.mainMenu = mainMenu;
 	}
 	
 }

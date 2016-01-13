@@ -74,6 +74,7 @@ public class ObjectiveScreen implements Screen {
 
 		// Draw title to screen. Should be center of screen width and at a set
 		// height
+		objFont.setColor(Color.WHITE);
 		objFont.draw(sb, screenTitle, objFont.getSpaceWidth() * screenTitle.length(), 220);
 
 		// Display each objective on the screen. Display current objective in

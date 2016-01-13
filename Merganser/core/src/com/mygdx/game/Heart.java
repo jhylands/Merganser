@@ -8,8 +8,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Heart {
 
+	/**
+	 * Declare AssetManager from game
+	 */
 	private AssetManager assetManager;
 
+	/**
+	 * Constructor for Heart allows assetManager to be seen from MyGdxGame class
+	 * Store textures for hearts from AssetManager in an Array to enable
+	 * drawing of Hearts
+	 * @param assetManager
+	 */
 	public Heart(AssetManager assetManager){
 		this.assetManager = assetManager;
 		hearts[0] = assetManager.get("Heart_0.png", Texture.class);
@@ -19,6 +28,11 @@ public class Heart {
 		hearts[4] = assetManager.get("Heart_4.png", Texture.class);
 	}
 
+	/**
+	 * Array of Textures
+	 * Allows for the storing of the heart images showing different
+	 * quarters of the heart shaded in
+	 */
 	private Texture[] hearts = new Texture[5];
 
 	public void addTextures(int health, int maxHealth, SpriteBatch batch, float screenWidth, float screenHeight) {

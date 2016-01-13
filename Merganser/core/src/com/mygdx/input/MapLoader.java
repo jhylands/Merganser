@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 import com.mygdx.game.MapFeature;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Portal;
 
 import java.io.File;
@@ -18,6 +19,12 @@ import org.jdom2.input.SAXBuilder;
 
 
 public class MapLoader {
+	
+	private MyGdxGame game;
+	
+	public MapLoader(MyGdxGame game){
+		this.game = game;
+	}
 		
 	public Map[] loadXML(String file){
 		Map[] arrMaps;
@@ -74,8 +81,10 @@ public class MapLoader {
 		             }
 		             
 		             //add this map to the maps array
+
 		             Texture mapTex = new Texture(map.getChildText("background"));
 		             arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex,arrFeatures,arrPortals,getGlobal(map));
+
 		             
 		          }//end MAP loop
 		          
