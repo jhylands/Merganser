@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		this.handleInput(game.currentMap);
 		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.currentMap));
-		System.out.println(game.currentMap.getGlobalPosition());
+//		System.out.println(game.currentMap.getGlobalPosition());
 		game.currentMap = game.currentMap.managePortals(game.duck);
 		game.badies[0].move(game.duck, game.currentMap);
 		batch.begin();
