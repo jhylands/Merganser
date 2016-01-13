@@ -27,13 +27,15 @@ public class MyGdxGame extends Game {
 	public PlayerDuck duck;
 	public BitmapFont myFont;
 	public Repeatable[] badies;
-	public GameScreen mainGame;
+	
 	public Map[] maps;
 	private float SCREENWIDTH;
 	private float SCREENHEIGHT;
 	private Objective currentObjective;
 	private AssetManager assetManager;
 	private ArrayList<Objective> objectives;
+	
+	private GameScreen mainGame;
 	private MainMenuScreen mainMenu;
 	private ObjectiveScreen objScreen;
 	private MapScreen mapScreen;
@@ -115,6 +117,10 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void dispose() {
+		mainGame.dispose();
+		mainMenu.dispose();
+		objScreen.dispose();
+		mapScreen.dispose();
 		super.dispose();
 	}
 

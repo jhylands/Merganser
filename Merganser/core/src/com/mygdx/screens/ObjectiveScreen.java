@@ -49,12 +49,6 @@ public class ObjectiveScreen implements Screen {
 		generator.dispose();
 	}
 
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * Renders the ObjectiveScreen
 	 * 
@@ -73,14 +67,17 @@ public class ObjectiveScreen implements Screen {
 		sb.begin();
 
 		// Draw title to screen. Should be center of screen width and at a set
-		// height
+		// height. Set colour of font to white.
 		objFont.setColor(Color.WHITE);
 		objFont.draw(sb, screenTitle, objFont.getSpaceWidth() * screenTitle.length(), 220);
 
-		// Display each objective on the screen. Display current objective in
-		// Red.
+		// Display each objective on the screen. 
 		for (int i = 0; i < game.getObjectives().size(); i++) {
+			// Get objectives as declared in MyGdxGame class
 			Objective drawObjective = game.getObjectives().get(i);
+			
+			// If objective is current objective; colour red
+			// Else; colour white
 			if (game.getCurrentObjective() == drawObjective) {
 				objFont.setColor(Color.RED);
 				objFont.draw(sb, drawObjective.getObjectiveDescription(), (game.getScreenWidth()
@@ -94,44 +91,77 @@ public class ObjectiveScreen implements Screen {
 			}
 		}
 
+		// End drawing spriteBatch
 		sb.end();
 
 	}
 
+	/**
+	 * Handle input from user.
+	 * Only need to check for Key O pressed to return back to Game
+	 * Or Key M pressed to return to the map
+	 */
 	public void handleInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(game.getMainGame());
 		}
+		else if (Gdx.input.isKeyJustPressed(Keys.M)){
+			game.setScreen(game.getMapScreen());
+		}
 	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
+	/**
+	 * Dispose of SpriteBatch when method called
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 		sb.dispose();
+	}
+
+	/**
+	 * No implementation
+	 */
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * No implementation
+	 */
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * No implementation
+	 */
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * No implementation
+	 */
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * No implementation
+	 */
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

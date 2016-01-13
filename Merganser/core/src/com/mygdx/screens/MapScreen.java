@@ -46,7 +46,7 @@ public class MapScreen implements Screen {
 		}
 		
 		else if(Gdx.input.isKeyJustPressed(Keys.M)) {
-			game.setScreen(game.mainGame);
+			game.setScreen(game.getMainGame());
 		}
 		
 	}
@@ -101,7 +101,6 @@ public class MapScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		game.myFont.dispose();
 		sb1.dispose();
 	}
 
