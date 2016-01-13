@@ -21,56 +21,51 @@ public class GameScreen implements Screen {
 	public GameScreen(MyGdxGame game) {
 		this.game = game;
 	}
-
-	private void move(Vector2 positionChange,int rotation, Map map){
-		//create a tempry box to hold the new state
-		Rectangle testBox = new Rectangle();
-		//set the tempery box to the current box for the playerduck
-		testBox.set(0,0,game.getDuck().getWidth(rotation),game.getDuck().getHeight(rotation));
-		//add the movement to the tempery box
-		testBox.setPosition(game.getDuck().getPosition().add(positionChange));
-		if(map.validSpace(testBox, game.getDuck().isflying(), game.getDuck().canswim())){
-			//update the playerduck's position with that of the temperybox
-			game.getDuck().setPosition(testBox.getPosition(new Vector2()));
-			game.getDuck().setRotation(rotation);}
-		}
 	
 	private void handleInput(Map map) {
-		if (Gdx.input.isKeyJustPressed(Keys.Q)){
-			game.getDuck().quack();
-		}
-		if (Gdx.input.isKeyPressed(Keys.W)
-				&& (game.getDuck().getPosition().y < (game.getScreenHeight() - 21 - game.getDuck().getSpriteHeight(0)))) {
-			this.move(new Vector2(0,game.getDuck().getSpeed()), game.getDuck().UP, map);
-		} else if (Gdx.input.isKeyPressed(Keys.S) && (game.getDuck().getPosition().y > 0)) {
-			this.move(new Vector2(0,-(game.getDuck().getSpeed())), game.getDuck().DOWN, map);
-		} else if (Gdx.input.isKeyPressed(Keys.A) && (game.getDuck().getPosition().x > 0)) {
-			this.move(new Vector2(-(game.getDuck().getSpeed()),0), game.getDuck().LEFT, map);
-		} else if (Gdx.input.isKeyPressed(Keys.D)
-				&& (game.getDuck().getPosition().x < (game.getScreenWidth() - game.getDuck().getSpriteWidth(3)))) {
-			this.move(new Vector2(game.getDuck().getSpeed(),0), game.getDuck().Right, map);
-		} 
 		
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT)
-				&& (game.getDuck().getPosition().x < (game.getScreenWidth() - game.getDuck().getSpriteWidth(3)))) {
-			game.getDuck().addScore(1);
+		//quack
+		if (Gdx.input.isKeyJustPressed(Keys.Q)){
+			game.duck.quack();
+		}
+		
+		//duck movement
+		if (Gdx.input.isKeyPressed(Keys.W)) {
+			game.duck.moveIfValid(game.duck.UP, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.S)) {
+			game.duck.moveIfValid( game.duck.DOWN, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.A)) {
+			game.duck.moveIfValid( game.duck.LEFT, game.currentMap);
+		} else if (Gdx.input.isKeyPressed(Keys.D)) {
+			game.duck.moveIfValid(game.duck.RIGHT, game.currentMap);
+		}
+		
+		//control of other features for testing
+		inputTests();
+	}
+
+	//function contsining keys that are not required in the game but are used for other testing
+	private void inputTests() {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
+			game.duck.addScore(1);
 		} else if (Gdx.input.isKeyPressed(Keys.LEFT)
-				&& (game.getDuck().getPosition().x < (game.getScreenWidth() - game.getDuck().getSpriteWidth(3)))) {
-			game.getDuck().addScore(-1);
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
+			game.duck.addScore(-1);
 		} else if (Gdx.input.isKeyPressed(Keys.UP)
-				&& (game.getDuck().getPosition().x < (game.getScreenWidth() - game.getDuck().getSpriteWidth(3)))) {
-			if (game.getDuck().getHealth() < game.getDuck().getMaxHealth()) {
-				game.getDuck().setHealth(game.getDuck().getHealth() + 1);
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
+			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
+				game.duck.setHealth(game.duck.getHealth() + 1);
 			}
 		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
-				&& (game.getDuck().getPosition().x < (game.getScreenWidth() - game.getDuck().getSpriteWidth(3)))) {
-			if (game.getDuck().getHealth() > 0) {
-				game.getDuck().setHealth(game.getDuck().getHealth() - 1);
+				&& (game.duck.getPosition().x < (game.screenWidth - game.duck.getWidth(3)))) {
+			if (game.duck.getHealth() > 0) {
+				game.duck.setHealth(game.duck.getHealth() - 1);
 			} // tests for health and score. use arrow keys.
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_9)) {
-			game.getDuck().setStamina(game.getDuck().getStamina() - 1);
+			game.duck.setStamina(game.duck.getStamina() - 1);
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_0)) {
-			game.getDuck().setStamina(game.getDuck().getStamina() + 1);
+			game.duck.setStamina(game.duck.getStamina() + 1);
 		}
 		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
@@ -78,6 +73,7 @@ public class GameScreen implements Screen {
 		else if(Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(new ObjectiveScreen(game));
 		}
+		
 	}
 
 	public void showStamina() {
@@ -86,10 +82,10 @@ public class GameScreen implements Screen {
 		Pixmap staminaBar = new Pixmap(barWidth, barHeight, Format.RGBA8888);
 		staminaBar.setColor(0, 1, 0, 0.75f);
 		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
-		staminaBar.fillRectangle(0, 0, game.getDuck().getStamina(), barHeight);
+		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
 		// Export pixmap to texture
-		game.setStam(null);
-		game.setStam(new Texture(staminaBar));
+		game.stam = null;
+		game.stam = new Texture(staminaBar);
 		// Dispose of pixmap as no longer needed
 		staminaBar.dispose();
 	}
@@ -102,26 +98,26 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		this.handleInput(game.getCurrentMap());
-		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.getCurrentMap()));
-		game.setCurrentMap(game.getCurrentMap().managePortals(game.getDuck()));
-		game.getBadies()[0].move(game.getDuck());
+		this.handleInput(game.currentMap);
+		game.currentObjective = game.currentObjective.isComplete(game.currentMap);
+		game.currentMap = game.currentMap.managePortals(game.duck);
+		game.badies[0].move(game.duck);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		game.getBatch().begin();
-		game.getBatch().draw(game.getMenu(), 0, game.getScreenHeight() - game.getMenu().getHeight());
-		game.getMyFont().draw(game.getBatch(), String.format("%06d", game.getDuck().getScore()), game.getScreenWidth() / 2 - 72,
-				game.getScreenHeight() - 6);
-		game.getBatch().draw(game.getCurrentMap().getBackground(), 0, 0);
-		game.getBatch().draw(game.getDuck().getTexture(), game.getDuck().getPosition().x, game.getDuck().getPosition().y);
-		game.getBatch().draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x, game.getBadies()[0].getPosition().y);
+		game.batch.begin();
+		game.batch.draw(game.menu, 0, game.screenHeight - game.menu.getHeight());
+		game.myFont.draw(game.batch, String.format("%06d", game.duck.getScore()), game.screenWidth / 2 - 72,
+				game.screenHeight - 6);
+		game.batch.draw(game.currentMap.getBackground(), 0, 0);
+		game.batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
+		game.batch.draw(game.badies[0].getTexture(), game.badies[0].getPosition().x, game.badies[0].getPosition().y);
 		// Needs to pass numbers rather than textures
-		game.getHeart().addTextures(game.getDuck().getHealth(), game.getDuck().getMaxHealth(), game.getBatch(), game.getScreenWidth(),
-				game.getScreenHeight());
+		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), game.batch, game.screenWidth,
+				game.screenHeight);
 		showStamina();
-		game.getBatch().draw(game.getStam(), 3, game.getScreenHeight() - 18);
-		game.getBatch().end();
-		game.getStam().dispose();
+		game.batch.draw(game.stam, 3, game.screenHeight - 18);
+		game.batch.end();
+		game.stam.dispose();
 
 	}
 
@@ -153,8 +149,8 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		this.dispose();
-		game.getMyFont().dispose();
-		game.getStam().dispose();
+		game.myFont.dispose();
+		game.stam.dispose();
 	}
 
 }

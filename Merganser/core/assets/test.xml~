@@ -8,12 +8,11 @@
 				<flightImpeedence>false</flightImpeedence>
 				<isWater>false</isWater>
 				<x>0</x>
-				
+				<y>0</y>
+				<width>100</width>
+				<height>100</height>
 			</MapFeature>
 		</MapFeatures>
-	`	<MapPortals>
-			<MapPortal>
-				
 	</Map>
 	<Map>
 		<name>Map2</name>

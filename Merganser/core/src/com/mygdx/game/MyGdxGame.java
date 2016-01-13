@@ -20,9 +20,9 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class MyGdxGame extends Game {
 	private SpriteBatch batch;
-	private Map currentMap;
+	public Map currentMap;
 	private Heart heart;
-	private PlayerDuck duck;
+	public PlayerDuck duck;
 	private BitmapFont myFont;
 	private Texture menu;
 	private Texture stam;
