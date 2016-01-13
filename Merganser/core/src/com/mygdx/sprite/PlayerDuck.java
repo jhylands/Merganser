@@ -1,28 +1,20 @@
 package com.mygdx.sprite;
 
-import java.io.Console;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Map;
-import com.mygdx.game.MapFeature;
 
 public class PlayerDuck extends LiveEntity {
-	
+
 	private int screenHeight = Gdx.graphics.getHeight();
-	private int screenWidth = Gdx.graphics.getWidth();
 	private int score = 0;
 	private int stamina = 100;
 	private Sound quack = null;
-	
-	//private Vector2 position <-not needed because position in stored in hitBox inherited from Entity
-	
 
-	
+	// private Vector2 position <-not needed because position in stored in
+	// hitBox inherited from Entity
+
 	public PlayerDuck() {
 		this.canSwim = true;
 		this.sprite = new Texture[4];
@@ -33,13 +25,14 @@ public class PlayerDuck extends LiveEntity {
 		this.setPosition(new Vector2(20, (screenHeight / 2) - (this.getHeight() / 2)));
 		this.setHealth(12);
 		this.setMaxHealth(12);
-		this.speed=3;
+		this.speed = 3;
 		this.quack = Gdx.audio.newSound(Gdx.files.internal("duckQuack.mp3"));
 	}
 
-	public void portalJumpTo(Vector2 v){
+	public void portalJumpTo(Vector2 v) {
 		this.setPosition(v);
 	}
+
 	public int getScore() {
 		return score;
 	}
@@ -47,8 +40,8 @@ public class PlayerDuck extends LiveEntity {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	public void addScore(int score){
+
+	public void addScore(int score) {
 		this.score += score;
 	}
 
@@ -59,12 +52,12 @@ public class PlayerDuck extends LiveEntity {
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-	
-	//public int getSpriteWidth(int rotation){
-	//use getWidth inherited from entity
-	
-	//public int getSpriteHeight(int rotation){
-	//use getHieght inherited from entity
+
+	// public int getSpriteWidth(int rotation){
+	// use getWidth inherited from entity
+
+	// public int getSpriteHeight(int rotation){
+	// use getHieght inherited from entity
 
 	public void quack() {
 		this.quack.play();

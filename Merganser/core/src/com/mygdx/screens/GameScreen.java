@@ -3,19 +3,12 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 import com.mygdx.game.MyGdxGame;
-import com.badlogic.gdx.graphics.Texture;
 
 public class GameScreen implements Screen {
 
@@ -116,11 +109,12 @@ public class GameScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Override
 	public void render(float delta) {
 		this.handleInput(game.currentMap);
 		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.currentMap));
-//		System.out.println(game.currentMap.getGlobalPosition());
+		// System.out.println(game.currentMap.getGlobalPosition());
 		game.currentMap = game.currentMap.managePortals(game.duck);
 		game.badies[0].move(game.duck, game.currentMap);
 		batch.begin();

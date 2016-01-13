@@ -6,6 +6,7 @@ public class World {
 	public Area[] getAreas() {
 		return Areas;
 	}
+
 	public void setAreas(Area[] areas) {
 		Areas = areas;
 	}

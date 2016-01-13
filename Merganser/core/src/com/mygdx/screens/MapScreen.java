@@ -21,14 +21,14 @@ public class MapScreen implements Screen {
 		this.globalMapPosition = game.currentMap.getGlobalPosition();
 		create();
 	}
-	
+
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public void handleInput(){
+	public void handleInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
 			if (currentGlobalMap == 1) {
 				currentGlobalMap--;
@@ -40,62 +40,61 @@ public class MapScreen implements Screen {
 				currentGlobalMap++;
 			}
 		}
-		
-		else if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+
+		else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
 		}
-		
-		else if(Gdx.input.isKeyJustPressed(Keys.M)) {
+
+		else if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMainGame());
 		}
-		
+
 	}
-	
+
 	public void create() {
 		sb1 = new SpriteBatch();
 	}
-	
+
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		handleInput();
 		sb1.begin();
-		if (currentGlobalMap == 0){
+		
+		// Testing of different maps
+		if (currentGlobalMap == 0) {
 			sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
-		}
-		else if (currentGlobalMap == 1){
+		} else if (currentGlobalMap == 1) {
 			sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
 		}
-		
-		
+
 		sb1.draw(game.getAssetManager().get("large_duck.png", Texture.class), globalMapPosition.x, globalMapPosition.y);
-		
-		
+
 		sb1.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

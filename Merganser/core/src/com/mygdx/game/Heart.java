@@ -10,11 +10,12 @@ public class Heart {
 
 	/**
 	 * Constructor for Heart allows assetManager to be seen from MyGdxGame class
-	 * Store textures for hearts from AssetManager in an Array to enable
-	 * drawing of Hearts
+	 * Store textures for hearts from AssetManager in an Array to enable drawing
+	 * of Hearts
+	 * 
 	 * @param assetManager
 	 */
-	public Heart(AssetManager assetManager){
+	public Heart(AssetManager assetManager) {
 		hearts[0] = assetManager.get("Heart_0.png", Texture.class);
 		hearts[1] = assetManager.get("Heart_1.png", Texture.class);
 		hearts[2] = assetManager.get("Heart_2.png", Texture.class);
@@ -23,9 +24,8 @@ public class Heart {
 	}
 
 	/**
-	 * Array of Textures
-	 * Allows for the storing of the heart images showing different
-	 * quarters of the heart shaded in
+	 * Array of Textures Allows for the storing of the heart images showing
+	 * different quarters of the heart shaded in
 	 */
 	private Texture[] hearts = new Texture[5];
 

@@ -1,8 +1,8 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -71,11 +71,11 @@ public class ObjectiveScreen implements Screen {
 		objFont.setColor(Color.WHITE);
 		objFont.draw(sb, screenTitle, objFont.getSpaceWidth() * screenTitle.length(), 220);
 
-		// Display each objective on the screen. 
+		// Display each objective on the screen.
 		for (int i = 0; i < game.getObjectives().size(); i++) {
 			// Get objectives as declared in MyGdxGame class
 			Objective drawObjective = game.getObjectives().get(i);
-			
+
 			// If objective is current objective; colour red
 			// Else; colour white
 			if (game.getCurrentObjective() == drawObjective) {
@@ -97,19 +97,17 @@ public class ObjectiveScreen implements Screen {
 	}
 
 	/**
-	 * Handle input from user.
-	 * Only need to check for Key O pressed to return back to Game
-	 * Or Key M pressed to return to the map
+	 * Handle input from user. Only need to check for Key O pressed to return
+	 * back to Game Or Key M pressed to return to the map
 	 */
 	public void handleInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(game.getMainGame());
-		}
-		else if (Gdx.input.isKeyJustPressed(Keys.M)){
+		} else if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMapScreen());
 		}
 	}
-	
+
 	/**
 	 * Dispose of SpriteBatch when method called
 	 */
@@ -125,7 +123,7 @@ public class ObjectiveScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -134,7 +132,7 @@ public class ObjectiveScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -143,16 +141,16 @@ public class ObjectiveScreen implements Screen {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	/**
 	 * No implementation
 	 */
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -161,7 +159,7 @@ public class ObjectiveScreen implements Screen {
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
