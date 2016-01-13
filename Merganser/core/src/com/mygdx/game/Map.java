@@ -22,6 +22,7 @@ public class Map {
 		this.background = background;
 		this.features = features;
 		this.portals = portals;
+		this.globalPosition = globalPosition;
 	}
 	
 	public Texture getBackground() {
@@ -115,6 +116,14 @@ public class Map {
 			}
 		}
 		return -1;
+	}
+
+	public Vector2 getGlobalPosition() {
+		return globalPosition;
+	}
+
+	public void setGlobalPosition(Vector2 globalPosition) {
+		this.globalPosition = globalPosition;
 	}
 	
 }
