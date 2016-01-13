@@ -112,7 +112,7 @@ public class MyGdxGame extends Game {
 	public Map[] mapGeneration(){
 		MapLoader loader = new MapLoader();
 		Map[] maps = new Map[2];
-		//map1
+		/*//map1
 		MapFeature[] features = new MapFeature[1];
 		features[0] = new MapFeature(new Rectangle().set(1000,1000,0,0),true,false,false);
 		Portal[] portals = new Portal[1];
@@ -125,7 +125,7 @@ public class MyGdxGame extends Game {
 		portals2[0] = new Portal(new Rectangle().set(0,0,100,100),maps[0]);
 		maps[1] = new Map(new Texture("bio-lab-0.png"),features2,portals2);
 		
-		maps[0].setPortalExit(0, maps[1]);
+		maps[0].setPortalExit(0, maps[1]);*/
 		return loader.loadXML("assets/test.xml");
 		//Rectangle[] a = new Rectangle[1];
 		//a[0] = new Rectangle()

@@ -6,7 +6,7 @@ import com.mygdx.sprite.PlayerDuck;
 
 public class Map {
 	private Texture background;
- 
+	private String name;
 	/*private Rectangle[] walls;    //walls impede movement
 	private Rectangle[] blocks;   //blocks impede movement, unless you're flying
 	private Rectangle[] liquids;  //liquids cause you to be swimming, if you can swim
@@ -15,7 +15,8 @@ public class Map {
 	private Portal[] portals;//portals take you to a different map
 	//swimming and flying will be needed later to calculate stamina use
 	
-	public Map(Texture background, MapFeature[] features, Portal[] portals){
+	public Map(String name, Texture background, MapFeature[] features, Portal[] portals){
+		this.name = name;
 		this.background = background;
 		this.features = features;
 		this.portals = portals;
@@ -49,7 +50,7 @@ public class Map {
 	}
 
 	//function gets a list of references to set up the map graph
-	public int[] getPortalRef(){
+	public int[] getPortalRefs(){
 		int[] references = new int[this.portals.length];
 		for(int i=0; i<references.length;i++){
 			references[i] = this.portals[i].getRef();
@@ -67,7 +68,6 @@ public class Map {
 			MapFeature feature = this.features[i];
 			if(hitbox.overlaps(feature.getBox())){
 				//this needs explaining
-				System.out.println(feature.groundImpeedence);
 				if((feature.groundImpeedence && !flying) || (feature.flightImpeedence && flying) || (feature.isWater &&  !canSwim)){
 					return false;
 				}
@@ -103,6 +103,8 @@ public class Map {
 			return this;
 		}
 	}
+	
+	//loops through portals checking their hitbox against the playerducks
 	private int shouldChangeMap(Rectangle hitbox){
 		for(int i = 0; i < this.portals.length; i++){
 			if(hitbox.overlaps(this.portals[i].getBox())){
