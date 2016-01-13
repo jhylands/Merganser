@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Objective;
 
 public class ObjectiveScreen implements Screen {
 
@@ -17,22 +19,32 @@ public class ObjectiveScreen implements Screen {
 	private SpriteBatch sb;
 	private String screenTitle;
 
+	/**
+	 * ObjectiveScreen is called with reference to the ordinal game. The
+	 * create() method is run to set up the new SpriteBatch and Font
+	 * 
+	 * @param game
+	 */
 	public ObjectiveScreen(MyGdxGame game) {
 		this.game = game;
 		create();
 	}
 
+	/**
+	 * Sets up the new Font and SpriteBatch to draw
+	 */
 	private void create() {
-		// TODO Auto-generated method stub
+		// New SpriteBatch
 		sb = new SpriteBatch();
+		// Title to be drawn on the screen
 		screenTitle = "Objectives:";
+
+		// Font generator
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 25;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
-
 		objFont = generator.generateFont(parameter);
-		objFont.setColor(Color.WHITE);
 
 		generator.dispose();
 	}
@@ -43,20 +55,42 @@ public class ObjectiveScreen implements Screen {
 
 	}
 
+	/**
+	 * Renders the ObjectiveScreen
+	 * 
+	 * @param delta
+	 */
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
+		// Handle any input as defined by the handleInput function
 		handleInput();
+
+		// Clear background to black
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		// Begin drawing SpriteBatch
 		sb.begin();
-		
-		objFont.draw(sb, screenTitle, objFont.getSpaceWidth() * screenTitle.length() , 220);
 
-		for (int i = 0; i < game.objective.length; i++) {
-			objFont.draw(sb, game.objective[i],
-					(game.screenWidth - (objFont.getSpaceWidth() * game.objective[i].length())) / 2, 180 - 35 * i);
+		// Draw title to screen. Should be center of screen width and at a set
+		// height
+		objFont.draw(sb, screenTitle, objFont.getSpaceWidth() * screenTitle.length(), 220);
+
+		// Display each objective on the screen. Display current objective in
+		// Red.
+		for (int i = 0; i < game.getObjectives().size(); i++) {
+			Objective drawObjective = game.getObjectives().get(i);
+			if (game.getCurrentObjective() == drawObjective) {
+				objFont.setColor(Color.RED);
+				objFont.draw(sb, drawObjective.getObjectiveDescription(), (game.getScreenWidth()
+						- (objFont.getSpaceWidth() * game.getObjectives().get(i).getObjectiveDescription().length()))
+						/ 2, 180 - 35 * i);
+			} else {
+				objFont.setColor(Color.WHITE);
+				objFont.draw(sb, drawObjective.getObjectiveDescription(), (game.getScreenWidth()
+						- (objFont.getSpaceWidth() * game.getObjectives().get(i).getObjectiveDescription().length()))
+						/ 2, 180 - 35 * i);
+			}
 		}
 
 		sb.end();
@@ -65,7 +99,7 @@ public class ObjectiveScreen implements Screen {
 
 	public void handleInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
-			game.setScreen(game.mainGame);
+			game.setScreen(game.getMainGame());
 		}
 	}
 

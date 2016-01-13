@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Map;
+import com.mygdx.game.MyGdxGame;
 import com.badlogic.gdx.graphics.Texture;
 
 public class GameScreen implements Screen {

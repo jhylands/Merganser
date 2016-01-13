@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.mygdx.game.MyGdxGame;
 
 public class MapScreen implements Screen {
 
@@ -55,10 +56,10 @@ public class MapScreen implements Screen {
 		handleInput();
 		sb1.begin();
 		if (currentMap == 0){
-			sb1.draw(game.globmap1, 0, 0);
+			sb1.draw(game.getGlobmap1(), 0, 0);
 		}
 		else if (currentMap == 1){
-			sb1.draw(game.globmap2, 0, 0);
+			sb1.draw(game.getGlobmap2(), 0, 0);
 		}
 		sb1.end();
 	}
@@ -90,8 +91,8 @@ public class MapScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		game.myFont.dispose();
-		game.stam.dispose();
+		game.getMyFont().dispose();
+		game.getStam().dispose();
 		sb1.dispose();
 	}
 
