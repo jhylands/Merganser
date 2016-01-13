@@ -42,7 +42,7 @@ public class MainMenuScreen implements Screen {
 		menuFont = generator.generateFont(parameter1);
 		titleFont.setColor(Color.WHITE);
 
-		menuItem = new String[] { "Play | Resume", "...", "Quit" };
+		menuItem = new String[] { "Play | Resume", "Map Screen§", "Quit" };
 
 		generator.dispose();
 	}
@@ -97,7 +97,7 @@ public class MainMenuScreen implements Screen {
 				game.setScreen(game.getMainGame());
 				break;
 			case 1:
-				game.setScreen(new MapScreen(game));
+				game.setScreen(game.getMapScreen());
 				break;
 			case 2:
 				Gdx.app.exit();

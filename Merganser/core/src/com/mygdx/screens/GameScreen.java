@@ -57,12 +57,12 @@ public class GameScreen implements Screen {
 		
 		// If O pressed then go to objective screen
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
-			game.setScreen(new ObjectiveScreen(game));
+			game.setScreen(game.getObjScreen());
 		} 
 		
 		// If M pressed then go to Map Screen
 		if (Gdx.input.isKeyJustPressed(Keys.M)) {
-			game.setScreen(new MapScreen(game));
+			game.setScreen(game.getMapScreen());
 		}
 
 		// control of other features for testing
@@ -114,24 +114,24 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		this.handleInput(game.currentMap);
-		game.currentObjective = game.currentObjective.isComplete(game.currentMap);
+		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.currentMap));
 		game.currentMap = game.currentMap.managePortals(game.duck);
 		game.badies[0].move(game.duck, game.currentMap);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
-				game.SCREENHEIGHT - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
-		game.myFont.draw(batch, String.format("%06d", game.duck.getScore()), game.SCREENWIDTH / 2 - 72,
-				game.SCREENHEIGHT - 6);
+				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
+		game.myFont.draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
+				game.getScreenHeight() - 6);
 		batch.draw(game.currentMap.getBackground(), 0, 0);
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
 		batch.draw(game.badies[0].getTexture(), game.badies[0].getPosition().x, game.badies[0].getPosition().y);
 		// Needs to pass numbers rather than textures
-		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.SCREENWIDTH,
-				game.SCREENHEIGHT);
+		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
+				game.getScreenHeight());
 		showStamina();
-		batch.draw(stam, 3, game.SCREENHEIGHT - 18);
+		batch.draw(stam, 3, game.getScreenHeight() - 18);
 		batch.end();
 		stam.dispose();
 
