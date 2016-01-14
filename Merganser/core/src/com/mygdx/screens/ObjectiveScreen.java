@@ -60,7 +60,6 @@ public class ObjectiveScreen implements Screen {
 			game.setNewObjective(false);
 		}
 			
-		
 		// Handle any input as defined by the handleInput function
 		handleInput();
 

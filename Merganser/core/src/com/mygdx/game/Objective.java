@@ -6,7 +6,6 @@ public class Objective {
 	private Map targetMap;
 	private Objective nextObjective;
 	private String objectiveDescription;
-	private boolean alreadyComplete =false;
 
 	int pointsValue;
 	int timeCounter = 0;
@@ -88,11 +87,9 @@ public class Objective {
 	 * @return
 	 */
 	private boolean isComplete(){
-		if(alreadyComplete){
-			return true;
-		}else if(game.getCurrentMap()== targetMap){
+		if(game.getCurrentMap()== targetMap){
 			updateScore();
-			alreadyComplete=true;
+			game.setNewObjective(true);
 			return true;
 		}else{
 			return false;
