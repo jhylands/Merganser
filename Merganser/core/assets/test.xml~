@@ -1,0 +1,30 @@
+<Maps>
+	<Map>
+		<name>Map1</name>
+		<background>bio-lab-1.png</background>
+		<MapFeatures>
+			<MapFeature>
+				<groundImpeedence>false</groundImpeedence>
+				<flightImpeedence>false</flightImpeedence>
+				<isWater>false</isWater>
+				<x>0</x>
+				<y>0</y>
+				<width>100</width>
+				<height>100</height>
+			</MapFeature>
+		</MapFeatures>
+	</Map>
+	<Map>
+		<name>Map2</name>
+		<background>bio-lab-0.png</background>
+		<MapFeatures>
+			<MapFeature>
+				<groundImpeedence>false</groundImpeedence>
+				<flightImpeedence>false</flightImpeedence>
+				<isWater>false</isWater>
+			</MapFeature>
+		</MapFeatures>
+	</Map>
+</Maps>
+
+

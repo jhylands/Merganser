@@ -1,20 +1,36 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
-public class Portal extends MapFeature{
+public class Portal extends MapFeature {
 	private Map exit;
-	public Portal(Rectangle box, Map to) {
-		super(box, false,false,false);
-		this.exit = to;
+	public int exitRef; // Hold this when loading maps in so all maps can be
+						// loaded before linked in
+	private Vector2 exitLocal;
+
+	public Portal(Rectangle box, int to, Vector2 exitLocal) {
+		super(box, false, false, false);
+		this.exit = null;
+		this.exitRef = to;
+		this.exitLocal = exitLocal;
 	}
 
 	public Map getDestination() {
 		return this.exit;
 	}
 
+	public int getRef() {
+		return this.exitRef;
+	}
+
 	public void setDestination(Map destination) {
 		this.exit = destination;
-		
+
+	}
+
+	public Vector2 getExitLocal() {
+		// TODO Auto-generated method stub
+		return this.exitLocal;
 	}
 }
