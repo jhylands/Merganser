@@ -56,6 +56,24 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMapScreen());
 		}
+		
+		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)){
+			if(!game.duck.atMinStam()){
+				game.duck.setSpeed(game.duck.getDUCKSPRINT());
+				game.duck.setStamina(game.duck.getStamina() - 1);
+			}
+			if(game.duck.atMinStam()){
+				game.duck.setSpeed(game.duck.getDUCKSPEED());
+			}
+		}
+		
+		if (! Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && (game.duck.getSpeed() == game.duck.getDUCKSPRINT())){
+			game.duck.setSpeed(game.duck.getDUCKSPEED());
+			game.duck.setStamina(game.duck.getStamina() + 1);
+		}
+		else if (! Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !game.duck.atMaxStam()){
+			game.duck.setStamina(game.duck.getStamina() + 1);
+		}
 
 		// control of other features for testing
 		// inputTests();
