@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.sprite.PlayerDuck;
 
 public class Map {
@@ -17,9 +18,9 @@ public class Map {
 	private MapFeature[] features;
 	private Portal[] portals;// portals take you to a different map
 	// swimming and flying will be needed later to calculate stamina use
-	private Vector2 globalPosition;
+	private Vector3 globalPosition;
 
-	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector2 globalPosition) {
+	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition) {
 		this.name = name;
 		this.background = background;
 		this.features = features;
@@ -122,11 +123,11 @@ public class Map {
 		return -1;
 	}
 
-	public Vector2 getGlobalPosition() {
+	public Vector3 getGlobalPosition() {
 		return globalPosition;
 	}
 
-	public void setGlobalPosition(Vector2 globalPosition) {
+	public void setGlobalPosition(Vector3 globalPosition) {
 		this.globalPosition = globalPosition;
 	}
 

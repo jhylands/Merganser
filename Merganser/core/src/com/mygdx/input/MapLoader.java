@@ -12,6 +12,7 @@ import org.jdom2.input.SAXBuilder;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Map;
 import com.mygdx.game.MapFeature;
 import com.mygdx.game.MyGdxGame;
@@ -135,9 +136,13 @@ public class MapLoader {
 	private Vector2 getVector(Element elm) {
 		return new Vector2(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")));
 	}
+	
+	private Vector3 getVector3(Element elm) {
+		return new Vector3(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),Integer.parseInt(elm.getChildText("z")));
+	}
 
-	private Vector2 getGlobal(Element map) {
-		return getVector(map.getChild("globalPosition"));
+	private Vector3 getGlobal(Element map) {
+		return getVector3(map.getChild("globalPosition"));
 
 	}
 

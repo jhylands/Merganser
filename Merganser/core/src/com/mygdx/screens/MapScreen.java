@@ -6,20 +6,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.MyGdxGame;
 
 public class MapScreen implements Screen {
 
 	private MyGdxGame game;
-	private int currentGlobalMap;
-	private Vector2 globalMapPosition;
+	private Boolean changeMap = false;
+	private Vector3 globalMapPosition;
 	private SpriteBatch sb1;
 
 	public MapScreen(MyGdxGame game) {
 		this.game = game;
-		this.currentGlobalMap = 0;
 		this.globalMapPosition = game.currentMap.getGlobalPosition();
 		create();
+	}
+
+	public void updateCurrentMap() {
+		globalMapPosition = game.currentMap.getGlobalPosition();
 	}
 
 	@Override
@@ -29,16 +33,17 @@ public class MapScreen implements Screen {
 	}
 
 	public void handleInput() {
-		if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-			if (currentGlobalMap == 1) {
-				currentGlobalMap--;
+		if (Gdx.input.isKeyJustPressed(Keys.LEFT) | Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+			if (changeMap == false) {
+				changeMap = true;
+			}
+			else if (changeMap == true) {
+				changeMap = false;
 			}
 		}
-
-		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-			if (currentGlobalMap == 0) {
-				currentGlobalMap++;
-			}
+		
+		else if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+			changeMap = false;
 		}
 
 		else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
@@ -59,16 +64,31 @@ public class MapScreen implements Screen {
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		handleInput();
+		updateCurrentMap();
 		sb1.begin();
-		
-		// Testing of different maps
-		if (currentGlobalMap == 0) {
-			sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
-		} else if (currentGlobalMap == 1) {
-			sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
-		}
 
-		sb1.draw(game.getAssetManager().get("large_duck.png", Texture.class), globalMapPosition.x, globalMapPosition.y);
+		// Testing of different maps
+		if (changeMap) {
+			if (globalMapPosition.z == 0) {
+				sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
+			}
+
+			else if (globalMapPosition.z == 1) {
+				sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
+			}
+
+		} else {
+			if (globalMapPosition.z == 0) {
+				sb1.draw(game.getAssetManager().get("map1.png", Texture.class), 0, 0);
+			}
+
+			else if (globalMapPosition.z == 1) {
+				sb1.draw(game.getAssetManager().get("map2.png", Texture.class), 0, 0);
+			}
+
+			sb1.draw(game.getAssetManager().get("large_duck.png", Texture.class), globalMapPosition.x,
+					globalMapPosition.y);
+		}
 
 		sb1.end();
 	}
