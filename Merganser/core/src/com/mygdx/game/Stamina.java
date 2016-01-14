@@ -22,12 +22,13 @@ public class Stamina{
 		// Create a pixmap to draw new stamina bar from the current stamina
 		// value
 		staminaBar = null;
+		stan = null;
 		staminaBar = new Pixmap(barWidth, barHeight, Format.RGBA8888);
 		staminaBar.setColor(0, 1, 0, 0.75f);
 		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
 		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
 		// Export pixmap to texture
-		stan = null;
+
 		stan = new Texture(staminaBar);
 		batch.draw(stan, 3, game.getScreenHeight() - 18);
 		// Dispose of pixmap as no longer needed
