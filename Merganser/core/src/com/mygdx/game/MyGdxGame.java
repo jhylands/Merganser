@@ -18,23 +18,25 @@ import com.mygdx.screens.ObjectiveScreen;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 
+/**
+ * This class holds the initialisation of the game. When libgdx creates the game using the desktop launcher
+ * the create function in this class is called.
+ * @author james
+ *
+ */
 public class MyGdxGame extends Game {
 
 	public PlayerDuck duck;
-	
 	private Map currentMap;
 	private Heart heart;
 	private BitmapFont myFont;
-	
 	private Repeatable[] badies;
 	private Map[] maps;
-	
 	private float SCREENWIDTH;
 	private float SCREENHEIGHT;
 	private Objective currentObjective;
 	private AssetManager assetManager;
 	private ArrayList<Objective> objectives;
-
 	private GameScreen mainGame;
 	private MainMenuScreen mainMenu;
 	private ObjectiveScreen objScreen;
@@ -43,7 +45,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create() {
 		/**
-		 * AssetManager implementation to allow loading of textures into game
+		 * AssetManager implementation to allow loading of textures into game at start
 		 */
 		assetManager = new AssetManager();
 		assetManager.load("GUI panel.png", Texture.class);

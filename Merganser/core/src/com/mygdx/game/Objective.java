@@ -68,5 +68,16 @@ public class Objective {
 		}
 
 	}
+	
+	//set of functions to return if an objective is complete
+	
+	//Location based
+	private boolean isCorrectLocation(Map currentMap){
+		return false;
+		
+		//some past data representing states so that more than one location can be represented
+		
+		//if(currentMap.getRef == this.mapRef());
+	}
 
 }

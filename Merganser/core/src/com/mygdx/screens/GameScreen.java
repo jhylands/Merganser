@@ -129,30 +129,68 @@ public class GameScreen implements Screen {
 	}
 
 	@Override
+	/**
+	 * function called by the main render loop of LIB GDX when the game screen is the screen being shown.
+	 */
 	public void render(float delta) {
-		this.handleInput(game.getCurrentMap());
-		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.getCurrentMap()));
-		// System.out.println(game.currentMap.getGlobalPosition());
-		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
-		game.getBadies()[0].move(game.duck, game.getCurrentMap());
+		//update the game state
+		this.update();
+		
+		//begine the drawing element
 		batch.begin();
+		//batch passed by reference (because its a class)
+		this.draw(batch);
+		//end the drawer element
+		batch.end();
+		
+		//dispose of the stamina -> The resoning behind this needs explaining
+		stam.dispose();
+	}
+	
+	/**
+	 * function to update the game state
+	 */
+	private void update(){
+		//handle the input 
+		this.handleInput(game.getCurrentMap());
+		//set the current objective
+		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.getCurrentMap()));
+		//set current map
+		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+		//include the baddies that need to be included in the game
+		game.getBadies()[0].move(game.duck, game.getCurrentMap());
+	}
+	
+/**
+ * Function to draw the sprites and text to the game screen
+ * @param batch
+ * batch is passed by reference (because its a class) so function doesn't need to return batch
+ */
+	private void draw(SpriteBatch batch){
+		//draw the GUI
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
+		//draw the score
 		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
+		//draw the map background
 		batch.draw(game.getCurrentMap().getBackground(), 0, 0);
+		//draw the duck texture
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
+		//draw the baddies
 		batch.draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x, game.getBadies()[0].getPosition().y);
+		//draw health
 		// Needs to pass numbers rather than textures
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
+		//draw stamina
+		//------ WTF two lines in the renderer to do one thing?
 		showStamina();
 		batch.draw(stam, 3, game.getScreenHeight() - 18);
-		batch.end();
-		stam.dispose();
-
+		//----------
 	}
-
+	
+	//WHY THE EMPTY FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -176,7 +214,8 @@ public class GameScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
