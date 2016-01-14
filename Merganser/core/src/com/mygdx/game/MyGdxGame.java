@@ -55,6 +55,13 @@ public class MyGdxGame extends Game {
 		assetManager.load("bio-lab-0.png", Texture.class);
 		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.load("large_duck.png", Texture.class);
+		assetManager.load("large_duck_down.png", Texture.class);
+		assetManager.load("large_duck_left.png", Texture.class);
+		assetManager.load("large_duck_right.png", Texture.class);
+		assetManager.load("goose_up.png", Texture.class);
+		assetManager.load("goose_down.png", Texture.class);
+		assetManager.load("goose_left.png", Texture.class);
+		assetManager.load("goose_right.png", Texture.class);
 		assetManager.finishLoading();
 
 		// Init map - load map from XML Map loader
@@ -65,13 +72,13 @@ public class MyGdxGame extends Game {
 
 		// Create a new PlayerDuck - contains all of the information for the
 		// users duck
-		duck = new PlayerDuck();
+		duck = new PlayerDuck(assetManager);
 
 		// Create Hearts
 		heart = new Heart(assetManager);
 
 		setBadies(new Repeatable[1]);
-		getBadies()[0] = new Repeatable(1);
+		getBadies()[0] = new Repeatable(1, assetManager);
 
 		// SET ScreenWidth and ScreenHeight
 		SCREENWIDTH = Gdx.graphics.getWidth();

@@ -60,7 +60,7 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)){
 			if(!game.duck.atMinStam()){
 				game.duck.setSpeed(game.duck.getDUCKSPRINT());
-				game.duck.setStamina(game.duck.getStamina() - 1);
+				game.duck.setStamina(game.duck.getStamina() - 2);
 			}
 			if(game.duck.atMinStam()){
 				game.duck.setSpeed(game.duck.getDUCKSPEED());

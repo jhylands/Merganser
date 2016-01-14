@@ -1,5 +1,6 @@
 package com.mygdx.sprite;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
@@ -9,12 +10,12 @@ public class Repeatable extends LiveEntity {
 	// sight2 is the distance of the sight squared
 	public int sight2 = 10000;
 
-	public Repeatable(int speed) {
+	public Repeatable(int speed, AssetManager manager) {
 		this.sprite = new Texture[4];
-		this.sprite[0] = new Texture("goose_up.png");
-		this.sprite[2] = new Texture("goose_down.png");
-		this.sprite[3] = new Texture("goose_left.png");
-		this.sprite[1] = new Texture("goose_right.png");
+		this.sprite[0] = manager.get("goose_up.png", Texture.class);
+		this.sprite[2] = manager.get("goose_down.png", Texture.class);
+		this.sprite[3] = manager.get("goose_left.png", Texture.class);
+		this.sprite[1] = manager.get("goose_right.png", Texture.class);
 		this.speed = speed;
 		this.setPosition(new Vector2(50, 50));
 	}

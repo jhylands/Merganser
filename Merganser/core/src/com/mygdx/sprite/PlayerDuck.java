@@ -1,9 +1,11 @@
 package com.mygdx.sprite;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGdxGame;
 
 public class PlayerDuck extends LiveEntity {
 
@@ -19,13 +21,13 @@ public class PlayerDuck extends LiveEntity {
 	// private Vector2 position <-not needed because position in stored in
 	// hitBox inherited from Entity
 
-	public PlayerDuck() {
+	public PlayerDuck(AssetManager manager) {
 		this.canSwim = true;
 		this.sprite = new Texture[4];
-		this.sprite[this.UP] = new Texture("large_duck.png");
-		this.sprite[this.DOWN] = new Texture("large_duck_down.png");
-		this.sprite[this.LEFT] = new Texture("large_duck_left.png");
-		this.sprite[this.RIGHT] = new Texture("large_duck_right.png");
+		this.sprite[this.UP] = manager.get("large_duck.png", Texture.class);
+		this.sprite[this.DOWN] = manager.get("large_duck_down.png", Texture.class);
+		this.sprite[this.LEFT] = manager.get("large_duck_left.png", Texture.class);
+		this.sprite[this.RIGHT] = manager.get("large_duck_right.png", Texture.class);
 		this.setPosition(new Vector2(20, (screenHeight / 2) - (this.getHeight() / 2)));
 		this.setHealth(12);
 		this.setMaxHealth(12);
@@ -50,7 +52,7 @@ public class PlayerDuck extends LiveEntity {
 	}
 	
 	public boolean atMinStam (){
-		return (stamina == MINSTAM);
+		return (stamina <= MINSTAM);
 	}
 
 	public void portalJumpTo(Vector2 v) {
