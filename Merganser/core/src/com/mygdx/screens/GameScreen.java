@@ -36,13 +36,13 @@ public class GameScreen implements Screen {
 
 		// duck movement
 		if (Gdx.input.isKeyPressed(Keys.W)) {
-			game.duck.moveIfValid(game.duck.UP, game.currentMap);
+			game.duck.moveIfValid(game.duck.UP, game.getCurrentMap());
 		} else if (Gdx.input.isKeyPressed(Keys.S)) {
-			game.duck.moveIfValid(game.duck.DOWN, game.currentMap);
+			game.duck.moveIfValid(game.duck.DOWN, game.getCurrentMap());
 		} else if (Gdx.input.isKeyPressed(Keys.A)) {
-			game.duck.moveIfValid(game.duck.LEFT, game.currentMap);
+			game.duck.moveIfValid(game.duck.LEFT, game.getCurrentMap());
 		} else if (Gdx.input.isKeyPressed(Keys.D)) {
-			game.duck.moveIfValid(game.duck.RIGHT, game.currentMap);
+			game.duck.moveIfValid(game.duck.RIGHT, game.getCurrentMap());
 		} else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game));
 		}
@@ -130,21 +130,21 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		this.handleInput(game.currentMap);
-		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.currentMap));
+		this.handleInput(game.getCurrentMap());
+		game.setCurrentObjective(game.getCurrentObjective().isComplete(game.getCurrentMap()));
 		// System.out.println(game.currentMap.getGlobalPosition());
-		game.currentMap = game.currentMap.managePortals(game.duck);
-		game.badies[0].move(game.duck, game.currentMap);
+		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+		game.getBadies()[0].move(game.duck, game.getCurrentMap());
 		batch.begin();
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
-		game.myFont.draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
+		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
-		batch.draw(game.currentMap.getBackground(), 0, 0);
+		batch.draw(game.getCurrentMap().getBackground(), 0, 0);
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
-		batch.draw(game.badies[0].getTexture(), game.badies[0].getPosition().x, game.badies[0].getPosition().y);
+		batch.draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x, game.getBadies()[0].getPosition().y);
 		// Needs to pass numbers rather than textures
-		game.heart.addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
+		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
 		showStamina();
 		batch.draw(stam, 3, game.getScreenHeight() - 18);
@@ -181,7 +181,7 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		batch.dispose();
-		game.myFont.dispose();
+		game.getMyFont().dispose();
 	}
 
 }

@@ -18,12 +18,12 @@ public class MapScreen implements Screen {
 
 	public MapScreen(MyGdxGame game) {
 		this.game = game;
-		this.globalMapPosition = game.currentMap.getGlobalPosition();
+		this.globalMapPosition = game.getCurrentMap().getGlobalPosition();
 		create();
 	}
 
 	public void updateCurrentMap() {
-		globalMapPosition = game.currentMap.getGlobalPosition();
+		globalMapPosition = game.getCurrentMap().getGlobalPosition();
 	}
 
 	@Override
