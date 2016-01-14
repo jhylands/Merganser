@@ -130,5 +130,9 @@ public class Map {
 	public void setGlobalPosition(Vector3 globalPosition) {
 		this.globalPosition = globalPosition;
 	}
+	
+	public String getName(){
+		return name;
+	}
 
 }

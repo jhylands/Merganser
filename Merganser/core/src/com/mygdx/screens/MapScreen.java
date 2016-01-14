@@ -3,9 +3,12 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.MyGdxGame;
 
@@ -15,6 +18,9 @@ public class MapScreen implements Screen {
 	private Boolean changeMap = false;
 	private Vector3 globalMapPosition;
 	private SpriteBatch sb1;
+	private BitmapFont mapFont;
+	private String currentMapName;
+	private String CURRENTLOCATION = "Current Location: ";
 
 	public MapScreen(MyGdxGame game) {
 		this.game = game;
@@ -36,13 +42,12 @@ public class MapScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.LEFT) | Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
 			if (changeMap == false) {
 				changeMap = true;
-			}
-			else if (changeMap == true) {
+			} else if (changeMap == true) {
 				changeMap = false;
 			}
 		}
-		
-		else if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+
+		else if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 			changeMap = false;
 		}
 
@@ -58,6 +63,15 @@ public class MapScreen implements Screen {
 
 	public void create() {
 		sb1 = new SpriteBatch();
+
+		// Font generator
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 15;
+		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
+		mapFont = generator.generateFont(parameter);
+
+		generator.dispose();
 	}
 
 	@Override
@@ -90,6 +104,13 @@ public class MapScreen implements Screen {
 					globalMapPosition.y);
 		}
 
+		currentMapName = game.getCurrentMap().getName();
+		mapFont.setColor(Color.BLACK);
+		mapFont.draw(sb1, CURRENTLOCATION + currentMapName,
+				game.getScreenWidth() - ((CURRENTLOCATION.length() * mapFont.getSpaceWidth())
+						+ (mapFont.getSpaceWidth() * currentMapName.length())),
+				20);
+
 		sb1.end();
 	}
 
@@ -121,6 +142,7 @@ public class MapScreen implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		sb1.dispose();
+		mapFont.dispose();
 	}
 
 }

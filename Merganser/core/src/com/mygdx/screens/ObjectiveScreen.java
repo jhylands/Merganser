@@ -115,6 +115,7 @@ public class ObjectiveScreen implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		sb.dispose();
+		objFont.dispose();
 	}
 
 	/**
