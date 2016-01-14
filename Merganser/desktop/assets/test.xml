@@ -118,6 +118,19 @@
 				<height>1</height>
 			</MapFeature>
 		</MapFeatures>
+		<MapPortals>
+			<MapPortal>
+				<x>200</x>
+				<y>100</y>
+				<width>100</width>
+				<height>100</height>
+				<to>
+					<ref>0</ref>
+					<x>200</x>
+					<y>200</y>
+				</to>
+			</MapPortal>
+		</MapPortals>
 		<globalPosition>
 			<x>150</x>
 			<y>150</y>
