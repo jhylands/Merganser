@@ -41,6 +41,8 @@ public class MyGdxGame extends Game {
 	private MainMenuScreen mainMenu;
 	private ObjectiveScreen objScreen;
 	private MapScreen mapScreen;
+	private Stamina stamina;
+
 
 	@Override
 	public void create() {
@@ -70,6 +72,7 @@ public class MyGdxGame extends Game {
 
 		// Init map - load map from XML Map loader
 		maps = this.mapGeneration();
+		
 
 		// Set the current map
 		setCurrentMap(maps[0]);
@@ -77,7 +80,9 @@ public class MyGdxGame extends Game {
 		// Create a new PlayerDuck - contains all of the information for the
 		// users duck
 		duck = new PlayerDuck(assetManager);
-
+		
+		//initiate stamina
+		stamina =  new Stamina();
 		// Create Hearts
 		setHeart(new Heart(assetManager));
 
@@ -249,6 +254,11 @@ public class MyGdxGame extends Game {
 
 	public void setMyFont(BitmapFont myFont) {
 		this.myFont = myFont;
+	}
+
+	public Stamina getStamina() {
+		// TODO Auto-generated method stub
+		return this.stamina;
 	}
 
 }

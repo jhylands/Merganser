@@ -10,11 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Map;
 import com.mygdx.game.MyGdxGame;
 
+
+
 public class GameScreen implements Screen {
 
 	private MyGdxGame game;
-	private int barHeight = 14;
-	private int barWidth = 100;
+
 	private SpriteBatch batch;
 
 	public GameScreen(MyGdxGame game) {
@@ -107,21 +108,6 @@ public class GameScreen implements Screen {
 
 	}
 
-	public void showStamina(SpriteBatch batch) {
-		// Create a pixmap to draw new stamina bar from the current stamina
-		// value
-		Pixmap staminaBar = new Pixmap(barWidth, barHeight, Format.RGBA8888);
-		staminaBar.setColor(0, 1, 0, 0.75f);
-		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
-		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
-		// Export pixmap to texture
-		Texture stan = new Texture(staminaBar);
-		batch.draw(stan, 3, game.getScreenHeight() - 18);
-		stan.dispose();
-		// Dispose of pixmap as no longer needed
-		staminaBar.dispose();
-	}
-
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -183,7 +169,7 @@ public class GameScreen implements Screen {
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
 		//draw stamina
-		showStamina(batch);
+		game.getStamina().draw(batch, game);
 	}
 	
 	//WHY THE EMPTY FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
