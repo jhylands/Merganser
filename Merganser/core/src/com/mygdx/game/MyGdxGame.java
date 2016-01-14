@@ -17,11 +17,11 @@ import com.mygdx.screens.MapScreen;
 import com.mygdx.screens.ObjectiveScreen;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
- * This class holds the initialisation of the game. When libgdx creates the game using the desktop launcher
- * the create function in this class is called.
+ * This class holds the initialisation of the game. When libgdx creates the game
+ * using the desktop launcher the create function in this class is called.
+ * 
  * @author james
  *
  */
@@ -44,7 +44,6 @@ public class MyGdxGame extends Game {
 	private MapScreen mapScreen;
 	private Stamina stamina;
 	private boolean newObjective = true;
-
 
 	@Override
 	public void create() {
@@ -71,6 +70,7 @@ public class MyGdxGame extends Game {
 		assetManager.load("goose_left.png", Texture.class);
 		assetManager.load("goose_right.png", Texture.class);
 		assetManager.load("objective.png", Texture.class);
+		assetManager.load("outside.png", Texture.class);
 		assetManager.finishLoading();
 
 		// Init map - load map from XML Map loader
@@ -98,10 +98,20 @@ public class MyGdxGame extends Game {
 
 		// Create some test objectives into an ArrayList
 		setObjectives(new ArrayList<Objective>());
-		getObjectives().add(new Objective(this, maps[1], "Go outside", 100));
-		getObjectives().add(new Objective(this, maps[0], "Go inside", 100));
-		getObjectives().get(0).setNextObjective(getObjectives().get(1));
-		getObjectives().get(1).setNextObjective(getObjectives().get(0));
+		try {
+			getObjectives().add(new Objective(this, maps[2], "Go to outside biology", 100));
+			getObjectives().add(new Objective(this, maps[0], "Go back to the biology lab", 100));
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");
+		}
+		try {
+			getObjectives().get(0).setNextObjective(getObjectives().get(1));
+			getObjectives().get(1).setNextObjective(getObjectives().get(0));
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("Can't set next objective to greater than objective ArrayList length");
+		}
+		
+		
 
 		// Set current objective as objective1. Allows an objective for when the
 		// game starts

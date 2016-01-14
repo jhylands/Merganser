@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Portal extends MapFeature {
 	private Map exit;
-	public int exitRef; // Hold this when loading maps in so all maps can be
+	private int exitRef; // Hold this when loading maps in so all maps can be
 						// loaded before linked in
 	private Vector2 exitLocal;
 

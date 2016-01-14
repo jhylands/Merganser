@@ -3,8 +3,6 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Map;
@@ -180,8 +178,14 @@ public class GameScreen implements Screen {
 		}
 	}
 
-	// WHY THE EMPTY
-	// FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		batch.dispose();
+		game.getMyFont().dispose();
+	}
+	
+	// Functions required by Screen implementation but not needed
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -206,12 +210,5 @@ public class GameScreen implements Screen {
 
 	}
 
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		batch.dispose();
-		game.getMyFont().dispose();
-	}
 
 }

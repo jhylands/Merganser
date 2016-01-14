@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
 	private Rectangle hitbox = new Rectangle(0, 0, 0, 0);
-	protected int rotation = 0;
+	private  int rotation = 0;
 	protected Texture[] sprite;
-	public String name;
+	private String name;
 	public int UP = 0;
 	public int RIGHT = 1;
 	public int DOWN = 2;

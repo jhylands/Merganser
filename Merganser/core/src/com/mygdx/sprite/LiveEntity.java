@@ -6,8 +6,8 @@ import com.mygdx.game.Map;
 public class LiveEntity extends Entity {
 	// as a superclass these should be protected rather than private so they can
 	// be visible to the subclasses
-	protected int health;
-	protected int maxHealth; // for duck, should always be divisible by 4,
+	private int health;
+	private int maxHealth; // for duck, should always be divisible by 4,
 								// anything else doesn't matter
 	protected int attackStrength;
 	protected int speed;

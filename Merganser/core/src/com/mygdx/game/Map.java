@@ -120,8 +120,8 @@ public class Map {
 			MapFeature feature = this.features[i];
 			if (hitbox.overlaps(feature.getBox())) {
 				// this needs explaining
-				if ((feature.groundImpeedence && !flying) || (feature.flightImpeedence && flying)
-						|| (feature.isWater && !canSwim)) {
+				if ((feature.isGroundImpeedence() && !flying) || (feature.isFlightImpeedence() && flying)
+						|| (feature.isWater() && !canSwim)) {
 					return false;
 				}
 			}
@@ -145,7 +145,7 @@ public class Map {
 	public boolean isSwimming(Rectangle hitbox) { // Only use this if not flying
 		int i = 0;
 		while (i < this.features.length) {
-			if (this.features[i].isWater) {
+			if (this.features[i].isWater()) {
 				if (hitbox.overlaps(this.features[i].getBox())) {
 					return true;
 				}

@@ -8,7 +8,7 @@ import com.mygdx.game.Map;
 public class Repeatable extends LiveEntity {
 	protected int attack;
 	// sight2 is the distance of the sight squared
-	public int sight2 = 10000;
+	private int sight2 = 10000;
 
 	public Repeatable(int speed, AssetManager manager) {
 		this.sprite = new Texture[4];

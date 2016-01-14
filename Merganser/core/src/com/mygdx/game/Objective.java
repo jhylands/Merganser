@@ -7,8 +7,8 @@ public class Objective {
 	private Objective nextObjective;
 	private String objectiveDescription;
 
-	int pointsValue;
-	int timeCounter = 0;
+	private int pointsValue;
+	private int timeCounter = 0;
 
 	public Objective(MyGdxGame game, Map targetMap, String objectiveDescription, int pointsValue) {
 		this.game = game;
