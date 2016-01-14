@@ -20,13 +20,15 @@ import com.mygdx.sprite.Repeatable;
 
 public class MyGdxGame extends Game {
 
-	public Map currentMap;
-	public Heart heart;
 	public PlayerDuck duck;
-	public BitmapFont myFont;
-	public Repeatable[] badies;
-
-	public Map[] maps;
+	
+	private Map currentMap;
+	private Heart heart;
+	private BitmapFont myFont;
+	
+	private Repeatable[] badies;
+	private Map[] maps;
+	
 	private float SCREENWIDTH;
 	private float SCREENHEIGHT;
 	private Objective currentObjective;
@@ -75,7 +77,7 @@ public class MyGdxGame extends Game {
 		duck = new PlayerDuck(assetManager);
 
 		// Create Hearts
-		heart = new Heart(assetManager);
+		setHeart(new Heart(assetManager));
 
 		setBadies(new Repeatable[1]);
 		getBadies()[0] = new Repeatable(1, assetManager);
@@ -100,8 +102,8 @@ public class MyGdxGame extends Game {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 14;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
-		myFont = generator.generateFont(parameter);
-		myFont.setColor(Color.WHITE);
+		setMyFont(generator.generateFont(parameter));
+		getMyFont().setColor(Color.WHITE);
 		generator.dispose();
 
 		// Create a GameScreen so we can reference to it from different screens
@@ -233,6 +235,18 @@ public class MyGdxGame extends Game {
 
 	public void setMainMenu(MainMenuScreen mainMenu) {
 		this.mainMenu = mainMenu;
+	}
+
+	public Heart getHeart() {
+		return heart;
+	}
+
+	public BitmapFont getMyFont() {
+		return myFont;
+	}
+
+	public void setMyFont(BitmapFont myFont) {
+		this.myFont = myFont;
 	}
 
 }
