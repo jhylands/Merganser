@@ -1,8 +1,8 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,24 +11,21 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.game.MyGdxGame;
 
-
-public class MainMenuScreen implements Screen {
-
-	private MyGdxGame game;
-
+public class EndScreen implements Screen {
+	
 	private SpriteBatch sb;
-	private BitmapFont titleFont;
-	private BitmapFont menuFont;
-	private final String gameTitle = "The Duck Game";
-	private int currentMenuItem;
+	private BitmapFont endFont, menuFont;
+	private MyGdxGame game;
 	private String[] menuItem;
-
-	public MainMenuScreen(MyGdxGame game) {
+	private String GAMEOVER = "Game Over!"; 
+	private int currentMenuItem;
+	
+	public EndScreen(MyGdxGame game){
 		this.game = game;
 		create();
 	}
 
-	public void create() {
+	public void create(){
 		sb = new SpriteBatch();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -38,32 +35,32 @@ public class MainMenuScreen implements Screen {
 		parameter1.size = 25;
 		parameter1.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-|";
 
-		titleFont = generator.generateFont(parameter);
+		endFont = generator.generateFont(parameter);
 		menuFont = generator.generateFont(parameter1);
-		titleFont.setColor(Color.WHITE);
+		endFont.setColor(Color.WHITE);
 
-		menuItem = new String[] { "Play | Resume", "Map Screen", "Quit" };
+		menuItem = new String[] { "Score: " + game.duck.getScore(), "Quit" };
 
 		generator.dispose();
 	}
-
+	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		handleInput();
+handleInput();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		sb.begin();
 
-		titleFont.draw(sb, gameTitle, (game.getScreenWidth() - (titleFont.getSpaceWidth() * gameTitle.length())) / 2, 240);
+		endFont.draw(sb, "Game Over!", (game.getScreenWidth() - (endFont.getSpaceWidth() * GAMEOVER.length())) / 2, 240);
 
 		for (int i = 0; i < menuItem.length; i++) {
 			if (currentMenuItem == i) {
@@ -77,7 +74,7 @@ public class MainMenuScreen implements Screen {
 		sb.end();
 
 	}
-
+	
 	public void handleInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.UP)) {
 			if (currentMenuItem > 0) {
@@ -94,12 +91,8 @@ public class MainMenuScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			switch (currentMenuItem) {
 			case 0:
-				game.setScreen(game.getMainGame());
 				break;
 			case 1:
-				game.setScreen(game.getMapScreen());
-				break;
-			case 2:
 				Gdx.app.exit();
 				break;
 			}
@@ -110,32 +103,31 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		titleFont.dispose();
-		menuFont.dispose();
+		endFont.dispose();
 		sb.dispose();
 	}
 
