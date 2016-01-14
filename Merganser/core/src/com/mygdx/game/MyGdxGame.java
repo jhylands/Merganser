@@ -45,6 +45,9 @@ public class MyGdxGame extends Game {
 	private Stamina stamina;
 	private boolean newObjective = true;
 
+	/**
+	 * Creates resources needed for the whole game
+	 */
 	@Override
 	public void create() {
 		/**
@@ -150,6 +153,13 @@ public class MyGdxGame extends Game {
 		super.dispose();
 	}
 
+	/**
+	 * Initializes the XML map loader
+	 * Returns a Map[] based on the results from the XML Loader
+	 * XML file needs to be stored in desktop assets directory as an external file
+	 * Can find XML documentation on group website
+	 * @return
+	 */
 	public Map[] mapGeneration() {
 		MapLoader loader = new MapLoader(this);
 		// Map[] maps = new Map[2];
@@ -173,6 +183,8 @@ public class MyGdxGame extends Game {
 		// map.setPortals([new Rectangle() ])
 	}
 
+	// GETTERS AND SETTERS
+	
 	public PlayerDuck getDuck() {
 		return duck;
 	}
@@ -270,7 +282,6 @@ public class MyGdxGame extends Game {
 	}
 
 	public Stamina getStamina() {
-		// TODO Auto-generated method stub
 		return this.stamina;
 	}
 

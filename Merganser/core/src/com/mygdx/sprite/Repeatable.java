@@ -10,6 +10,13 @@ public class Repeatable extends LiveEntity {
 	// sight2 is the distance of the sight squared
 	private int sight2 = 10000;
 
+	/**
+	 * Constructor for Repeatable.
+	 * Loads textures from assetManager
+	 * Sets up variables and position
+	 * @param speed
+	 * @param manager
+	 */
 	public Repeatable(int speed, AssetManager manager) {
 		this.sprite = new Texture[4];
 		this.sprite[0] = manager.get("goose_up.png", Texture.class);
@@ -20,8 +27,11 @@ public class Repeatable extends LiveEntity {
 		this.setPosition(new Vector2(50, 50));
 	}
 
-	// update the ducks position by the direction towards the player multiplied
-	// by the ducks speed
+	/**
+	 * Update the ducks position by the direction towards the player multiplied by the ducks speed
+	 * @param duck
+	 * @param map
+	 */
 	public void move(PlayerDuck duck, Map map) {
 		if (duck.getPosition().sub(this.getPosition()).len2() < sight2) {
 			this.moveIfValid(this.findDirection(duck).scl(this.speed), map);
@@ -29,6 +39,10 @@ public class Repeatable extends LiveEntity {
 		}
 	}
 
+	/**
+	 * Depending on direction given sets rotation of Repeatable
+	 * @param direction
+	 */
 	private void rotate(float direction) {
 		if (direction < 45 || direction > 315) {
 			this.setRotation(this.RIGHT);
@@ -41,6 +55,11 @@ public class Repeatable extends LiveEntity {
 		}
 	}
 
+	/**
+	 * Returns the direction of playerDuck from repeatable
+	 * @param duck
+	 * @return
+	 */
 	public Vector2 findDirection(PlayerDuck duck) {
 		return duck.getPosition().sub(this.getPosition()).nor();
 	}

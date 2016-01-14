@@ -132,6 +132,7 @@ public class Map {
 	
 	/**
 	 * function to show if an object can land given a box and if it can land on water
+	 * @return Boolean
 	 */
 	public boolean canLand(Rectangle hitbox, boolean canSwim) {
 		return this.validSpace(hitbox, false, canSwim);
@@ -140,7 +141,7 @@ public class Map {
 	/**
 	 * function showing if object is touching water
 	 * @param hitbox
-	 * @return
+	 * @return Boolean
 	 */
 	public boolean isSwimming(Rectangle hitbox) { // Only use this if not flying
 		int i = 0;
@@ -157,7 +158,7 @@ public class Map {
 	/**
 	 * Function that returns the map that should be displayed given the position of the duck box
 	 * @param duck
-	 * @return
+	 * @return Map
 	 */
 	public Map managePortals(PlayerDuck duck) {
 		int change = shouldChangeMap(duck.getHitBox());
@@ -170,7 +171,12 @@ public class Map {
 		}
 	}
 
-	// loops through portals checking their hitbox against the playerducks
+	/**
+	 * Function that loops through portals checking their hitbox against the playerDucks
+	 * Returns overlapping portal reference in list of portals, otherwise -1
+	 * @param hitbox
+	 * @return Integer
+	 */
 	private int shouldChangeMap(Rectangle hitbox) {
 		for (int i = 0; i < this.portals.length; i++) {
 			if (hitbox.overlaps(this.portals[i].getBox())) {
@@ -180,14 +186,26 @@ public class Map {
 		return -1;
 	}
 
+	/**
+	 * Returns globalPosition
+	 * @return Vector3
+	 */
 	public Vector3 getGlobalPosition() {
 		return globalPosition;
 	}
 
+	/**
+	 * Sets globalPosition
+	 * @param globalPosition
+	 */
 	public void setGlobalPosition(Vector3 globalPosition) {
 		this.globalPosition = globalPosition;
 	}
 	
+	/**
+	 * Returns the name/description of the map
+	 * @return
+	 */
 	public String getName(){
 		return name;
 	}

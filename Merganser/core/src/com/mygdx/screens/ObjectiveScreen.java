@@ -122,45 +122,30 @@ public class ObjectiveScreen implements Screen {
 		objFont.dispose();
 	}
 
-	/**
-	 * No implementation
-	 */
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * No implementation
-	 */
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * No implementation
-	 */
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * No implementation
-	 */
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * No implementation
-	 */
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
