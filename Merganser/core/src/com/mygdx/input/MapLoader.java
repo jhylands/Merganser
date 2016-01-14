@@ -22,6 +22,7 @@ import com.mygdx.game.Portal;
 
 public class MapLoader {
 
+	//required for asset manager to hold new background images
 	private MyGdxGame game;
 
 	public MapLoader(MyGdxGame game) {
@@ -29,6 +30,7 @@ public class MapLoader {
 	}
 
 	public Map[] loadXML(String file) {
+		//initiate the list of maps
 		Map[] arrMaps;
 		try {
 			// create a file connection to pass to the SaxBuilder
@@ -37,58 +39,45 @@ public class MapLoader {
 			SAXBuilder saxBuilder = new SAXBuilder();
 			// get the saxBuilder to create a document from the file connection
 			Document document = saxBuilder.build(inputFile);
-			// root element should be Maps
-			// System.out.println(document.getRootElement().getName()=="Maps");
 			// get a list of the maps contained in the maps file
 			List<Element> maps = document.getRootElement().getChildren();
-			// create Structure to hold the maps needs to be update to AVL tree
-			// for faster linking but currently uses integer references which
-			// are faster anyway even if less user friendly
+			// create Structure to hold the maps (needs to be update to AVL tree
+				// for faster linking but currently uses integer references which
+				// are faster anyway even if less user friendly)
 			arrMaps = new Map[maps.size()];
 
 			// iterate through the maps
 			for (int mapIterator = 0; mapIterator < maps.size(); mapIterator++) {
 				Element map = maps.get(mapIterator);
-				// given this map create map class from it leaving portal
-				// destinations numerical referenced but not connected
+				
 
-				// check if there are any mapFeatures
 				MapFeature[] arrFeatures;
+				// check if there are any mapFeatures if not arrFeatures is an empty array
 				if (map.getChild("MapFeatures") != null) {
 					// get list of mapFeatures
 					List<Element> features = map.getChild("MapFeatures").getChildren();
 					// initiate the array of MapFeatures to be passed to the map
-					// constructor
 					arrFeatures = new MapFeature[features.size()];
 					// parse the xml into MapFeature type
-					// System.out.println(features.get(0).getChild("groundImpeedence").getText());
 					for (int featureIterator = 0; featureIterator < features.size(); featureIterator++) {
-						Element feature = features.get(featureIterator);
-						arrFeatures[featureIterator] = new MapFeature(element2rectangle(feature),
-								Str2Bool(feature.getChildText("groundImpeedence")),
-								Str2Bool(feature.getChildText("flightImpeedence")),
-								Str2Bool(feature.getChildText("isWater")));
+						arrFeatures[featureIterator] = elm2MapFeature(features.get(featureIterator));
 					}
 				} else {
 					arrFeatures = new MapFeature[0];
 				}
-
 				Portal[] arrPortals;
+				//check if there any portals if not arrPortals is empty array
 				if (map.getChild("MapPortals") != null) {
 					// get list of portals
 					List<Element> portals = map.getChild("MapPortals").getChildren();
 					arrPortals = new Portal[portals.size()];
 					for (int portalIterator = 0; portalIterator < portals.size(); portalIterator++) {
-						Element portal = portals.get(portalIterator);
-						arrPortals[portalIterator] = new Portal(element2rectangle(portal),
-								Integer.parseInt(portal.getChild("to").getChildText("ref")), portal2Vector(portal));
+						arrPortals[portalIterator] = elm2Portal(portals.get(portalIterator));
 					}
 				} else {
 					arrPortals = new Portal[0];
 				}
-
 				// add this map to the maps array
-
 				Texture mapTex = game.getAssetManager().get(map.getChildText("background"), Texture.class);
 				arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex, arrFeatures, arrPortals,
 						getGlobal(map));
@@ -120,31 +109,79 @@ public class MapLoader {
 		return arrMaps;
 	}
 
+	/**
+	 * function to take an element and extracts the mapFeature data from it defining a new map feature
+	 * @param feature
+	 * @return
+	 */
+	private MapFeature elm2MapFeature(Element feature) {
+		return new MapFeature(element2rectangle(feature),
+				Str2Bool(feature.getChildText("groundImpeedence")),
+				Str2Bool(feature.getChildText("flightImpeedence")),
+				Str2Bool(feature.getChildText("isWater")));
+	}
+	/**
+	 * function to take an element and extract Portal data from it and defines a new Portal
+	 * @param portal
+	 * @return
+	 */
+	//NEEDS DATA VALIDATION
+	private Portal elm2Portal(Element portal){
+		return new Portal(element2rectangle(portal),
+				Integer.parseInt(portal.getChild("to").getChildText("ref")), portal2Vector(portal));
+	}
+
 	// requires data validation!
 	private Boolean Str2Bool(String text) {
 		return Integer.parseInt(text) > 0;
 	}
-
+	
+	/**
+	 * Takes XML element and extracts rectangle data from it (x,y,width,height)
+	 * @param elm
+	 * @return
+	 */
+	//NEEDS DATA VALIDATION
 	private Rectangle element2rectangle(Element elm) {
 		return new Rectangle().set(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),
 				Integer.parseInt(elm.getChildText("width")), Integer.parseInt(elm.getChildText("height")));
 	}
 
+	/**
+	 * Takes XML element representing a portal and extract vector data (x,y)
+	 * @param portal
+	 * @return
+	 */
 	private Vector2 portal2Vector(Element portal) {
 		return getVector2(portal.getChild("to"));
 	}
-
+	
+	/**
+	 * Takes XML element and extract vector data (x,y)
+	 * @param portal
+	 * @return
+	 */
+	//NEEDS DATA VALIDATION
 	private Vector2 getVector2(Element elm) {
 		return new Vector2(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")));
 	}
-	
+	/**
+	 * Takes XML element and extract vector data (x,y,z)
+	 * @param portal
+	 * @return
+	 */
+	//NEEDS DATA VALIDATION
 	private Vector3 getVector3(Element elm) {
 		return new Vector3(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),Integer.parseInt(elm.getChildText("z")));
 	}
-
+	
+	/**
+	 * Takes XML element representing a map and returs its global coordinates
+	 * @param map
+	 * @return
+	 */
 	private Vector3 getGlobal(Element map) {
 		return getVector3(map.getChild("globalPosition"));
-
 	}
 
 }
