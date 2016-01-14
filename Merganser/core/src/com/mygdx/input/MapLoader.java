@@ -60,7 +60,10 @@ public class MapLoader {
 					arrFeatures = new MapFeature[features.size()];
 					// parse the xml into MapFeature type
 					for (int featureIterator = 0; featureIterator < features.size(); featureIterator++) {
-						arrFeatures[featureIterator] = elm2MapFeature(features.get(featureIterator));
+						//check if feature contains random position 
+							//if it does implement the random feature so a different elm2Mapfeature function 
+						//else
+							arrFeatures[featureIterator] = elm2MapFeature(features.get(featureIterator));
 					}
 				} else {
 					arrFeatures = new MapFeature[0];
