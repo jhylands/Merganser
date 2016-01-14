@@ -18,6 +18,8 @@ import com.mygdx.game.MapFeature;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Portal;
 
+
+
 public class MapLoader {
 
 	private MyGdxGame game;
@@ -124,16 +126,15 @@ public class MapLoader {
 	}
 
 	private Rectangle element2rectangle(Element elm) {
-		System.out.println(elm.getText()); // ChildText("x"));
 		return new Rectangle().set(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),
 				Integer.parseInt(elm.getChildText("width")), Integer.parseInt(elm.getChildText("height")));
 	}
 
 	private Vector2 portal2Vector(Element portal) {
-		return getVector(portal.getChild("to"));
+		return getVector2(portal.getChild("to"));
 	}
 
-	private Vector2 getVector(Element elm) {
+	private Vector2 getVector2(Element elm) {
 		return new Vector2(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")));
 	}
 	

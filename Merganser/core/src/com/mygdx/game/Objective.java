@@ -6,6 +6,7 @@ public class Objective {
 	Map targetMap;
 	Objective nextObjective;
 	String objectiveDescription;
+	private boolean alreadyComplete =false;
 
 	int pointsValue;
 	int timeCounter = 0;
@@ -48,26 +49,52 @@ public class Objective {
 	public void setPointsValue(int pointsValue) {
 		this.pointsValue = pointsValue;
 	}
-
-	public Objective isComplete(Map currentMap) {
-		if (currentMap == targetMap) {
-			game.getDuck().addScore(pointsValue);
+	
+	/**
+	 * update objective
+	 * @param currentMap
+	 * @return
+	 */
+	public Objective updateObjective() {
+		updateScore();
+		if(isComplete()){
 			return nextObjective;
 		} else {
-
-			if (timeCounter == 30) {
-				if (pointsValue > 1) {
-					pointsValue--;
-				}
-				timeCounter = 0;
-
-			} else {
-				timeCounter++;
-			}
+			reduceReward();
 			return this;
 		}
-
 	}
+	
+	/*
+	 * function to cause a time penalty as the player takes longer
+	 * to carry out the objective
+	 */
+	private void reduceReward(){
+		if (timeCounter == 30) {
+			if (pointsValue > 1) {
+				pointsValue--;
+			}
+			timeCounter = 0;
+		} else {
+			timeCounter++;
+		}
+	}
+	private void updateScore(){
+		if (isComplete() && !alreadyComplete) {
+			game.getDuck().addScore(pointsValue);
+		}
+	}
+	private boolean isComplete(){
+		if(alreadyComplete){
+			return true;
+		}else if(game.getCurrentMap()== targetMap){
+			alreadyComplete=true;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	//public void Objective removeObjective()
 	
 	//set of functions to return if an objective is complete
 	
