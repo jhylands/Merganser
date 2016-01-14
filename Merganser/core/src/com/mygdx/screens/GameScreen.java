@@ -142,8 +142,11 @@ public class GameScreen implements Screen {
 		game.setCurrentObjective(game.getCurrentObjective().updateObjective());
 		//set current map
 		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+		
 		//include the baddies that need to be included in the game
 		game.getBadies()[0].move(game.duck, game.getCurrentMap());
+		
+		//manage interation between baddies and the duck
 	}
 	
 /**
