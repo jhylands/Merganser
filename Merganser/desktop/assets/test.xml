@@ -12,6 +12,42 @@
 				<width>100</width>
 				<height>100</height>
 			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>0</y>
+				<width>1</width>
+				<height>249</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>480</x>
+				<y>0</y>
+				<width>1</width>
+				<height>249</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>249</y>
+				<width>480</width>
+				<height>1</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1</height>
+			</MapFeature>
 		</MapFeatures>
 		<MapPortals>
 			<MapPortal>
@@ -44,6 +80,42 @@
 				<y>0</y>
 				<width>100</width>
 				<height>100</height>
+			</MapFeature>
+				<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>0</y>
+				<width>1</width>
+				<height>249</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>480</x>
+				<y>0</y>
+				<width>1</width>
+				<height>249</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>249</y>
+				<width>480</width>
+				<height>1</height>
+			</MapFeature>
+			<MapFeature>
+				<groundImpeedence>1</groundImpeedence>
+				<flightImpeedence>1</flightImpeedence>
+				<isWater>0</isWater>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1</height>
 			</MapFeature>
 		</MapFeatures>
 		<globalPosition>
