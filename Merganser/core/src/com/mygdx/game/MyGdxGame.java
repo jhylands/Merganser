@@ -17,6 +17,7 @@ import com.mygdx.screens.MapScreen;
 import com.mygdx.screens.ObjectiveScreen;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * This class holds the initialisation of the game. When libgdx creates the game using the desktop launcher
@@ -42,6 +43,7 @@ public class MyGdxGame extends Game {
 	private ObjectiveScreen objScreen;
 	private MapScreen mapScreen;
 	private Stamina stamina;
+	private boolean newObjective = true;
 
 
 	@Override
@@ -68,6 +70,7 @@ public class MyGdxGame extends Game {
 		assetManager.load("goose_down.png", Texture.class);
 		assetManager.load("goose_left.png", Texture.class);
 		assetManager.load("goose_right.png", Texture.class);
+		assetManager.load("objective.png", Texture.class);
 		assetManager.finishLoading();
 
 		// Init map - load map from XML Map loader
@@ -259,6 +262,14 @@ public class MyGdxGame extends Game {
 	public Stamina getStamina() {
 		// TODO Auto-generated method stub
 		return this.stamina;
+	}
+
+	public boolean isNewObjective() {
+		return newObjective;
+	}
+
+	public void setNewObjective(boolean newObjective) {
+		this.newObjective = newObjective;
 	}
 
 }

@@ -21,6 +21,8 @@ public class Stamina{
 	public void draw(SpriteBatch batch, MyGdxGame game) {
 		// Create a pixmap to draw new stamina bar from the current stamina
 		// value
+		staminaBar.dispose();
+		stan.dispose();
 		staminaBar = null;
 		stan = null;
 		staminaBar = new Pixmap(barWidth, barHeight, Format.RGBA8888);

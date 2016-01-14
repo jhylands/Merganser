@@ -2,10 +2,10 @@ package com.mygdx.game;
 
 public class Objective {
 
-	MyGdxGame game;
-	Map targetMap;
-	Objective nextObjective;
-	String objectiveDescription;
+	private MyGdxGame game;
+	private Map targetMap;
+	private Objective nextObjective;
+	private String objectiveDescription;
 	private boolean alreadyComplete =false;
 
 	int pointsValue;
@@ -56,7 +56,6 @@ public class Objective {
 	 * @return
 	 */
 	public Objective updateObjective() {
-		updateScore();
 		if(isComplete()){
 			return nextObjective;
 		} else {
@@ -79,32 +78,35 @@ public class Objective {
 			timeCounter++;
 		}
 	}
+	
 	private void updateScore(){
-		if (isComplete() && !alreadyComplete) {
 			game.getDuck().addScore(pointsValue);
-		}
 	}
+	
+	/**
+	 * Updates alreadyComplete
+	 * @return
+	 */
 	private boolean isComplete(){
 		if(alreadyComplete){
 			return true;
 		}else if(game.getCurrentMap()== targetMap){
+			updateScore();
 			alreadyComplete=true;
 			return true;
 		}else{
 			return false;
 		}
 	}
-	//public void Objective removeObjective()
 	
-	//set of functions to return if an objective is complete
-	
-	//Location based
-	private boolean isCorrectLocation(Map currentMap){
-		return false;
-		
-		//some past data representing states so that more than one location can be represented
-		
-		//if(currentMap.getRef == this.mapRef());
-	}
+//	IN DEVELOPMENT READY FOR XML
+//	// Location based.
+//	private boolean isCorrectLocation(Map currentMap){
+//		return false;
+//		
+//		//some past data representing states so that more than one location can be represented
+//		
+//		//if(currentMap.getRef == this.mapRef());
+//	}
 
 }

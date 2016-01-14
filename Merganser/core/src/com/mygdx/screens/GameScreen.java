@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Map;
 import com.mygdx.game.MyGdxGame;
 
-
-
 public class GameScreen implements Screen {
 
 	private MyGdxGame game;
@@ -44,7 +42,7 @@ public class GameScreen implements Screen {
 		} else if (Gdx.input.isKeyPressed(Keys.D)) {
 			game.duck.moveIfValid(game.duck.RIGHT, game.getCurrentMap());
 		} else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-			game.setScreen(new MainMenuScreen(game));
+			game.setScreen(game.getMainMenu());
 		}
 
 		// If O pressed then go to objective screen
@@ -56,22 +54,21 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMapScreen());
 		}
-		
-		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)){
-			if(!game.duck.atMinStam()){
+
+		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+			if (!game.duck.atMinStam()) {
 				game.duck.setSpeed(game.duck.getDUCKSPRINT());
 				game.duck.setStamina(game.duck.getStamina() - 2);
 			}
-			if(game.duck.atMinStam()){
+			if (game.duck.atMinStam()) {
 				game.duck.setSpeed(game.duck.getDUCKSPEED());
 			}
 		}
-		
-		if (! Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && (game.duck.getSpeed() == game.duck.getDUCKSPRINT())){
+
+		if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && (game.duck.getSpeed() == game.duck.getDUCKSPRINT())) {
 			game.duck.setSpeed(game.duck.getDUCKSPEED());
 			game.duck.setStamina(game.duck.getStamina() + 1);
-		}
-		else if (! Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !game.duck.atMaxStam()){
+		} else if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !game.duck.atMaxStam()) {
 			game.duck.setStamina(game.duck.getStamina() + 1);
 		}
 
@@ -116,66 +113,75 @@ public class GameScreen implements Screen {
 
 	@Override
 	/**
-	 * function called by the main render loop of LIB GDX when the game screen is the screen being shown.
+	 * function called by the main render loop of LIB GDX when the game screen
+	 * is the screen being shown.
 	 */
 	public void render(float delta) {
-		//update the game state
+		// update the game state
 		this.update();
-		
-		//begine the drawing element
+
+		// begine the drawing element
 		batch.begin();
-		//batch passed by reference (because its a class)
+		// batch passed by reference (because its a class)
 		this.draw(batch);
-		//end the drawer element
+		// end the drawer element
 		batch.end();
-		
 
 	}
-	
+
 	/**
 	 * function to update the game state
 	 */
-	private void update(){
-		//handle the input 
+	private void update() {
+		// handle the input
 		this.handleInput(game.getCurrentMap());
-		//set the current objective
+		// set the current objective
 		game.setCurrentObjective(game.getCurrentObjective().updateObjective());
-		//set current map
+		// set current map
 		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
-		
-		//include the baddies that need to be included in the game
+
+		// include the baddies that need to be included in the game
 		game.getBadies()[0].move(game.duck, game.getCurrentMap());
-		
-		//manage interation between baddies and the duck
+
+		// manage interation between baddies and the duck
 	}
-	
-/**
- * Function to draw the sprites and text to the game screen
- * @param batch
- * batch is passed by reference (because its a class) so function doesn't need to return batch
- */
-	private void draw(SpriteBatch batch){
-		//draw the GUI
+
+	/**
+	 * Function to draw the sprites and text to the game screen
+	 * 
+	 * @param batch
+	 *            batch is passed by reference (because its a class) so function
+	 *            doesn't need to return batch
+	 */
+	private void draw(SpriteBatch batch) {
+		// draw the GUI
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
-		//draw the score
+		// draw the score
 		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
-		//draw the map background
+		// draw the map background
 		batch.draw(game.getCurrentMap().getBackground(), 0, 0);
-		//draw the duck texture
+		// draw the duck texture
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
-		//draw the baddies
-		batch.draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x, game.getBadies()[0].getPosition().y);
-		//draw health
+		// draw the baddies
+		batch.draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x,
+				game.getBadies()[0].getPosition().y);
+		// draw health
 		// Needs to pass numbers rather than textures
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
-		//draw stamina
+		// draw stamina
 		game.getStamina().draw(batch, game);
+		// draw new objective
+		if (game.isNewObjective()) {
+			batch.draw(game.getAssetManager().get("objective.png", Texture.class), 350,
+					game.getScreenHeight() - game.getAssetManager().get("objective.png", Texture.class).getHeight());
+		}
 	}
-	
-	//WHY THE EMPTY FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+	// WHY THE EMPTY
+	// FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -199,8 +205,8 @@ public class GameScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
