@@ -56,6 +56,11 @@ public class ObjectiveScreen implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
+		if(game.isNewObjective()){
+			game.setNewObjective(false);
+		}
+			
+		
 		// Handle any input as defined by the handleInput function
 		handleInput();
 
