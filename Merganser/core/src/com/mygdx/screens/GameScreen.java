@@ -115,7 +115,9 @@ public class GameScreen implements Screen {
 		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
 		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
 		// Export pixmap to texture
-		batch.draw(new Texture(staminaBar), 3, game.getScreenHeight() - 18); 
+		Texture stan = new Texture(staminaBar);
+		batch.draw(stan, 3, game.getScreenHeight() - 18);
+		stan.dispose();
 		// Dispose of pixmap as no longer needed
 		staminaBar.dispose();
 	}
