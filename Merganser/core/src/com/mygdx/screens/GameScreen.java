@@ -16,7 +16,6 @@ public class GameScreen implements Screen {
 	private int barHeight = 14;
 	private int barWidth = 100;
 	private SpriteBatch batch;
-	private Texture stam;
 
 	public GameScreen(MyGdxGame game) {
 		this.game = game;
@@ -108,7 +107,7 @@ public class GameScreen implements Screen {
 
 	}
 
-	public void showStamina() {
+	public void showStamina(SpriteBatch batch) {
 		// Create a pixmap to draw new stamina bar from the current stamina
 		// value
 		Pixmap staminaBar = new Pixmap(barWidth, barHeight, Format.RGBA8888);
@@ -116,8 +115,7 @@ public class GameScreen implements Screen {
 		staminaBar.drawRectangle(0, 0, barWidth, barHeight);
 		staminaBar.fillRectangle(0, 0, game.duck.getStamina(), barHeight);
 		// Export pixmap to texture
-		stam = null;
-		stam = new Texture(staminaBar);
+		batch.draw(new Texture(staminaBar), 3, game.getScreenHeight() - 18); 
 		// Dispose of pixmap as no longer needed
 		staminaBar.dispose();
 	}
@@ -143,8 +141,7 @@ public class GameScreen implements Screen {
 		//end the drawer element
 		batch.end();
 		
-		//dispose of the stamina -> The resoning behind this needs explaining
-		stam.dispose();
+
 	}
 	
 	/**
@@ -184,10 +181,7 @@ public class GameScreen implements Screen {
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
 		//draw stamina
-		//------ WTF two lines in the renderer to do one thing?
-		showStamina();
-		batch.draw(stam, 3, game.getScreenHeight() - 18);
-		//----------
+		showStamina(batch);
 	}
 	
 	//WHY THE EMPTY FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
