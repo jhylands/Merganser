@@ -27,35 +27,54 @@ public class Repeatable extends LiveEntity {
 		this.sprite[this.DOWN] = manager.get("goose_down.png", Texture.class);
 		this.sprite[this.LEFT] = manager.get("goose_left.png", Texture.class);
 		this.sprite[this.RIGHT] = manager.get("goose_right.png", Texture.class);
+		this.attackSprite[this.UP] = manager.get("goose_attack_up.png", Texture.class);
+		this.attackSprite[this.RIGHT] = manager.get("goose_action_right.png", Texture.class);
+		this.attackSprite[this.DOWN] = manager.get("goose_attack_down.png", Texture.class);
+		this.attackSprite[this.LEFT] = manager.get("gooes_attack_left.png", Texture.class);
+		
 		this.speed = speed;
 		this.setPosition(new Vector2(50, 50));
 	}
 
+	
+	public void update(PlayerDuck duck, Map map){
+		move(duck, map);
+		attack(duck,map);
+		threat(duck);
+	}
 	/**
 	 * Update the ducks position by the direction towards the player multiplied by the ducks speed
 	 * @param duck
 	 * @param map
 	 */
 	public void move(PlayerDuck duck, Map map) {
-		if (duck.getPosition().sub(this.getPosition()).len2() < sight2) {
+		if (isCloseToDuck(sight2,duck)) {
 			this.moveIfValid(this.findDirection(duck).scl(this.speed), map);
 			this.rotate(this.findDirection(duck).angle());
 		}
 	}
-	
 	/**
 	 * Implement an attack function for the repeatable
 	 * @param duck
 	 */
-	public void attack(PlayerDuck duck){
-		if(duck.getPosition().sub(this.getPosition()).len2() < attackRadius){
+	public void attack(PlayerDuck duck, Map map){
+		if(isCloseToDuck(attackRadius,duck)){
 			duck.changeHealth(attack*-1);
+			this.moveIfValid(this.findDirection(duck).scl(threatRadius*-1), map);
 		}
 	}
 	public void threat(PlayerDuck duck){
-		this.attacking = duck.getPosition().sub(this.getPosition()).len2() < attackRadius;
+		this.attacking = isCloseToDuck(threatRadius,duck);
 	}
-
+	/**
+	 * function to calculate if the repeatables is with a cirtasin distance of the duck
+	 * @param close
+	 * @param duck
+	 * @return
+	 */
+	private boolean isCloseToDuck(int close, PlayerDuck duck){
+		return duck.getPosition().sub(this.getPosition()).len2() < close;
+	}
 	/**
 	 * Depending on direction given sets rotation of Repeatable
 	 * @param direction

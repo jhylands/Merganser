@@ -87,12 +87,12 @@ public class GameScreen implements Screen {
 		} else if (Gdx.input.isKeyPressed(Keys.UP)
 				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
 			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
-				game.duck.setHealth(game.duck.getHealth() + 1);
+				//game.duck.setHealth(game.duck.getHealth() + 1);
 			}
 		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
 				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
 			if (game.duck.getHealth() > 0) {
-				game.duck.setHealth(game.duck.getHealth() - 1);
+				//game.duck.setHealth(game.duck.getHealth() - 1);
 			}
 			// tests for health and score. use arrow keys.
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_9)) {
@@ -139,7 +139,7 @@ public class GameScreen implements Screen {
 		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
 
 		// include the baddies that need to be included in the game
-		game.getBadies()[0].move(game.duck, game.getCurrentMap());
+		game.getBadies()[0].update(game.duck, game.getCurrentMap());
 
 		// manage interation between baddies and the duck
 	}

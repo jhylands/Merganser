@@ -79,8 +79,12 @@ public class LiveEntity extends Entity {
 	}
 	
 	
-	public Texture getAttackTexture(){
-		return this.attackSprite[this.getRotation()];
+	public Texture getTexture(){
+		if(attacking){
+			return this.attackSprite[this.getRotation()];
+		}else{
+			return this.sprite[this.getRotation()];
+		}
 	}
 	
 	public int getWidth() {
