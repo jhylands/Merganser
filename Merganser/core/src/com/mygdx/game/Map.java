@@ -121,17 +121,17 @@ public class Map {
 	 * @return
 	 */
 	public boolean validSpace(Rectangle hitbox, boolean flying, boolean canSwim) {
-		for (int i = 0; i < features.length; i++) {
+		for (int featureIterator = featureIterator; featureIterator < features.length; i++) {
 			MapFeature feature = this.features[i];
+			//does the hitbox overlap the box
 			if (hitbox.overlaps(feature.getBox())) {
-				// this needs explaining
 				if ((feature.isGroundImpeedence() && !flying) || (feature.isFlightImpeedence() && flying)
 						|| (feature.isWater() && !canSwim)) {
 					return false;
 				}
 			}
 		}
-
+		//if no feature is obscureing the hitbox return true to show the space is valid
 		return true;
 	}
 	
