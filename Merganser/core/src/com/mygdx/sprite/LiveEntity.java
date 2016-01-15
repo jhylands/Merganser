@@ -26,10 +26,13 @@ public class LiveEntity extends Entity {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	protected void setHealth(int health) {
 		this.health = health;
 	}
 
+	public void changeHealth(int change){
+		this.setHealth(this.getHealth()+change);
+	}
 	public int getAttackStrength() {
 		return attackStrength;
 	}

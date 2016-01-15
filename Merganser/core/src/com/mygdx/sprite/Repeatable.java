@@ -6,7 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 
 public class Repeatable extends LiveEntity {
-	protected int attack;
+	//The amount of damadge on a strike
+	protected int attack = 1;
+	protected int attackRadius = 100;
+	protected int threatRadius = 200;
 	// sight2 is the distance of the sight squared
 	private int sight2 = 10000;
 
@@ -19,10 +22,10 @@ public class Repeatable extends LiveEntity {
 	 */
 	public Repeatable(int speed, AssetManager manager) {
 		this.sprite = new Texture[4];
-		this.sprite[0] = manager.get("goose_up.png", Texture.class);
-		this.sprite[2] = manager.get("goose_down.png", Texture.class);
-		this.sprite[3] = manager.get("goose_left.png", Texture.class);
-		this.sprite[1] = manager.get("goose_right.png", Texture.class);
+		this.sprite[this.UP] = manager.get("goose_up.png", Texture.class);
+		this.sprite[this.DOWN] = manager.get("goose_down.png", Texture.class);
+		this.sprite[this.LEFT] = manager.get("goose_left.png", Texture.class);
+		this.sprite[this.RIGHT] = manager.get("goose_right.png", Texture.class);
 		this.speed = speed;
 		this.setPosition(new Vector2(50, 50));
 	}
@@ -37,6 +40,19 @@ public class Repeatable extends LiveEntity {
 			this.moveIfValid(this.findDirection(duck).scl(this.speed), map);
 			this.rotate(this.findDirection(duck).angle());
 		}
+	}
+	
+	/**
+	 * Implement an attack function for the repeatable
+	 * @param duck
+	 */
+	public void attack(PlayerDuck duck){
+		if(duck.getPosition().sub(this.getPosition()).len2() < attackRadius){
+			duck.changeHealth(attack*-1);
+		}
+	}
+	public void threat(PlayerDuck duck){
+		this.attacking = duck.getPosition().sub(this.getPosition()).len2() < attackRadius;
 	}
 
 	/**

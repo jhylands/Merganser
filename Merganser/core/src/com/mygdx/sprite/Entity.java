@@ -43,8 +43,7 @@ public class Entity {
 	// ---------------------------------------------------------------------------------
 	public Vector2 getPosition() {
 		return new Vector2(this.hitbox.x, this.hitbox.y);// to return by value
-															// rather than by
-															// reference
+															// rather than by reference
 	}
 
 	protected void setPosition(int x, int y) {
