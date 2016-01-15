@@ -141,7 +141,7 @@ public class GameScreen implements Screen {
 		// Checks to see if last objective complete.
 		// If complete then go to Game Complete screen
 		if(game.isLastObjComplete()){
-			game.setScreen(new CompleteEndScreen(game));
+			game.setScreen(game.getGameCompleteScreen());
 		}
 
 		// include the baddies that need to be included in the game

@@ -54,6 +54,7 @@ public class CompleteEndScreen implements Screen {
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		handleInput();
+		menuItem[0] = "Score: " + game.duck.getScore();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
