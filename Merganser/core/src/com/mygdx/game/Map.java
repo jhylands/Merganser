@@ -3,35 +3,35 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 
 /**
- *Class to contain an indevidual map and its backgoriund 
- * @author james
- *
+ * Class to contain an individual map and its background
  */
 public class Map {
 	private Texture background;
 	private String name;
 	private MapFeature[] features;
-	private Portal[] portals;// portals take you to a different map
+	private Portal[] portals; // portals take you to a different map
 	// swimming and flying will be needed later to calculate stamina use
 	private Vector3 globalPosition;
-	
+
 	private Repeatable[] enemies;
-	
+
 	/**
-	 * Constructor, A map should only be constructed in the maploader class (with the exception of testing)
+	 * Constructor, A map should only be constructed in the maploader class
+	 * (with the exception of testing)
+	 * 
 	 * @param name
 	 * @param background
 	 * @param features
 	 * @param portals
 	 * @param globalPosition
 	 */
-	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition, Repeatable[] enemies) {
+	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition,
+			Repeatable[] enemies) {
 		this.name = name;
 		this.background = background;
 		this.features = features;
@@ -41,8 +41,9 @@ public class Map {
 	}
 
 	/**
-	 * Getter for the background texture to be used by the batch drawer
-	 * Could do with the map implementing itself on the batch in a seperate function in Map which takes batch as parametor
+	 * Getter for the background texture to be used by the batch drawer Could do
+	 * with the map implementing itself on the batch in a separate function in
+	 * Map which takes batch as parameter
 	 * 
 	 * @return Texture
 	 */
@@ -51,17 +52,21 @@ public class Map {
 	}
 
 	/**
-	 * function as yet unused but could be a useful features if the background became interactive
+	 * function as yet unused but could be a useful features if the background
+	 * became interactive to set the background
+	 * 
 	 * @param background
 	 */
 	private void setBackground(Texture background) {
 		this.background = background;
 	}
-	
+
 	/**
-	 * gets the destination of a portal with reference portalNumber
+	 * gets the destination of a portal from portals array with reference
+	 * portalNumber
+	 * 
 	 * @param portalNumber
-	 * @return
+	 * @return Map
 	 */
 	public Map getPortalDestination(int portalNumber) {
 		return portals[portalNumber].getDestination();
@@ -69,6 +74,7 @@ public class Map {
 
 	/**
 	 * setter for portals (more description needed)
+	 * 
 	 * @param portals
 	 */
 	public void setPortals(Portal[] portals) {
@@ -76,8 +82,10 @@ public class Map {
 	}
 
 	/**
-	 * function to assign the destination a a paortal included in this map
-	 * Not in constructor because the Map reference in a portal has to be linked after all make are constructed
+	 * function to assign the destination a a portal included in this map Not in
+	 * constructor because the Map reference in a portal has to be linked after
+	 * all maps are constructed
+	 * 
 	 * @param portal
 	 * @param destination
 	 */
@@ -86,16 +94,18 @@ public class Map {
 	}
 
 	/**
-	 * function to get the list of map features
-	 * @return
+	 * function to get the list of map features from map
+	 * 
+	 * @return MapFeature[]
 	 */
 	private MapFeature[] getMapFeatures() {
 		return this.features;
 	}
 
 	/**
-	 *  function gets a list of references to set up the map graph
-	 * @return
+	 * function gets a list of references to set up the map graph
+	 * 
+	 * @return Integer
 	 */
 	public int[] getPortalRefs() {
 		int[] references = new int[this.portals.length];
@@ -104,27 +114,30 @@ public class Map {
 		}
 		return references;
 	}
-	
+
 	/**
 	 * Gets a count of the portals in this map
-	 * @return
+	 * 
+	 * @return Integer
 	 */
 	public int getPortalNo() {
 		return this.portals.length;
 	}
-	
+
 	/**
-	 * function to say weather a box is valid in this map
+	 * Function to say weather a box (rectangle) is valid in this map taking
+	 * into account whether the duck is on the ground, flying or possible to
+	 * swim
+	 * 
 	 * @param hitbox
 	 * @param flying
 	 * @param canSwim
-	 * @return
+	 * @return Boolean
 	 */
 	public boolean validSpace(Rectangle hitbox, boolean flying, boolean canSwim) {
 		for (int i = 0; i < features.length; i++) {
 			MapFeature feature = this.features[i];
 			if (hitbox.overlaps(feature.getBox())) {
-				// this needs explaining
 				if ((feature.isGroundImpeedence() && !flying) || (feature.isFlightImpeedence() && flying)
 						|| (feature.isWater() && !canSwim)) {
 					return false;
@@ -134,9 +147,11 @@ public class Map {
 
 		return true;
 	}
-	
+
 	/**
-	 * function to show if an object can land given a box and if it can land on water
+	 * function to show if an object (rectangle) can land given a box and if it can land on
+	 * water
+	 * 
 	 * @return Boolean
 	 */
 	public boolean canLand(Rectangle hitbox, boolean canSwim) {
@@ -145,6 +160,7 @@ public class Map {
 
 	/**
 	 * function showing if object is touching water
+	 * 
 	 * @param hitbox
 	 * @return Boolean
 	 */
@@ -159,9 +175,11 @@ public class Map {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Function that returns the map that should be displayed given the position of the duck box
+	 * Function that returns the map that should be displayed given the position
+	 * of the duck box
+	 * 
 	 * @param duck
 	 * @return Map
 	 */
@@ -177,8 +195,10 @@ public class Map {
 	}
 
 	/**
-	 * Function that loops through portals checking their hitbox against the playerDucks
-	 * Returns overlapping portal reference in list of portals, otherwise -1
+	 * Function that loops through portals checking their hitbox against the
+	 * playerDucks Returns overlapping portal reference in list of portals,
+	 * otherwise -1
+	 * 
 	 * @param hitbox
 	 * @return Integer
 	 */
@@ -192,7 +212,8 @@ public class Map {
 	}
 
 	/**
-	 * Returns globalPosition
+	 * Returns globalPosition vector
+	 * 
 	 * @return Vector3
 	 */
 	public Vector3 getGlobalPosition() {
@@ -200,31 +221,41 @@ public class Map {
 	}
 
 	/**
-	 * Sets globalPosition
-	 * @param globalPosition
+	 * Sets globalPosition vector
+	 * 
+	 * @param Vector3 globalPosition
 	 */
 	public void setGlobalPosition(Vector3 globalPosition) {
 		this.globalPosition = globalPosition;
 	}
-	
+
 	/**
 	 * Returns the name/description of the map
+	 * 
 	 * @return
 	 */
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Updates enemies in enemies array 
+	 * Calls repeatable update function
+	 * @param duck
+	 */
 	public void updateEnemies(PlayerDuck duck) {
-		for(int enemyIterator = 0; enemyIterator< enemies.length; enemyIterator++){
+		for (int enemyIterator = 0; enemyIterator < enemies.length; enemyIterator++) {
 			enemies[enemyIterator].update(duck, this);
 		}
 	}
 
+	/**
+	 * Renders the map background and enemies to SpriteBatch
+	 * @param batch
+	 */
 	public void draw(SpriteBatch batch) {
-		// TODO Auto-generated method stub
 		batch.draw(this.getBackground(), 0, 0);
-		for(int enemyIterator = 0; enemyIterator< enemies.length; enemyIterator++){
+		for (int enemyIterator = 0; enemyIterator < enemies.length; enemyIterator++) {
 			enemies[enemyIterator].draw(batch);
 		}
 	}

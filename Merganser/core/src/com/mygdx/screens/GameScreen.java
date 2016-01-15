@@ -176,7 +176,7 @@ public class GameScreen implements Screen {
 		
 		// draw health
 		// Needs to pass numbers rather than textures
-		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
+		game.getHeart().drawHearts(batch, game.duck.getHealth(), game.duck.getMaxHealth(), game.getScreenWidth(),
 				game.getScreenHeight());
 		
 		// draw stamina

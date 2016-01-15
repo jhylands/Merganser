@@ -3,9 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Rectangle;
 
 public class MapFeature {
+	// Boolean values for impedance.
+	// If true then duck/ entity will be impeded
+	// from travelling through MapFeature
 	private boolean groundImpeedence;
 	private boolean flightImpeedence;
 	private boolean isWater;
+	
 	private Rectangle box;
 
 	public MapFeature(Rectangle box, boolean groundImpeedence, boolean flightImpeedence, boolean isWater) {
