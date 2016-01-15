@@ -24,7 +24,7 @@ public class Heart {
 	}
 
 	/**
-	 * Array of Textures Allows for the storing of the heart images showing
+	 * Array of Textures allows for the storing of the heart images showing
 	 * different quarters of the heart shaded in
 	 */
 	private Texture[] hearts = new Texture[5];
@@ -37,10 +37,25 @@ public class Heart {
 					disp.add(4);
 				}
 			}
-		} else {
+		} 
+		
+		/*
+		 * If the player's health is full, the above loop iteratively draws full hearts
+		 * a number of times equal to a quarter of the players health.
+		 * If the player's health is not full, there will be a partially filled heart
+		 * and/or 1 or more empty hearts.
+		 */
+		
+		else {
 			int whole = health / 4;
 			int rem = health % 4;
 			int empty = (maxHealth - health) / 4;
+			
+			/*
+			 * the number of whole hearts, the state of the partial heart,
+			 * and the number of empty hearts are all calculated.
+			 * A value of zero for any of these will stop the program trying to draw them.
+			 */
 
 			if (whole != 0) {
 				for (int i = 1; i <= whole; i++) {
@@ -59,6 +74,12 @@ public class Heart {
 			batch.draw(this.getTexture(disp.get(i)), screenWidth - 20 - i * this.getTexture(disp.get(i)).getWidth(),
 					screenHeight - this.getTexture(disp.get(i)).getHeight() - 2);
 		}
+		
+		/*
+		 * The hearts are drawn at the top of the screen, starting from the right.
+		 * The code in this state means the maximum health value can be changed without
+		 * changing any code, although the value should always be an integer multiple of 4.
+		 */
 
 	}
 

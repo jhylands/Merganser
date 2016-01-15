@@ -37,12 +37,16 @@ public class MapLoader {
 		try {
 			// create a file connection to pass to the SaxBuilder
 			File inputFile = new File(file);
+			
 			// define a new saxBuilder
 			SAXBuilder saxBuilder = new SAXBuilder();
+			
 			// get the saxBuilder to create a document from the file connection
 			Document document = saxBuilder.build(inputFile);
+			
 			// get a list of the maps contained in the maps file
 			List<Element> maps = document.getRootElement().getChildren();
+			
 			// create Structure to hold the maps (needs to be update to AVL tree
 				// for faster linking but currently uses integer references which
 				// are faster anyway even if less user friendly)
@@ -54,14 +58,19 @@ public class MapLoader {
 				
 
 				MapFeature[] arrFeatures;
+				
 				// check if there are any mapFeatures if not arrFeatures is an empty array
 				if (map.getChild("MapFeatures") != null) {
+					
 					// get list of mapFeatures
 					List<Element> features = map.getChild("MapFeatures").getChildren();
+					
 					// initiate the array of MapFeatures to be passed to the map
 					arrFeatures = new MapFeature[features.size()];
+					
 					// parse the xml into MapFeature type
 					for (int featureIterator = 0; featureIterator < features.size(); featureIterator++) {
+						
 						//check if feature contains random position 
 							//if it does implement the random feature so a different elm2Mapfeature function 
 						//else
