@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.input.MapLoader;
+import com.mygdx.screens.CompleteEndScreen;
 import com.mygdx.screens.EndScreen;
 import com.mygdx.screens.GameScreen;
 import com.mygdx.screens.MainMenuScreen;
@@ -43,6 +44,8 @@ public class MyGdxGame extends Game {
 	private MainMenuScreen mainMenu;
 	private ObjectiveScreen objScreen;
 	private MapScreen mapScreen;
+	private EndScreen gameOverScreen;
+	private CompleteEndScreen gameCompleteScreen;
 	private Stamina stamina;
 	private boolean newObjective = true;
 	private boolean lastObjComplete = false;
@@ -125,7 +128,7 @@ public class MyGdxGame extends Game {
 			//Sets next objectives of objectives in the ArrayList. 
 			//If objective not set a nextObjective then automatically defined as LastObjective
 			//Game will show Game Complete screen on lastObjective
-			getObjectives().get(0).setNextObjective(getObjectives().get(1));
+//			getObjectives().get(0).setNextObjective(getObjectives().get(1));
 			getObjectives().get(1).setNextObjective(getObjectives().get(0));
 			
 		} catch (IndexOutOfBoundsException e) {
@@ -152,6 +155,8 @@ public class MyGdxGame extends Game {
 		setMainMenu(new MainMenuScreen(this));
 		setMapScreen(new MapScreen(this));
 		setObjScreen(new ObjectiveScreen(this));
+		setGameCompleteScreen(new CompleteEndScreen(this));
+		setGameOverScreen(new EndScreen(this));
 		
 		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(getMainMenu());
@@ -317,6 +322,22 @@ public class MyGdxGame extends Game {
 
 	public void setLastObjComplete(boolean lastObjComplete) {
 		this.lastObjComplete = lastObjComplete;
+	}
+
+	public EndScreen getGameOverScreen() {
+		return gameOverScreen;
+	}
+
+	public void setGameOverScreen(EndScreen gameOverScreen) {
+		this.gameOverScreen = gameOverScreen;
+	}
+
+	public CompleteEndScreen getGameCompleteScreen() {
+		return gameCompleteScreen;
+	}
+
+	public void setGameCompleteScreen(CompleteEndScreen gameCompleteScreen) {
+		this.gameCompleteScreen = gameCompleteScreen;
 	}
 
 }
