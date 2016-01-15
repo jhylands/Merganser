@@ -27,10 +27,11 @@ public class Repeatable extends LiveEntity {
 		this.sprite[this.DOWN] = manager.get("goose_down.png", Texture.class);
 		this.sprite[this.LEFT] = manager.get("goose_left.png", Texture.class);
 		this.sprite[this.RIGHT] = manager.get("goose_right.png", Texture.class);
-		this.attackSprite[this.UP] = manager.get("goose_attack_up.png", Texture.class);
+		this.attackSprite = new Texture[4];
+		this.attackSprite[this.UP] = manager.get("goose_action_up.png", Texture.class);
 		this.attackSprite[this.RIGHT] = manager.get("goose_action_right.png", Texture.class);
-		this.attackSprite[this.DOWN] = manager.get("goose_attack_down.png", Texture.class);
-		this.attackSprite[this.LEFT] = manager.get("gooes_attack_left.png", Texture.class);
+		this.attackSprite[this.DOWN] = manager.get("goose_action_down.png", Texture.class);
+		this.attackSprite[this.LEFT] = manager.get("goose_action_left.png", Texture.class);
 		
 		this.speed = speed;
 		this.setPosition(new Vector2(50, 50));
