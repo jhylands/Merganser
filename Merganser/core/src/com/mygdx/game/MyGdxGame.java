@@ -128,8 +128,8 @@ public class MyGdxGame extends Game {
 			//Sets next objectives of objectives in the ArrayList. 
 			//If objective not set a nextObjective then automatically defined as LastObjective
 			//Game will show Game Complete screen on lastObjective
-//			getObjectives().get(0).setNextObjective(getObjectives().get(1));
-			getObjectives().get(1).setNextObjective(getObjectives().get(0));
+			getObjectives().get(0).setNextObjective(getObjectives().get(1));
+//			getObjectives().get(1).setNextObjective(getObjectives().get(0));
 			
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Can't set next objective to greater than objective ArrayList length");

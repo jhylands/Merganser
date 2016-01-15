@@ -144,7 +144,7 @@ public class GameScreen implements Screen {
 			game.setScreen(game.getGameCompleteScreen());
 		}
 		if(!game.duck.isAlive()){
-			game.setScreen(new EndScreen(game));
+			game.setScreen(game.getGameOverScreen());
 		}
 		// include the baddies that need to be included in the game
 		game.getCurrentMap().updateEnemies(game.duck);
