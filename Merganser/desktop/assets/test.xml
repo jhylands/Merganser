@@ -67,6 +67,7 @@
 			<y>150</y>
 			<z>0</z>
 		</globalPosition>
+
 	</Map>
 	<Map>
 		<name>Biology Corridor</name>
@@ -196,6 +197,7 @@
             <y>150</y>
             <z>1</z>
         </globalPosition>
+	<enemy>enemies</enemy>
     </Map>
 </Maps>
 

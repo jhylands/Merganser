@@ -16,6 +16,11 @@ public class LiveEntity extends Entity {
 	protected boolean canSwim = false;
 	protected Texture[] attackSprite;
 	protected boolean attacking;
+	
+	//if the health is not zero the entity is alive
+	public boolean isAlive() {
+		return health!=0;
+	}
 
 	public boolean isflying() {
 		return flying;
@@ -33,8 +38,14 @@ public class LiveEntity extends Entity {
 		this.health = health;
 	}
 
-	public void changeHealth(int change){
-		this.setHealth(this.getHealth()+change);
+	public boolean changeHealth(int change){
+		if(this.getHealth()+change<0){
+			this.setHealth(0);
+			return false;
+		}else{
+			this.setHealth(this.getHealth()+change);
+			return true;
+		}
 	}
 	public int getAttackStrength() {
 		return attackStrength;

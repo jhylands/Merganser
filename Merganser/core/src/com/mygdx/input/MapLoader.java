@@ -9,6 +9,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +18,7 @@ import com.mygdx.game.Map;
 import com.mygdx.game.MapFeature;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Portal;
+import com.mygdx.sprite.Repeatable;
 
 
 
@@ -82,8 +84,12 @@ public class MapLoader {
 				}
 				// add this map to the maps array
 				Texture mapTex = game.getAssetManager().get(map.getChildText("background"), Texture.class);
-				arrMaps[mapIterator] = new Map(map.getChildText("name"), mapTex, arrFeatures, arrPortals,
-						getGlobal(map));
+				arrMaps[mapIterator] = new Map(map.getChildText("name"), 
+						mapTex, 
+						arrFeatures, 
+						arrPortals,
+						getGlobal(map),
+						generateEnemies(map, game.getAssetManager()));
 
 			} // end MAP loop
 
@@ -187,4 +193,12 @@ public class MapLoader {
 		return getVector3(map.getChild("globalPosition"));
 	}
 
+	private Repeatable[] generateEnemies(Element map, AssetManager manager){
+		if (map.getChild("enemy") != null) {
+			Repeatable[] repeatables = new Repeatable[1];
+			repeatables[0] = new Repeatable(3,manager);
+			return repeatables;
+		}
+		return new Repeatable[0];
+	}
 }

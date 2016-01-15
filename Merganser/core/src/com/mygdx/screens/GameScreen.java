@@ -139,7 +139,7 @@ public class GameScreen implements Screen {
 		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
 
 		// include the baddies that need to be included in the game
-		game.getBadies()[0].update(game.duck, game.getCurrentMap());
+		game.getCurrentMap().updateEnemies(game.duck);
 
 		// manage interation between baddies and the duck
 	}
@@ -158,13 +158,10 @@ public class GameScreen implements Screen {
 		// draw the score
 		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
-		// draw the map background
-		batch.draw(game.getCurrentMap().getBackground(), 0, 0);
+		// draw the map background (and the maps enemies)
+		game.getCurrentMap().draw(batch);
 		// draw the duck texture
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
-		// draw the baddies
-		batch.draw(game.getBadies()[0].getTexture(), game.getBadies()[0].getPosition().x,
-				game.getBadies()[0].getPosition().y);
 		// draw health
 		// Needs to pass numbers rather than textures
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),

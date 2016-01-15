@@ -18,6 +18,7 @@ public class PlayerDuck extends LiveEntity {
 	private int MAXSTAM = 100;
 	private int MINSTAM = 0;
 
+
 	// private Vector2 position <-not needed because position in stored in
 	// hitBox inherited from Entity
 

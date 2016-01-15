@@ -2,6 +2,7 @@ package com.mygdx.sprite;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 
@@ -61,7 +62,7 @@ public class Repeatable extends LiveEntity {
 	public void attack(PlayerDuck duck, Map map){
 		if(isCloseToDuck(attackRadius,duck)){
 			duck.changeHealth(attack*-1);
-			this.moveIfValid(this.findDirection(duck).scl(threatRadius*-1), map);
+			this.moveIfValid(this.findDirection(duck).scl(10*-1), map);
 		}
 	}
 	public void threat(PlayerDuck duck){
@@ -99,6 +100,12 @@ public class Repeatable extends LiveEntity {
 	 */
 	public Vector2 findDirection(PlayerDuck duck) {
 		return duck.getPosition().sub(this.getPosition()).nor();
+	}
+
+
+	public void draw(SpriteBatch batch) {
+		batch.draw(this.getTexture(), this.getPosition().x, this.getPosition().y);
+		
 	}
 
 }

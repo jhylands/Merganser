@@ -1,10 +1,12 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.sprite.PlayerDuck;
+import com.mygdx.sprite.Repeatable;
 
 /**
  *Class to contain an indevidual map and its backgoriund 
@@ -19,6 +21,8 @@ public class Map {
 	// swimming and flying will be needed later to calculate stamina use
 	private Vector3 globalPosition;
 	
+	private Repeatable[] enemies;
+	
 	/**
 	 * Constructor, A map should only be constructed in the maploader class (with the exception of testing)
 	 * @param name
@@ -27,12 +31,13 @@ public class Map {
 	 * @param portals
 	 * @param globalPosition
 	 */
-	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition) {
+	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition, Repeatable[] enemies) {
 		this.name = name;
 		this.background = background;
 		this.features = features;
 		this.portals = portals;
 		this.globalPosition = globalPosition;
+		this.enemies = enemies;
 	}
 
 	/**
@@ -208,6 +213,20 @@ public class Map {
 	 */
 	public String getName(){
 		return name;
+	}
+
+	public void updateEnemies(PlayerDuck duck) {
+		for(int enemyIterator = 0; enemyIterator< enemies.length; enemyIterator++){
+			enemies[enemyIterator].update(duck, this);
+		}
+	}
+
+	public void draw(SpriteBatch batch) {
+		// TODO Auto-generated method stub
+		batch.draw(this.getBackground(), 0, 0);
+		for(int enemyIterator = 0; enemyIterator< enemies.length; enemyIterator++){
+			enemies[enemyIterator].draw(batch);
+		}
 	}
 
 }
