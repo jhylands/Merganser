@@ -11,16 +11,16 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.game.MyGdxGame;
 
-public class EndScreen implements Screen {
+public class CompleteEndScreen implements Screen {
 	
 	private SpriteBatch sb;
 	private BitmapFont endFont, menuFont;
 	private MyGdxGame game;
 	private String[] menuItem;
-	private String GAMEOVER = "Game Over!"; 
+	private String GAMECOMPLETE = "Game Complete!"; 
 	private int currentMenuItem;
 	
-	public EndScreen(MyGdxGame game){
+	public CompleteEndScreen(MyGdxGame game){
 		this.game = game;
 		create();
 	}
@@ -60,7 +60,7 @@ public class EndScreen implements Screen {
 
 		sb.begin();
 
-		endFont.draw(sb, GAMEOVER, (game.getScreenWidth() - (endFont.getSpaceWidth() * GAMEOVER.length())) / 2, 240);
+		endFont.draw(sb, GAMECOMPLETE, (game.getScreenWidth() - (endFont.getSpaceWidth() * GAMECOMPLETE.length())) / 2, 240);
 
 		for (int i = 0; i < menuItem.length; i++) {
 			if (currentMenuItem == i) {

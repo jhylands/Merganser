@@ -8,6 +8,8 @@ public class Objective {
 	private String objectiveDescription;
 	private int pointsValue;
 	private int timeCounter = 0;
+	// Objective automatically set to last objective
+	private boolean  lastObjective = true;
 
 	/**
 	 * Constructor for Objective.
@@ -34,8 +36,14 @@ public class Objective {
 	 */
 	public Objective updateObjective() {
 		if (isComplete()) {
-			game.setNewObjective(true);
-			return nextObjective;
+			if (isLastObjective()){
+				game.setLastObjComplete(true);
+				return this;
+			}
+			else{
+				game.setNewObjective(true);
+				return nextObjective;
+			}
 		} else {
 			reduceReward();
 			return this;
@@ -103,8 +111,13 @@ public class Objective {
 		return nextObjective;
 	}
 
+	/**
+	 * Set next objective. Current objective is now not the last objective.
+	 * @param nextObjective
+	 */
 	public void setNextObjective(Objective nextObjective) {
 		this.nextObjective = nextObjective;
+		this.lastObjective = false;
 	}
 
 	public String getObjectiveDescription() {
@@ -121,6 +134,14 @@ public class Objective {
 
 	public void setPointsValue(int pointsValue) {
 		this.pointsValue = pointsValue;
+	}
+
+	public boolean isLastObjective() {
+		return lastObjective;
+	}
+
+	public void setLastObjective(boolean lastObjective) {
+		this.lastObjective = lastObjective;
 	}
 	
 

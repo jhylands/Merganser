@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.input.MapLoader;
+import com.mygdx.screens.EndScreen;
 import com.mygdx.screens.GameScreen;
 import com.mygdx.screens.MainMenuScreen;
 import com.mygdx.screens.MapScreen;
@@ -44,6 +45,7 @@ public class MyGdxGame extends Game {
 	private MapScreen mapScreen;
 	private Stamina stamina;
 	private boolean newObjective = true;
+	private boolean lastObjComplete = false;
 
 	/**
 	 * Creates resources needed for the whole game
@@ -120,9 +122,12 @@ public class MyGdxGame extends Game {
 			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");
 		}
 		try {
-			//Sets next objectives of objectives in the ArrayList. EACH objective must have a next objective set
+			//Sets next objectives of objectives in the ArrayList. 
+			//If objective not set a nextObjective then automatically defined as LastObjective
+			//Game will show Game Complete screen on lastObjective
 			getObjectives().get(0).setNextObjective(getObjectives().get(1));
 			getObjectives().get(1).setNextObjective(getObjectives().get(0));
+			
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Can't set next objective to greater than objective ArrayList length");
 		}
@@ -147,7 +152,7 @@ public class MyGdxGame extends Game {
 		setMainMenu(new MainMenuScreen(this));
 		setMapScreen(new MapScreen(this));
 		setObjScreen(new ObjectiveScreen(this));
-
+		
 		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(getMainMenu());
 	}
@@ -304,6 +309,14 @@ public class MyGdxGame extends Game {
 
 	public void setNewObjective(boolean newObjective) {
 		this.newObjective = newObjective;
+	}
+
+	public boolean isLastObjComplete() {
+		return lastObjComplete;
+	}
+
+	public void setLastObjComplete(boolean lastObjComplete) {
+		this.lastObjComplete = lastObjComplete;
 	}
 
 }
