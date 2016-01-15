@@ -49,6 +49,7 @@ public class MyGdxGame extends Game {
 	private Stamina stamina;
 	private boolean newObjective = true;
 	private boolean lastObjComplete = false;
+	private String xmlLocation = "GameMap.xml";
 
 	/**
 	 * Creates resources needed for the whole game
@@ -200,7 +201,7 @@ public class MyGdxGame extends Game {
 		 * 
 		 * maps[0].setPortalExit(0, maps[1]);
 		 */
-		return loader.loadXML("assets/test.xml");
+		return loader.loadXML(xmlLocation);
 		// Rectangle[] a = new Rectangle[1];
 		// a[0] = new Rectangle()
 		// map.setPortals([new Rectangle() ])
