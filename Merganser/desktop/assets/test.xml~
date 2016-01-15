@@ -67,7 +67,7 @@
 			<y>150</y>
 			<z>0</z>
 		</globalPosition>
-		<enemy>enemies</enemy>
+
 	</Map>
 	<Map>
 		<name>Biology Corridor</name>
@@ -187,8 +187,19 @@
                 <height>100</height>
                 <to>
                     <ref>1</ref>
-                    <x>200</x>
-                    <y>200</y>
+                    <x>100</x>
+                    <y>100</y>
+                </to>
+            </MapPortal>
+            <MapPortal>
+                <x>400</x>
+                <y>100</y>
+                <width>100</width>
+                <height>300</height>
+                <to>
+                    <ref>0</ref>
+                    <x>100</x>
+                    <y>100</y>
                 </to>
             </MapPortal>
         </MapPortals>
@@ -197,6 +208,7 @@
             <y>150</y>
             <z>1</z>
         </globalPosition>
+	<enemy>enemies</enemy>
     </Map>
 </Maps>
 

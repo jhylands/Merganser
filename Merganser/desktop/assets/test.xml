@@ -5,15 +5,6 @@
 		<MapFeatures>
 			<MapFeature>
 				<groundImpeedence>1</groundImpeedence>
-				<flightImpeedence>0</flightImpeedence>
-				<isWater>0</isWater>
-				<x>100</x>
-				<y>100</y>
-				<width>100</width>
-				<height>100</height>
-			</MapFeature>
-			<MapFeature>
-				<groundImpeedence>1</groundImpeedence>
 				<flightImpeedence>1</flightImpeedence>
 				<isWater>0</isWater>
 				<x>0</x>
@@ -187,8 +178,19 @@
                 <height>100</height>
                 <to>
                     <ref>1</ref>
-                    <x>200</x>
-                    <y>200</y>
+                    <x>100</x>
+                    <y>100</y>
+                </to>
+            </MapPortal>
+            <MapPortal>
+                <x>400</x>
+                <y>100</y>
+                <width>100</width>
+                <height>300</height>
+                <to>
+                    <ref>0</ref>
+                    <x>100</x>
+                    <y>100</y>
                 </to>
             </MapPortal>
         </MapPortals>
