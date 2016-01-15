@@ -34,7 +34,7 @@ public class LiveEntity extends Entity {
 		return health;
 	}
 
-	protected void setHealth(int health) {
+	public void setHealth(int health) {
 		this.health = health;
 	}
 
@@ -72,7 +72,7 @@ public class LiveEntity extends Entity {
 	}
 
 	// public Vector2 getPosition(){
-	// use getPosition inherited from enitity
+	// use getPosition inherited from Entity
 	public boolean moveIfValid(int direction, Map map) {
 		setRotation(direction);
 		return moveIfValid(direction2Vector(direction).scl(speed), map);
