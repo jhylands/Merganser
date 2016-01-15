@@ -52,6 +52,7 @@ public class MyGdxGame extends Game {
 	public void create() {
 		/**
 		 * AssetManager implementation to allow loading of textures into game at start
+		 * for speed efficiency later in the game
 		 */
 		assetManager = new AssetManager();
 		assetManager.load("GUI panel.png", Texture.class);
@@ -74,6 +75,14 @@ public class MyGdxGame extends Game {
 		assetManager.load("goose_right.png", Texture.class);
 		assetManager.load("objective.png", Texture.class);
 		assetManager.load("outside.png", Texture.class);
+		assetManager.load("duck_action_left.png", Texture.class);
+		assetManager.load("duck_action_right.png", Texture.class);
+		assetManager.load("duck_action_up.png", Texture.class);
+		assetManager.load("duck_action_down.png", Texture.class);
+		assetManager.load("goose_action_left.png", Texture.class);
+		assetManager.load("goose_action_right.png", Texture.class);
+		assetManager.load("goose_action_up.png", Texture.class);
+		assetManager.load("goose_action_down.png", Texture.class);
 		assetManager.finishLoading();
 
 		// Init map - load map from XML Map loader
@@ -89,9 +98,11 @@ public class MyGdxGame extends Game {
 		
 		//initiate stamina
 		stamina =  new Stamina();
-		// Create Hearts
+		
+		// Create Hearts from Heart class
 		setHeart(new Heart(assetManager));
 
+		// Create a new repeatable object where enemies/ badies are stored in the code 
 		setBadies(new Repeatable[1]);
 		getBadies()[0] = new Repeatable(1, assetManager);
 
@@ -102,12 +113,14 @@ public class MyGdxGame extends Game {
 		// Create some test objectives into an ArrayList
 		setObjectives(new ArrayList<Objective>());
 		try {
+			// Add new objective to ArrayList
 			getObjectives().add(new Objective(this, maps[2], "Go to outside biology", 100));
 			getObjectives().add(new Objective(this, maps[0], "Go back to the biology lab", 100));
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");
 		}
 		try {
+			//Sets next objectives of objectives in the ArrayList. EACH objective must have a next objective set
 			getObjectives().get(0).setNextObjective(getObjectives().get(1));
 			getObjectives().get(1).setNextObjective(getObjectives().get(0));
 		} catch (IndexOutOfBoundsException e) {
