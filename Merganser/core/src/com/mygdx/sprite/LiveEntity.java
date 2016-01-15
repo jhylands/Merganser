@@ -1,5 +1,6 @@
 package com.mygdx.sprite;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 
@@ -13,6 +14,8 @@ public class LiveEntity extends Entity {
 	protected int speed;
 	protected boolean flying = false;
 	protected boolean canSwim = false;
+	protected Texture[] attackSprite;
+	protected boolean attacking;
 
 	public boolean isflying() {
 		return flying;
@@ -71,4 +74,51 @@ public class LiveEntity extends Entity {
 			return false;
 		}
 	}
+	
+	
+	public Texture getAttackTexture(){
+		return this.attackSprite[this.getRotation()];
+	}
+	
+	public int getWidth() {
+		if(attacking){
+			return this.attackSprite[this.getRotation()].getWidth();
+		}
+		else {
+			return this.sprite[this.getRotation()].getWidth();
+		}
+	}
+
+	public int getWidth(int sprite) {
+		assert (this.sprite.length > sprite);
+		if(attacking){
+			return this.attackSprite[sprite].getWidth();
+		}
+		else {
+			return this.sprite[sprite].getWidth();
+		}
+	}
+
+	public int getHeight() {
+		if(attacking){
+			return this.attackSprite[this.getRotation()].getHeight();
+		}
+		else {
+			return this.sprite[this.getRotation()].getHeight();
+		}
+	}
+
+	public int getHeight(int sprite) {
+		assert (this.sprite.length > sprite);
+		if(attacking){
+			return this.attackSprite[sprite].getHeight();
+		}
+		else {
+			return this.sprite[sprite].getHeight();
+		}
+		
+		
+		
+	}
+
 }

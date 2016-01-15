@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
 
 public class Repeatable extends LiveEntity {
-	protected int attack;
+	
 	// sight2 is the distance of the sight squared
 	private int sight2 = 10000;
 
