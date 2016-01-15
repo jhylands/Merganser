@@ -70,6 +70,7 @@ public class MyGdxGame extends Game {
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
 		assetManager.load("bio-lab-0.png", Texture.class);
+		assetManager.load("bio-lab-0-r.png", Texture.class);
 		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.load("large_duck.png", Texture.class);
 		assetManager.load("large_duck_down.png", Texture.class);
