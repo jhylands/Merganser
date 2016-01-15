@@ -10,6 +10,7 @@ public class Repeatable extends LiveEntity {
 	protected int attack = 1;
 	protected int attackRadius = 100;
 	protected int threatRadius = 200;
+
 	// sight2 is the distance of the sight squared
 	private int sight2 = 10000;
 
