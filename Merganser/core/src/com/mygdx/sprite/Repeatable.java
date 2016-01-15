@@ -61,7 +61,7 @@ public class Repeatable extends LiveEntity {
 	public void attack(PlayerDuck duck, Map map){
 		if(isCloseToDuck(attackRadius,duck)){
 			duck.changeHealth(attack*-1);
-			this.moveIfValid(this.findDirection(duck).scl(threatRadius*-1), map);
+			this.moveIfValid(this.findDirection(duck).scl(20*-1), map);
 		}
 	}
 	public void threat(PlayerDuck duck){

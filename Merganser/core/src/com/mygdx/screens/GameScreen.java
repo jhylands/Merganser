@@ -137,6 +137,12 @@ public class GameScreen implements Screen {
 		game.setCurrentObjective(game.getCurrentObjective().updateObjective());
 		// set current map
 		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+		
+		// Checks to see if last objective complete.
+		// If complete then go to Game Complete screen
+		if(game.isLastObjComplete()){
+			game.setScreen(new CompleteEndScreen(game));
+		}
 
 		// include the baddies that need to be included in the game
 		game.getBadies()[0].update(game.duck, game.getCurrentMap());
