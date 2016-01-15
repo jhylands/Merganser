@@ -12,10 +12,10 @@ public class Objective {
 	/**
 	 * Constructor for Objective.
 	 * 
-	 * @param game
-	 * @param targetMap
-	 * @param objectiveDescription
-	 * @param pointsValue
+	 * @param game					Current game state
+	 * @param targetMap				Target map for objective to be complete
+	 * @param objectiveDescription	Description of objective
+	 * @param pointsValue			Points awarded for completion of objective
 	 */
 	public Objective(MyGdxGame game, Map targetMap, String objectiveDescription, int pointsValue) {
 		this.game = game;
@@ -122,5 +122,7 @@ public class Objective {
 	public void setPointsValue(int pointsValue) {
 		this.pointsValue = pointsValue;
 	}
+	
+
 
 }
