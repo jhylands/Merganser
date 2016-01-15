@@ -1,6 +1,6 @@
 <Maps>
 	<Map>
-		<name>Biology Lab</name>
+		<name>Biology Lab 1</name>
 		<background>bio-lab-0.png</background>
 		<MapFeatures>
 			<MapFeature>
@@ -103,7 +103,6 @@
 			<y>150</y>
 			<z>0</z>
 		</globalPosition>
-
 	</Map>
 	<Map>
 		<name>Biology Corridor</name>
@@ -113,12 +112,12 @@
 				<groundImpeedence>1</groundImpeedence>
 				<flightImpeedence>0</flightImpeedence>
 				<isWater>0</isWater>
-				<x>0</x>
-				<y>0</y>
-				<width>100</width>
-				<height>100</height>
+				<x>255</x>
+				<y>216</y>
+				<width>33</width>
+				<height>25</height>
 			</MapFeature>
-				<MapFeature>
+            <MapFeature>
 				<groundImpeedence>1</groundImpeedence>
 				<flightImpeedence>1</flightImpeedence>
 				<isWater>0</isWater>
@@ -157,23 +156,266 @@
 		</MapFeatures>
 		<MapPortals>
 			<MapPortal>
-				<x>200</x>
-				<y>100</y>
-				<width>100</width>
-				<height>100</height>
+				<x>65</x>
+				<y>0</y>
+				<width>65</width>
+				<height>15</height>
 				<to>
-					<ref>2</ref>
-					<x>200</x>
-					<y>200</y>
+					<ref>0</ref>
+					<x>137</x>
+					<y>216</y>
 				</to>
 			</MapPortal>
-		</MapPortals>
+            <MapPortal>
+                <x>324</x>
+                <y>0</y>
+                <width>65</width>
+                <height>15</height>
+                <to>
+                    <ref>2</ref>
+                    <x>137</x>
+                    <y>216</y>
+                </to>
+            </MapPortal>
+            <MapPortal>
+                <x>70</x>
+                <y>234</y>
+                <width>65</width>
+                <height>15</height>
+                <to>
+                    <ref>3</ref>
+                    <x>296</x>
+                    <y>15</y>
+                </to>
+            </MapPortal>
+            <MapPortal>
+                <x>458</x>
+                <y>6</y>
+                <width>15</width>
+                <height>238</height>
+                <to>
+                    <ref>4</ref>
+                    <x>10</x>
+                    <y>200</y>
+                </to>
+            </MapPortal>
+        </MapPortals>
 		<globalPosition>
 			<x>150</x>
 			<y>150</y>
 			<z>1</z>
 		</globalPosition>
 	</Map>
+    <Map>
+        <name>Biology Lab 2</name>
+        <background>bio-lab-0.png</background>
+        <MapFeatures>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>0</y>
+                <width>1</width>
+                <height>249</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>480</x>
+                <y>0</y>
+                <width>1</width>
+                <height>249</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>249</y>
+                <width>480</width>
+                <height>1</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>0</y>
+                <width>480</width>
+                <height>1</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>81</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>160</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>240</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>320</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>404</x>
+                <y>75</y>
+                <width>25</width>
+                <height>96</height>
+            </MapFeature>
+        </MapFeatures>
+        <MapPortals>
+            <MapPortal>
+                <x>68</x>
+                <y>240</y>
+                <width>62</width>
+                <height>15</height>
+                <to>
+                    <ref>1</ref>
+                    <x>99</x>
+                    <y>40</y>
+                </to>
+            </MapPortal>
+        </MapPortals>
+        <globalPosition>
+            <x>150</x>
+            <y>150</y>
+            <z>0</z>
+        </globalPosition>
+    </Map>
+    <Map>
+        <name>Biology Lab 3</name>
+        <background>bio-lab-0-r.png</background>
+        <MapFeatures>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>0</y>
+                <width>1</width>
+                <height>249</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>480</x>
+                <y>0</y>
+                <width>1</width>
+                <height>249</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>249</y>
+                <width>480</width>
+                <height>1</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>1</flightImpeedence>
+                <isWater>0</isWater>
+                <x>0</x>
+                <y>0</y>
+                <width>480</width>
+                <height>1</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>81</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>160</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>240</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>320</x>
+                <y>37</y>
+                <width>38</width>
+                <height>174</height>
+            </MapFeature>
+            <MapFeature>
+                <groundImpeedence>1</groundImpeedence>
+                <flightImpeedence>0</flightImpeedence>
+                <isWater>0</isWater>
+                <x>404</x>
+                <y>75</y>
+                <width>25</width>
+                <height>96</height>
+            </MapFeature>
+        </MapFeatures>
+        <MapPortals>
+            <MapPortal>
+                <x>68</x>
+                <y>240</y>
+                <width>62</width>
+                <height>15</height>
+                <to>
+                    <ref>1</ref>
+                    <x>99</x>
+                    <y>40</y>
+                </to>
+            </MapPortal>
+        </MapPortals>
+        <globalPosition>
+            <x>150</x>
+            <y>150</y>
+            <z>0</z>
+        </globalPosition>
+    </Map>
     <Map>
         <name>Outside Biology</name>
         <background>outside.png</background>
@@ -233,7 +475,7 @@
                 <width>100</width>
                 <height>300</height>
                 <to>
-                    <ref>0</ref>
+                    <ref>1</ref>
                     <x>100</x>
                     <y>100</y>
                 </to>

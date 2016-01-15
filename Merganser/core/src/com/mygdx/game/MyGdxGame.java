@@ -121,7 +121,7 @@ public class MyGdxGame extends Game {
 		setObjectives(new ArrayList<Objective>());
 		try {
 			// Add new objective to ArrayList
-			getObjectives().add(new Objective(this, maps[2], "Go to outside biology", 100));
+			getObjectives().add(new Objective(this, maps[4], "Go to outside biology", 100));
 			getObjectives().add(new Objective(this, maps[0], "Go back to the biology lab", 100));
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");
