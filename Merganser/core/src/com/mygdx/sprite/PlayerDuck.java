@@ -43,6 +43,10 @@ public class PlayerDuck extends LiveEntity {
 	public int getDUCKSPRINT() {
 		return DUCKSPRINT;
 	}
+	
+	public void setDUCKSPEED(int DUCKSPEED) {
+		this.speed = DUCKSPEED;
+	}
 
 	public void setDUCKSPRINT(int dUCKSPRINT) {
 		DUCKSPRINT = dUCKSPRINT;

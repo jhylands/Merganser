@@ -23,20 +23,26 @@ public class LiveEntityTesting extends TestCase {
 		 assertTrue(HealthTest == 100);
 	 }
 	 
+	 public void testisDead(){
+		 testEntity.setHealth(0);
+		 assertTrue(testEntity.isAlive() == false);
+	 }
+	 
 	 public void testisAlive(){
-		 assertTrue(testEntity.isAlive() == true || testEntity.isAlive() == false);
+		 testEntity.setHealth(100);
+		 assertTrue(testEntity.isAlive() == true);
 	 }
 
 	 public void testisFlying(){
-		 assertTrue(testEntity.isflying() == true || testEntity.isflying() == false);
+		 assertTrue(testEntity.isflying() == false);
 		 		 
 	 }
 	 
 	 public void testcanswim(){
-		 assertTrue(testEntity.canswim() == true || testEntity.canswim() == false);
+		 assertTrue(testEntity.canswim() == false);
 	 }
 	 
-	 public void testHealth(){
+	 public void testChangeHealth(){
 		 testEntity.changeHealth(100);
 		 assertTrue(testEntity.getHealth() == 100);
 	 }
@@ -46,11 +52,11 @@ public class LiveEntityTesting extends TestCase {
 		 assertTrue(testEntity.getAttackStrength() == 20);
 	 }
 	 
-	 public void setHealth(){ 
+	 public void testSetHealth(){ 
 		 testEntity.setHealth(20);
 		 assertTrue(testEntity.getHealth() == 20);
 	 }
-
+	 
 	 /*
 	  * Test Move Validity
 	  * Test Width
