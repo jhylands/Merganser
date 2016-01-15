@@ -1,18 +1,13 @@
 package com.mygdx.test.game;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.Heart;
-import com.mygdx.sprite.Entity;
 import com.mygdx.sprite.LiveEntity;
-
 import junit.framework.*;
 
 public class LiveEntityTesting extends TestCase {
-	 protected int value1, value2, speed;
+	 protected int speed;
 	 LiveEntity testEntity = new LiveEntity();
+	 
 	 protected void setUp(){
-	      value1=3;
-	      value2=3;
 	      speed = 120;
 	   }
 	 
@@ -27,6 +22,40 @@ public class LiveEntityTesting extends TestCase {
 		 int HealthTest = testEntity.getMaxHealth();
 		 assertTrue(HealthTest == 100);
 	 }
+	 
+	 public void testisAlive(){
+		 assertTrue(testEntity.isAlive() == true || testEntity.isAlive() == false);
+	 }
 
+	 public void testisFlying(){
+		 assertTrue(testEntity.isflying() == true || testEntity.isflying() == false);
+		 		 
+	 }
+	 
+	 public void testcanswim(){
+		 assertTrue(testEntity.canswim() == true || testEntity.canswim() == false);
+	 }
+	 
+	 public void testHealth(){
+		 testEntity.changeHealth(100);
+		 assertTrue(testEntity.getHealth() == 100);
+	 }
+	 
+	 public void testStrength(){
+		 testEntity.setAttackStrength(20);
+		 assertTrue(testEntity.getAttackStrength() == 20);
+	 }
+	 
+	 public void setHealth(){ 
+		 testEntity.setHealth(20);
+		 assertTrue(testEntity.getHealth() == 20);
+	 }
 
+	 /*
+	  * Test Move Validity
+	  * Test Width
+	  * Test Height
+	  * Test Texture
+	  */
+	 
 }
