@@ -1,5 +1,7 @@
 package com.mygdx.sprite;
 
+import java.util.Random;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,9 +37,14 @@ public class Repeatable extends LiveEntity {
 		this.attackSprite[this.LEFT] = manager.get("goose_action_left.png", Texture.class);
 		
 		this.speed = speed;
-		this.setPosition(new Vector2(50, 50));
+		this.setPosition(new Vector2(randomNumber(470), randomNumber(240)));
 	}
 
+	public int randomNumber(int range){
+		Random rnd = new Random();
+		return rnd.nextInt(range);
+	}
+	
 	
 	public void update(PlayerDuck duck, Map map){
 		move(duck, map);
