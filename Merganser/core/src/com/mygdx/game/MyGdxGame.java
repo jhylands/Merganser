@@ -70,6 +70,7 @@ public class MyGdxGame extends Game {
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
 		assetManager.load("bio-lab-0.png", Texture.class);
+		assetManager.load("bio-lab-0-r.png", Texture.class);
 		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.load("large_duck.png", Texture.class);
 		assetManager.load("large_duck_down.png", Texture.class);
@@ -120,7 +121,7 @@ public class MyGdxGame extends Game {
 		setObjectives(new ArrayList<Objective>());
 		try {
 			// Add new objective to ArrayList
-			getObjectives().add(new Objective(this, maps[2], "Go to outside biology", 100));
+			getObjectives().add(new Objective(this, maps[4], "Go to outside biology", 100));
 			getObjectives().add(new Objective(this, maps[0], "Go back to the biology lab", 100));
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");

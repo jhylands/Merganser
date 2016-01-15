@@ -163,19 +163,25 @@ public class GameScreen implements Screen {
 		// draw the GUI
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
+		
 		// draw the score
 		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
+		
 		// draw the map background (and the maps enemies)
 		game.getCurrentMap().draw(batch);
+		
 		// draw the duck texture
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
+		
 		// draw health
 		// Needs to pass numbers rather than textures
 		game.getHeart().addTextures(game.duck.getHealth(), game.duck.getMaxHealth(), batch, game.getScreenWidth(),
 				game.getScreenHeight());
+		
 		// draw stamina
 		game.getStamina().draw(batch, game);
+		
 		// draw new objective
 		if (game.isNewObjective()) {
 			batch.draw(game.getAssetManager().get("objective.png", Texture.class), 350,
