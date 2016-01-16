@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.sprite.PlayerDuck;
 
 public class EndScreen implements Screen {
 	
@@ -39,7 +40,7 @@ public class EndScreen implements Screen {
 		menuFont = generator.generateFont(parameter1);
 		endFont.setColor(Color.WHITE);
 
-		menuItem = new String[] { "Score: " + game.duck.getScore(), "Main Menu" };
+		menuItem = new String[] { "Score: " + game.duck.getScore(), "Main Menu", "Quit"};
 
 		generator.dispose();
 	}
@@ -94,7 +95,11 @@ public class EndScreen implements Screen {
 			case 0:
 				break;
 			case 1:
+				game.create();
 				game.setScreen(game.getMainMenu());
+				break;
+			case 2:
+				Gdx.app.exit();
 				break;
 
 			}
