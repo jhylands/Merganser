@@ -21,6 +21,7 @@ public class GameScreen implements Screen {
 
 	public void create() {
 		batch = new SpriteBatch();
+		game.duck.assignResources(game.getAssetManager());
 	}
 
 	private void handleInput(Map map) {

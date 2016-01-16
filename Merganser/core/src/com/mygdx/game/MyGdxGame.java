@@ -101,7 +101,7 @@ public class MyGdxGame extends Game {
 
 		// Create a new PlayerDuck - contains all of the information for the
 		// users duck
-		duck = new PlayerDuck(assetManager);
+		duck = new PlayerDuck();
 		
 		//initiate stamina
 		stamina =  new Stamina();

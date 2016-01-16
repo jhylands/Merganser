@@ -11,7 +11,7 @@ public class PlayerDuck extends LiveEntity {
 
 	private int screenHeight = Gdx.graphics.getHeight();
 	private int score = 0;
-	private int stamina = 100;
+	private int stamina;
 	private Sound quack = null;
 	private int DUCKSPEED = 3;
 	private int DUCKSPRINT = 6;
@@ -22,17 +22,22 @@ public class PlayerDuck extends LiveEntity {
 	// private Vector2 position <-not needed because position in stored in
 	// hitBox inherited from Entity
 
-	public PlayerDuck(AssetManager manager) {
+	public PlayerDuck() {
 		this.canSwim = true;
+		this.setHealth(12);
+		this.setMaxHealth(12);
+		this.setStamina(100);
+		this.speed = DUCKSPEED;
+		
+	}
+	
+	public void assignResources(AssetManager manager){
 		this.sprite = new Texture[4];
 		this.sprite[this.UP] = manager.get("large_duck.png", Texture.class);
 		this.sprite[this.DOWN] = manager.get("large_duck_down.png", Texture.class);
 		this.sprite[this.LEFT] = manager.get("large_duck_left.png", Texture.class);
 		this.sprite[this.RIGHT] = manager.get("large_duck_right.png", Texture.class);
 		this.setPosition(new Vector2(20, (screenHeight / 2) - (this.getHeight() / 2)));
-		this.setHealth(12);
-		this.setMaxHealth(12);
-		this.speed = DUCKSPEED;
 		this.quack = Gdx.audio.newSound(Gdx.files.internal("duckQuack.mp3"));
 	}
 
