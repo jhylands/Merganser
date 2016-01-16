@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -79,6 +80,8 @@ public class MapScreen implements Screen {
 		// TODO Auto-generated method stub
 		handleInput();
 		updateCurrentMap();
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sb1.begin();
 
 		// Testing of different maps
@@ -105,11 +108,11 @@ public class MapScreen implements Screen {
 		}
 
 		currentMapName = game.getCurrentMap().getName();
-		mapFont.setColor(Color.BLACK);
+		mapFont.setColor(Color.WHITE);
 		mapFont.draw(sb1, CURRENTLOCATION + currentMapName,
 				game.getScreenWidth() - ((CURRENTLOCATION.length() * mapFont.getSpaceWidth())
 						+ (mapFont.getSpaceWidth() * currentMapName.length())),
-				20);
+				game.getScreenHeight()-mapFont.getCapHeight());
 
 		sb1.end();
 	}
