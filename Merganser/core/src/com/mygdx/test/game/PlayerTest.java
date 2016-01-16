@@ -8,12 +8,13 @@ import junit.framework.*;
 
 public class PlayerTest extends TestCase {
 	 MyGdxGame newGame = new MyGdxGame();
+	 AssetManager assetManager2 = newGame.getAssetManager();
+	 PlayerDuck testEntity = new PlayerDuck();
 	 
 	 protected void setUp(){
+		 testEntity.assignResources(assetManager2);
 	   }
-	 
-	 AssetManager assetManager2 = newGame.getAssetManager();
-	 PlayerDuck testEntity = new PlayerDuck(assetManager2);
+	
 	 
 	 public void testSprint(){
 		 testEntity.setDUCKSPRINT(1213);
