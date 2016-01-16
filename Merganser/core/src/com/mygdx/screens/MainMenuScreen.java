@@ -19,7 +19,7 @@ public class MainMenuScreen implements Screen {
 	private SpriteBatch sb;
 	private BitmapFont titleFont;
 	private BitmapFont menuFont;
-	private final String gameTitle = "The Duck Game";
+	private final String gameTitle = "M.E.R.G.A.N.S.E.R";
 	private int currentMenuItem;
 	private String[] menuItem;
 
@@ -32,7 +32,7 @@ public class MainMenuScreen implements Screen {
 		sb = new SpriteBatch();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 50;
+		parameter.size = 40;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
 		FreeTypeFontParameter parameter1 = new FreeTypeFontParameter();
 		parameter1.size = 25;
