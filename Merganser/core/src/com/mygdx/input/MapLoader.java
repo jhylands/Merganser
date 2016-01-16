@@ -24,13 +24,22 @@ import com.mygdx.sprite.Repeatable;
 
 public class MapLoader {
 
-	//required for asset manager to hold new background images
+	// Required for asset manager to hold new background images
 	private MyGdxGame game;
 
+	/** 
+	 * Passes current state of the game
+	 * @param game MyGdxGame
+	 */
 	public MapLoader(MyGdxGame game) {
 		this.game = game;
 	}
 
+	/**
+	 * Creates a Map array from a given XML file path
+	 * @param file XML file path
+	 * @return Map[]  - array of maps
+	 */
 	public Map[] loadXML(String file) {
 		//initiate the list of maps
 		Map[] arrMaps;
