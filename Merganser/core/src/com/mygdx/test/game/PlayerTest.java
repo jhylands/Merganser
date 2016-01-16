@@ -29,14 +29,5 @@ public class PlayerTest extends TestCase {
 		assertTrue(testEntity.getScore() == 0);
 	}
 	
-	public void testSprint() {
-		testEntity.setDUCKSPRINT(1213);
-		assertTrue(testEntity.getDUCKSPRINT() == 1213);
-	}
-
-	public void testSpeed() {
-		testEntity.setDUCKSPEED(20);
-		assertTrue(testEntity.getDUCKSPEED() == 20);
-	}
 
 }

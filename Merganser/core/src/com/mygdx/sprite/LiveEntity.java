@@ -1,8 +1,11 @@
 package com.mygdx.sprite;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
+
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
 public class LiveEntity extends Entity {
 	// as a superclass these should be protected rather than private so they can
@@ -34,8 +37,21 @@ public class LiveEntity extends Entity {
 		return health;
 	}
 
+	/**
+	 * Sets entity health. If trying to set health > MaxHealth
+	 * set health to maxHealth
+	 * @param health
+	 */
 	public void setHealth(int health) {
-		this.health = health;
+		if(health < 0){
+			this.health = 0;
+		}
+		else if(health > this.getMaxHealth()){
+			this.health = getMaxHealth();
+		} else {
+			this.health = health;
+		}
+		
 	}
 
 	public boolean changeHealth(int change){
@@ -68,7 +84,23 @@ public class LiveEntity extends Entity {
 	}
 
 	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
+		try {
+			if (maxHealth < 0){
+				throw new Exception("MaxHealth must be >= 0");
+			}
+			if (maxHealth % 4 != 0){
+				this.maxHealth = maxHealth - (maxHealth % 4);
+			} else {
+				this.maxHealth = maxHealth;
+			}
+		} catch (Exception e) {
+			System.err.println("Max health must be >= 0");
+			Gdx.app.exit();
+		}
+		
+		
+		
+		
 	}
 
 	// public Vector2 getPosition(){
