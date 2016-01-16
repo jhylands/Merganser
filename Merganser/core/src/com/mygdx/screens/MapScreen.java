@@ -52,7 +52,7 @@ public class MapScreen implements Screen {
 		}
 
 		else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-			game.setScreen(new MainMenuScreen(game));
+			game.setScreen(game.getMainMenu());
 		}
 
 		else if (Gdx.input.isKeyJustPressed(Keys.M)) {
