@@ -39,7 +39,7 @@ public class EndScreen implements Screen {
 		menuFont = generator.generateFont(parameter1);
 		endFont.setColor(Color.WHITE);
 
-		menuItem = new String[] { "Score: " + game.duck.getScore(), "Quit" };
+		menuItem = new String[] { "Score: " + game.duck.getScore(), "Main Menu" };
 
 		generator.dispose();
 	}
@@ -94,8 +94,9 @@ public class EndScreen implements Screen {
 			case 0:
 				break;
 			case 1:
-				Gdx.app.exit();
+				game.setScreen(game.getMainMenu());
 				break;
+
 			}
 		}
 
