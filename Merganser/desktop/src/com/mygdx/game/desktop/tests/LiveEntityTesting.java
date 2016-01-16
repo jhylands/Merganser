@@ -1,4 +1,4 @@
-package com.mygdx.test.game;
+package com.mygdx.game.desktop.tests;
 
 import com.mygdx.sprite.LiveEntity;
 import junit.framework.*;

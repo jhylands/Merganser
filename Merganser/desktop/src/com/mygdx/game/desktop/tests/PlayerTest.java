@@ -1,16 +1,13 @@
-package com.mygdx.test.game;
+package com.mygdx.game.desktop.tests;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.mygdx.game.MyGdxGame;
 import com.mygdx.sprite.PlayerDuck;
 
-import junit.framework.*;
-
-public class PlayerTest extends TestCase {
+public class PlayerTest extends AssetTestCase {
 	
 	PlayerDuck testEntity;
 	
-	protected void setUp() {
+	public void setUp() {
+		super.setUp();
 		 testEntity = new PlayerDuck();
 	}
 
