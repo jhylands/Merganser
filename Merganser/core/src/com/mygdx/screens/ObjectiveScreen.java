@@ -83,12 +83,12 @@ public class ObjectiveScreen implements Screen {
 			// If objective is current objective; colour red
 			// Else; colour white
 			if (game.getCurrentObjective() == drawObjective) {
-				objFont.setColor(Color.RED);
+				objFont.setColor(Color.YELLOW);
 				objFont.draw(sb, drawObjective.getObjectiveDescription(), (game.getScreenWidth()
 						- (objFont.getSpaceWidth() * game.getObjectives().get(i).getObjectiveDescription().length()))
 						/ 2, 180 - 35 * i);
 			} else {
-				objFont.setColor(Color.WHITE);
+				objFont.setColor(Color.GRAY);
 				objFont.draw(sb, drawObjective.getObjectiveDescription(), (game.getScreenWidth()
 						- (objFont.getSpaceWidth() * game.getObjectives().get(i).getObjectiveDescription().length()))
 						/ 2, 180 - 35 * i);
