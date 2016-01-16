@@ -1,5 +1,10 @@
 package com.mygdx.game;
-
+/**
+ * Objective class contains information for an objective
+ * along with methods to update points system and check
+ * whether objective is complete
+ *
+ */
 public class Objective {
 
 	private MyGdxGame game;
@@ -15,7 +20,7 @@ public class Objective {
 	 * Constructor for Objective.
 	 * 
 	 * @param game					Current game state
-	 * @param targetMap				Target map for objective to be complete
+	 * @param targetMap				Target map for the objective to be completed
 	 * @param objectiveDescription	Description of objective
 	 * @param pointsValue			Points awarded for completion of objective
 	 */
@@ -97,22 +102,36 @@ public class Objective {
 	// //if(currentMap.getRef == this.mapRef());
 	// }
 
+	
 	// GETTERS AND SETTERS
 
+	/**
+	 * Return the target map of the objective
+	 * @return
+	 */
 	public Map getTargetMap() {
 		return targetMap;
 	}
 
+	/**
+	 * Set a Map to be the objective target
+	 * @param targetMap
+	 */
 	public void setTargetMap(Map targetMap) {
 		this.targetMap = targetMap;
 	}
 
+	/**
+	 * Gets the next objective
+	 * @return
+	 */
 	public Objective getNextObjective() {
 		return nextObjective;
 	}
 
 	/**
-	 * Set next objective. Current objective is now not the last objective.
+	 * Sets the next objective. 
+	 * Sets the boolean last objective to false as no longer last objective.
 	 * @param nextObjective
 	 */
 	public void setNextObjective(Objective nextObjective) {
@@ -120,26 +139,50 @@ public class Objective {
 		this.lastObjective = false;
 	}
 
+	/**
+	 * Returns the objective description
+	 * @return
+	 */
 	public String getObjectiveDescription() {
 		return objectiveDescription;
 	}
 
+	/**
+	 * Set objective description
+	 * @param objectiveDescription
+	 */
 	public void setObjectiveDescription(String objectiveDescription) {
 		this.objectiveDescription = objectiveDescription;
 	}
 
+	/**
+	 * Get points value for completing the objective
+	 * @return
+	 */
 	public int getPointsValue() {
 		return pointsValue;
 	}
 
+	/**
+	 * Set points value for completing the objective
+	 * @param pointsValue Integer
+	 */
 	public void setPointsValue(int pointsValue) {
 		this.pointsValue = pointsValue;
 	}
 
+	/**
+	 * Returns true if this objective is the last objective
+	 * @return
+	 */
 	public boolean isLastObjective() {
 		return lastObjective;
 	}
 
+	/**
+	 * Changes boolean to sets whether this is the last objective
+	 * @param lastObjective
+	 */
 	public void setLastObjective(boolean lastObjective) {
 		this.lastObjective = lastObjective;
 	}

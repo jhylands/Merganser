@@ -21,7 +21,7 @@ import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 
 /**
- * This class holds the initialisation of the game. When libgdx creates the game
+ * This class holds the initialization of the game. When LibGDX creates the game
  * using the desktop launcher the create function in this class is called.
  * 
  * @author james
@@ -29,28 +29,46 @@ import com.mygdx.sprite.Repeatable;
  */
 public class MyGdxGame extends Game {
 
+	// Players duck
 	public PlayerDuck duck;
+	
+	// Map that playerDuck is currently on
 	private Map currentMap;
-	private Heart heart;
-	private BitmapFont myFont;
-	private Repeatable[] badies;
 	private Map[] maps;
+	
+	// Instance of classes and fonts to enable rendering 
+	private Heart heart;
+	private Stamina stamina;
+	private BitmapFont myFont;
+	
+	// Array of enemies
+	private Repeatable[] badies;
+	
+	// Variables/ Constants for the game
 	private float SCREENWIDTH;
 	private float SCREENHEIGHT;
-	private Objective currentObjective;
+	private final String XMLLOCATION = "GameMap.xml";
+	
+	// AssetManager to store textures
 	private AssetManager assetManager;
-	private ArrayList<Objective> objectives;
+	
+	// Different screens for the game
 	private GameScreen mainGame;
 	private MainMenuScreen mainMenu;
 	private ObjectiveScreen objScreen;
 	private MapScreen mapScreen;
 	private EndScreen gameOverScreen;
 	private CompleteEndScreen gameCompleteScreen;
-	private Stamina stamina;
+	
+	// Objective Array containing all objectives
+	private ArrayList<Objective> objectives;
+	// Objective variables for tracking objective status
+	private Objective currentObjective;
 	private boolean newObjective = true;
 	private boolean lastObjComplete = false;
-	private String xmlLocation = "GameMap.xml";
 
+	public boolean created = false;
+	
 	/**
 	 * Creates resources needed for the whole game
 	 */
@@ -61,41 +79,53 @@ public class MyGdxGame extends Game {
 		 * for speed efficiency later in the game
 		 */
 		assetManager = new AssetManager();
+		// Load background for GUI panel at top of screen
 		assetManager.load("GUI panel.png", Texture.class);
+		
+		// Load over-world maps
 		assetManager.load("map1.png", Texture.class);
 		assetManager.load("map2.png", Texture.class);
+		
+		// Load heart textures
 		assetManager.load("Heart_0.png", Texture.class);
 		assetManager.load("Heart_1.png", Texture.class);
 		assetManager.load("Heart_2.png", Texture.class);
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
+		
+		// Load background image textures
 		assetManager.load("bio-lab-0.png", Texture.class);
 		assetManager.load("bio-lab-0-r.png", Texture.class);
 		assetManager.load("bio-lab-1.png", Texture.class);
+		assetManager.load("outside.png", Texture.class);
+		
+		// Load assets for duck
 		assetManager.load("large_duck.png", Texture.class);
 		assetManager.load("large_duck_down.png", Texture.class);
 		assetManager.load("large_duck_left.png", Texture.class);
 		assetManager.load("large_duck_right.png", Texture.class);
+		assetManager.load("duck_action_left.png", Texture.class);
+		assetManager.load("duck_action_right.png", Texture.class);
+		assetManager.load("duck_action_up.png", Texture.class);
+		assetManager.load("duck_action_down.png", Texture.class);
+		
+		// Load assets for enemy goose
 		assetManager.load("goose_up.png", Texture.class);
 		assetManager.load("goose_down.png", Texture.class);
 		assetManager.load("goose_left.png", Texture.class);
 		assetManager.load("goose_right.png", Texture.class);
 		assetManager.load("objective.png", Texture.class);
-		assetManager.load("outside.png", Texture.class);
-		assetManager.load("duck_action_left.png", Texture.class);
-		assetManager.load("duck_action_right.png", Texture.class);
-		assetManager.load("duck_action_up.png", Texture.class);
-		assetManager.load("duck_action_down.png", Texture.class);
 		assetManager.load("goose_action_left.png", Texture.class);
 		assetManager.load("goose_action_right.png", Texture.class);
 		assetManager.load("goose_action_up.png", Texture.class);
 		assetManager.load("goose_action_down.png", Texture.class);
+		
+		// Finish loading textures into AssetManager
 		assetManager.finishLoading();
 
 		// Init map - load map from XML Map loader
 		maps = this.mapGeneration();
 		
-
 		// Set the current map
 		setCurrentMap(maps[0]);
 
@@ -124,7 +154,8 @@ public class MyGdxGame extends Game {
 			getObjectives().add(new Objective(this, maps[4], "Go to outside biology", 100));
 			getObjectives().add(new Objective(this, maps[0], "Go back to the biology lab", 100));
 		} catch (IndexOutOfBoundsException e) {
-			throw new IndexOutOfBoundsException("Can't create an objective with map greater than map list length");
+			System.err.println("Can't create an objective with map greater than map list length");
+			Gdx.app.exit();
 		}
 		try {
 			//Sets next objectives of objectives in the ArrayList. 
@@ -134,7 +165,8 @@ public class MyGdxGame extends Game {
 //			getObjectives().get(1).setNextObjective(getObjectives().get(0));
 			
 		} catch (IndexOutOfBoundsException e) {
-			throw new IndexOutOfBoundsException("Can't set next objective to greater than objective ArrayList length");
+			System.err.println("Can't set next objective to greater than objective ArrayList length");
+			Gdx.app.exit();
 		}
 		
 		
@@ -162,6 +194,8 @@ public class MyGdxGame extends Game {
 		
 		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(getMainMenu());
+	
+		this.created = true;
 	}
 
 	@Override
@@ -202,7 +236,7 @@ public class MyGdxGame extends Game {
 		 * 
 		 * maps[0].setPortalExit(0, maps[1]);
 		 */
-		return loader.loadXML(xmlLocation);
+		return loader.loadXML(XMLLOCATION);
 		// Rectangle[] a = new Rectangle[1];
 		// a[0] = new Rectangle()
 		// map.setPortals([new Rectangle() ])

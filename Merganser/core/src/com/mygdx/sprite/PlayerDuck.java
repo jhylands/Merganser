@@ -6,6 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Class encapsulates all variables for the for players duck.
+ * Initialization of this class sets values for the duck such as
+ * health, score, stamina 
+ */
 public class PlayerDuck extends LiveEntity {
 
 	// CONSTANTS

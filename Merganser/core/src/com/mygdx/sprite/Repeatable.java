@@ -88,7 +88,7 @@ public class Repeatable extends LiveEntity {
 	 * Depending on direction given sets rotation of Repeatable
 	 * @param direction
 	 */
-	private void rotate(float direction) {
+	public void rotate(float direction) {
 		if (direction < 45 || direction > 315) {
 			this.setRotation(this.RIGHT);
 		} else if (direction < 135) {

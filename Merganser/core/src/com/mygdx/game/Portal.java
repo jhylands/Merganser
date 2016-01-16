@@ -3,6 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Portal extends MapFeature, allowing the user duck to be transported from
+ * one place to another on the maps 
+ */
 public class Portal extends MapFeature {
 	private Map exit;
 	private int exitRef; // Hold this when loading maps in so all maps can be

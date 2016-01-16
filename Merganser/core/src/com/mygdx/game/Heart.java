@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/**
+ * Handles drawing the hearts for the GUI
+ *
+ */
 public class Heart {
 
 	/**
