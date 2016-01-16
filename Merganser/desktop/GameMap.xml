@@ -205,6 +205,7 @@
 			<y>143</y>
 			<z>1</z>
 		</globalPosition>
+		<enemy>enemies</enemy>
 	</Map>
     <Map>
         <name>Biology Lab 2</name>
@@ -493,7 +494,6 @@
             <y>149</y>
             <z>1</z>
         </globalPosition>
-	<enemy>enemies</enemy>
     </Map>
 </Maps>
 
