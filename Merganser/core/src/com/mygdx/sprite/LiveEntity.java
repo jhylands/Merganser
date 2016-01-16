@@ -43,11 +43,11 @@ public class LiveEntity extends Entity {
 	 * @param health
 	 */
 	public void setHealth(int health) {
-		if(health < 0){
+		if(health <= 0){
 			this.health = 0;
 		}
-		else if(health > this.getMaxHealth()){
-			this.health = getMaxHealth();
+		else if(health > this.maxHealth){
+			this.health = this.maxHealth;
 		} else {
 			this.health = health;
 		}

@@ -29,7 +29,8 @@ public class LiveEntityTesting extends TestCase {
 	 }
 	 
 	 public void testisAlive(){
-		 testEntity.setHealth(100);
+		 testEntity.setMaxHealth(100);
+		 testEntity.setHealth(101);
 		 assertTrue(testEntity.isAlive() == true);
 	 }
 
@@ -44,7 +45,7 @@ public class LiveEntityTesting extends TestCase {
 	 
 	 public void testChangeHealth(){
 		 testEntity.changeHealth(100);
-		 assertTrue(testEntity.getHealth() == 100);
+		 assertTrue(testEntity.getHealth() == testEntity.getMaxHealth());
 	 }
 	 
 	 public void testStrength(){
@@ -53,8 +54,9 @@ public class LiveEntityTesting extends TestCase {
 	 }
 	 
 	 public void testSetHealth(){ 
-		 testEntity.setHealth(20);
-		 assertTrue(testEntity.getHealth() == 20);
+		 testEntity.setMaxHealth(100);
+		 testEntity.setHealth(4);
+		 assertTrue(testEntity.getHealth() == 4);
 	 }
 	 
 	 /*
