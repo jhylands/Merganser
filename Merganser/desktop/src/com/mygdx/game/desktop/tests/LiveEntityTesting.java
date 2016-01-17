@@ -1,14 +1,17 @@
 package com.mygdx.game.desktop.tests;
 
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.sprite.LiveEntity;
 import junit.framework.*;
 
-public class LiveEntityTesting extends TestCase {
+public class LiveEntityTesting extends AssetTestCase {
 	 protected int speed;
 	 LiveEntity testEntity = new LiveEntity();
+	 Vector2 v = testEntity.getPosition();
 	 
-	 protected void setUp(){
-	      speed = 120;
+	 public void setUp(){
+		 super.setUp();
+	     speed = 120;
 	   }
 	 
 	 public void testLiveEntitySpeed(){
@@ -58,12 +61,5 @@ public class LiveEntityTesting extends TestCase {
 		 testEntity.setHealth(4);
 		 assertTrue(testEntity.getHealth() == 4);
 	 }
-	 
-	 /*
-	  * Test Move Validity
-	  * Test Width
-	  * Test Height
-	  * Test Texture
-	  */
 	 
 }
