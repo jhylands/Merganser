@@ -19,6 +19,8 @@ public class PlayerDuck extends LiveEntity {
 	// MAXSTAM should always be 100
 	private int MAXSTAM = 100;
 	private int MINSTAM = 0;
+	private int SPRINTCOST = 2;
+	private int STAMINAREGEN = 1;
 
 	/**
 	 * Current screenHeight of game
@@ -183,6 +185,18 @@ public class PlayerDuck extends LiveEntity {
 	 */
 	public int getMINSTAM() {
 		return MINSTAM;
+	}
+
+	public int getSPRINTCOST() {
+		return SPRINTCOST;
+	}
+
+	public int getSTAMINAREGEN() {
+		return STAMINAREGEN;
+	}
+
+	public void setSTAMINAREGEN(int sTAMINAREGEN) {
+		STAMINAREGEN = sTAMINAREGEN;
 	}
 
 }

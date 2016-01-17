@@ -54,15 +54,16 @@ public class LiveEntity extends Entity {
 		
 	}
 
-	public boolean changeHealth(int change){
+	public void changeHealth(int change){
 		if(this.getHealth()+change<0){
 			this.setHealth(0);
-			return false;
+//			return false;
 		}else{
 			this.setHealth(this.getHealth()+change);
-			return true;
+//			return true;
 		}
 	}
+	
 	public int getAttackStrength() {
 		return attackStrength;
 	}

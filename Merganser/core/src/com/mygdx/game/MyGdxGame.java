@@ -31,27 +31,27 @@ public class MyGdxGame extends Game {
 
 	// Players duck
 	public PlayerDuck duck;
-	
+
 	// Map that playerDuck is currently on
 	private Map currentMap;
 	private Map[] maps;
-	
-	// Instance of classes and fonts to enable rendering 
+
+	// Instance of classes and fonts to enable rendering
 	private Heart heart;
 	private Stamina stamina;
 	private BitmapFont myFont;
-	
+
 	// Array of enemies
 	private Repeatable[] badies;
-	
+
 	// Variables/ Constants for the game
 	private float SCREENWIDTH;
 	private float SCREENHEIGHT;
 	private final String XMLLOCATION = "GameMap.xml";
-	
+
 	// AssetManager to store textures
 	private AssetManager assetManager;
-	
+
 	// Different screens for the game
 	private GameScreen mainGame;
 	private MainMenuScreen mainMenu;
@@ -59,46 +59,47 @@ public class MyGdxGame extends Game {
 	private MapScreen mapScreen;
 	private EndScreen gameOverScreen;
 	private CompleteEndScreen gameCompleteScreen;
-	
+
 	// Objective Array containing all objectives
 	private ArrayList<Objective> objectives;
+
 	// Objective variables for tracking objective status
 	private Objective currentObjective;
 	private boolean newObjective = true;
 	private boolean lastObjComplete = false;
 
+	// Boolean for testing purposes for whether create() method
+	// has been called by the JUnit testing meaning that assets
+	// will have been loaded
 	public boolean created = false;
-	
+
 	/**
-	 * Creates resources needed for the whole game
+	 * Load all required assets into AssetManager to allow loading of textures
+	 * into game at start for game speed and efficiency
 	 */
-	@Override
-	public void create() {
-		/**
-		 * AssetManager implementation to allow loading of textures into game at start
-		 * for speed efficiency later in the game
-		 */
+	public void loadAssets() {
+
 		assetManager = new AssetManager();
 		// Load background for GUI panel at top of screen
 		assetManager.load("GUI panel.png", Texture.class);
-		
+
 		// Load over-world maps
 		assetManager.load("map1.png", Texture.class);
 		assetManager.load("map2.png", Texture.class);
-		
+
 		// Load heart textures
 		assetManager.load("Heart_0.png", Texture.class);
 		assetManager.load("Heart_1.png", Texture.class);
 		assetManager.load("Heart_2.png", Texture.class);
 		assetManager.load("Heart_3.png", Texture.class);
 		assetManager.load("Heart_4.png", Texture.class);
-		
+
 		// Load background image textures
 		assetManager.load("bio-lab-0.png", Texture.class);
 		assetManager.load("bio-lab-0-r.png", Texture.class);
 		assetManager.load("bio-lab-1.png", Texture.class);
 		assetManager.load("outside.png", Texture.class);
-		
+
 		// Load assets for duck
 		assetManager.load("large_duck.png", Texture.class);
 		assetManager.load("large_duck_down.png", Texture.class);
@@ -108,7 +109,7 @@ public class MyGdxGame extends Game {
 		assetManager.load("duck_action_right.png", Texture.class);
 		assetManager.load("duck_action_up.png", Texture.class);
 		assetManager.load("duck_action_down.png", Texture.class);
-		
+
 		// Load assets for enemy goose
 		assetManager.load("goose_up.png", Texture.class);
 		assetManager.load("goose_down.png", Texture.class);
@@ -119,27 +120,37 @@ public class MyGdxGame extends Game {
 		assetManager.load("goose_action_right.png", Texture.class);
 		assetManager.load("goose_action_up.png", Texture.class);
 		assetManager.load("goose_action_down.png", Texture.class);
-		
+
 		// Finish loading textures into AssetManager
 		assetManager.finishLoading();
+	}
+
+	/**
+	 * Creates resources needed for the whole game
+	 */
+	@Override
+	public void create() {
+		// Loads assets into assetManager
+		loadAssets();
 
 		// Init map - load map from XML Map loader
 		maps = this.mapGeneration();
-		
+
 		// Set the current map
 		setCurrentMap(maps[0]);
 
 		// Create a new PlayerDuck - contains all of the information for the
 		// users duck
 		duck = new PlayerDuck();
-		
-		//initiate stamina
-		stamina =  new Stamina();
-		
+
+		// initiate stamina
+		stamina = new Stamina();
+
 		// Create Hearts from Heart class
 		setHeart(new Heart(assetManager));
 
-		// Create a new repeatable object where enemies/ badies are stored in the code 
+		// Create a new repeatable object where enemies/ badies are stored in
+		// the code
 		setBadies(new Repeatable[1]);
 		getBadies()[0] = new Repeatable(1, assetManager);
 
@@ -154,22 +165,22 @@ public class MyGdxGame extends Game {
 			getObjectives().add(new Objective(this, maps[4], "Go to outside biology", 100));
 			getObjectives().add(new Objective(this, maps[0], "Go back to the 1st biology lab", 100));
 		} catch (IndexOutOfBoundsException e) {
+			// Exit the game if objective references are wrong
 			System.err.println("Can't create an objective with map greater than map list length");
 			Gdx.app.exit();
 		}
 		try {
-			//Sets next objectives of objectives in the ArrayList. 
-			//If objective not set a nextObjective then automatically defined as LastObjective
-			//Game will show Game Complete screen on lastObjective
+			// Sets next objectives of objectives in the ArrayList.
+			// If objective not set a nextObjective then automatically defined
+			// as LastObjective
 			getObjectives().get(0).setNextObjective(getObjectives().get(1));
-//			getObjectives().get(1).setNextObjective(getObjectives().get(0));
-			
+			// getObjectives().get(1).setNextObjective(getObjectives().get(0));
+
 		} catch (IndexOutOfBoundsException e) {
+			// Exit the game if objective references are wrong
 			System.err.println("Can't set next objective to greater than objective ArrayList length");
 			Gdx.app.exit();
 		}
-		
-		
 
 		// Set current objective as objective1. Allows an objective for when the
 		// game starts
@@ -178,10 +189,14 @@ public class MyGdxGame extends Game {
 		// FONT Generation for Score
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("COUR.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		// Font size and characters for font
 		parameter.size = 14;
 		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:-";
+		// Set MyFont to font generated by generator and parameter
 		setMyFont(generator.generateFont(parameter));
+		// Set font colour
 		getMyFont().setColor(Color.WHITE);
+		// dispose of font generator as no longer needed. Frees memory
 		generator.dispose();
 
 		// Create a GameScreen so we can reference to it from different screens
@@ -191,10 +206,10 @@ public class MyGdxGame extends Game {
 		setObjScreen(new ObjectiveScreen(this));
 		setGameCompleteScreen(new CompleteEndScreen(this));
 		setGameOverScreen(new EndScreen(this));
-		
+
 		// Set current screen to MainMenu Screen (screen that first loads)
 		this.setScreen(getMainMenu());
-	
+
 		this.created = true;
 	}
 
@@ -213,10 +228,10 @@ public class MyGdxGame extends Game {
 	}
 
 	/**
-	 * Initializes the XML map loader
-	 * Returns a Map[] based on the results from the XML Loader
-	 * XML file needs to be stored in desktop assets directory as an external file
-	 * Can find XML documentation on group website
+	 * Initializes the XML map loader Returns a Map[] based on the results from
+	 * the XML Loader XML file needs to be stored in desktop assets directory as
+	 * an external file Can find XML documentation on group website
+	 * 
 	 * @return
 	 */
 	public Map[] mapGeneration() {
@@ -243,7 +258,7 @@ public class MyGdxGame extends Game {
 	}
 
 	// GETTERS AND SETTERS
-	
+
 	public PlayerDuck getDuck() {
 		return duck;
 	}

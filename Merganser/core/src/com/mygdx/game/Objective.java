@@ -12,7 +12,10 @@ public class Objective {
 	private Objective nextObjective;
 	private String objectiveDescription;
 	private int pointsValue;
+	// Time counter to check when to reduce rewards
 	private int timeCounter = 0;
+	// Constant amount to reduce objective reward by
+	private int REDUCEREWARD = 1;
 	// Objective automatically set to last objective
 	private boolean  lastObjective = true;
 
@@ -32,26 +35,22 @@ public class Objective {
 	}
 
 	/**
-	 * Update objective - if isComplete() returns true then return the next
-	 * objective and sets NewObjective boolean to True to notify of new
-	 * objective If objective not complete then reduce the reward
-	 * 
-	 * @param currentMap
-	 * @return
+	 * Updates current objective
+	 * If complete and last objective will set last objective flag to true
+	 * Otherwise will get next objective
+	 * If not complete then reduce reward for current objective
 	 */
-	public Objective updateObjective() {
+	public void updateObjective() {
 		if (isComplete()) {
 			if (isLastObjective()){
 				game.setLastObjComplete(true);
-				return this;
 			}
 			else{
 				game.setNewObjective(true);
-				return nextObjective;
+				game.setCurrentObjective(nextObjective);
 			}
 		} else {
 			reduceReward();
-			return this;
 		}
 	}
 
@@ -60,9 +59,10 @@ public class Objective {
 	 * the objective (decrement pointsValue for completing objective)
 	 */
 	private void reduceReward() {
+		// Reduce rewards every 30 frames by REDUCEREWARD constant and reset time counter
 		if (timeCounter == 30) {
 			if (pointsValue > 1) {
-				pointsValue--;
+				pointsValue -= REDUCEREWARD;
 			}
 			timeCounter = 0;
 		} else {

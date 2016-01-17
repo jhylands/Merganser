@@ -8,30 +8,52 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Map;
 import com.mygdx.game.MyGdxGame;
 
+/**
+ * Screen for displaying the game
+ */
 public class GameScreen implements Screen {
-
+	/**
+	 * Game to allow reference to game state
+	 */
 	private MyGdxGame game;
 
+	/**
+	 * SpriteBatch for drawing textures
+	 */
 	private SpriteBatch batch;
 
+	/**
+	 * Constructor for GameScreen Calls create() method
+	 * 
+	 * @param game
+	 *            Current game state (allows reference to PlayerDuck score)
+	 */
 	public GameScreen(MyGdxGame game) {
 		this.game = game;
 		create();
 	}
 
+	/**
+	 * Set up spriteBatch Assigns duck resources from assetManager so it can be
+	 * rendered
+	 */
 	public void create() {
 		batch = new SpriteBatch();
 		game.duck.assignResources(game.getAssetManager());
 	}
 
-	private void handleInput(Map map) {
+	/**
+	 * Handles any user input for defined keys
+	 */
+	private void handleInput() {
 
-		// quack
+		// Play quack audio if Q pressed
 		if (Gdx.input.isKeyJustPressed(Keys.Q)) {
 			game.duck.quack();
 		}
 
-		// duck movement
+		// Input for duck movement.
+		// Checks whether move is valid for current map position
 		if (Gdx.input.isKeyPressed(Keys.W)) {
 			game.duck.moveIfValid(game.duck.UP, game.getCurrentMap());
 		} else if (Gdx.input.isKeyPressed(Keys.S)) {
@@ -40,11 +62,38 @@ public class GameScreen implements Screen {
 			game.duck.moveIfValid(game.duck.LEFT, game.getCurrentMap());
 		} else if (Gdx.input.isKeyPressed(Keys.D)) {
 			game.duck.moveIfValid(game.duck.RIGHT, game.getCurrentMap());
-		} else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		}
+
+		// Checks whether sprint key is pressed
+		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+			// If duck has stamina then set movement speed to sprint speed
+			// and decrement stamina by sprint cost
+			if (!game.duck.atMinStam()) {
+				game.duck.setSpeed(game.duck.getDUCKSPRINT());
+				game.duck.setStamina(game.duck.getStamina() - game.duck.getSPRINTCOST());
+			}
+			// If duck has no stamina then reset duck speed to normal speed
+			if (game.duck.atMinStam()) {
+				game.duck.setSpeed(game.duck.getDUCKSPEED());
+			}
+		}
+
+		// Reset speed and regenerate stamina when not sprinting
+		if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && (game.duck.getSpeed() == game.duck.getDUCKSPRINT())) {
+			game.duck.setSpeed(game.duck.getDUCKSPEED());
+			game.duck.setStamina(game.duck.getStamina() + game.duck.getSTAMINAREGEN());
+		} 
+		// Regenerate stamina if not sprinting
+		else if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !game.duck.atMaxStam()) {
+			game.duck.setStamina(game.duck.getStamina() + game.duck.getSTAMINAREGEN());
+		}
+
+		// Set screen to Main Menu if Escape pressed
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			game.setScreen(game.getMainMenu());
 		}
 
-		// If O pressed then go to objective screen
+		// Set screen to objective screen if O pressed
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
 			game.setScreen(game.getObjScreen());
 		}
@@ -53,104 +102,79 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.M)) {
 			game.setScreen(game.getMapScreen());
 		}
-
-		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
-			if (!game.duck.atMinStam()) {
-				game.duck.setSpeed(game.duck.getDUCKSPRINT());
-				game.duck.setStamina(game.duck.getStamina() - 2);
-			}
-			if (game.duck.atMinStam()) {
-				game.duck.setSpeed(game.duck.getDUCKSPEED());
-			}
-		}
-
-		if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && (game.duck.getSpeed() == game.duck.getDUCKSPRINT())) {
-			game.duck.setSpeed(game.duck.getDUCKSPEED());
-			game.duck.setStamina(game.duck.getStamina() + 1);
-		} else if (!Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && !game.duck.atMaxStam()) {
-			game.duck.setStamina(game.duck.getStamina() + 1);
-		}
-
-		// control of other features for testing
-		// inputTests();
 	}
 
-	// function contsining keys that are not required in the game but are used
-	// for other testing
-
+	
+	/**
+	 * Input tests to check if score, health and stamina display
+	 * correctly when changed
+	 */
 	private void inputTests() {
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)
-				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			game.duck.addScore(1);
-		} else if (Gdx.input.isKeyPressed(Keys.LEFT)
-				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
+		} else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
 			game.duck.addScore(-1);
-		} else if (Gdx.input.isKeyPressed(Keys.UP)
-				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
-			if (game.duck.getHealth() < game.duck.getMaxHealth()) {
-				//game.duck.setHealth(game.duck.getHealth() + 1);
-			}
-		} else if (Gdx.input.isKeyPressed(Keys.DOWN)
-				&& (game.duck.getPosition().x < (game.getScreenWidth() - game.duck.getWidth(3)))) {
-			if (game.duck.getHealth() > 0) {
-				//game.duck.setHealth(game.duck.getHealth() - 1);
-			}
-			// tests for health and score. use arrow keys.
+		} else if (Gdx.input.isKeyPressed(Keys.UP)) {
+			game.duck.setHealth(game.duck.getHealth() + 1);
+		} else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+			game.duck.setHealth(game.duck.getHealth() - 1);
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_9)) {
-			game.duck.setStamina(game.duck.getStamina() - 1);
+			game.duck.setStamina(game.duck.getStamina() - 4);
 		} else if (Gdx.input.isKeyPressed(Keys.NUM_0)) {
 			game.duck.setStamina(game.duck.getStamina() + 1);
 		}
-
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	/**
-	 * function called by the main render loop of LIB GDX when the game screen
-	 * is the screen being shown.
+	 * Function called by the main render loop of LibGDX when the game screen
+	 * is the screen currently being shown.
 	 */
 	public void render(float delta) {
-		// update the game state
+		// Update the game state
 		this.update();
 
-		// begine the drawing element
+		// Begin the drawing element
 		batch.begin();
-		// batch passed by reference (because its a class)
+		// Batch passed by reference (because its a class)
 		this.draw(batch);
-		// end the drawer element
+		// End the drawer element
 		batch.end();
 
 	}
 
 	/**
-	 * function to update the game state
+	 * Function to update the game state 
+	 * (input, objectives, maps, if game needs to end and enemies)
 	 */
 	private void update() {
-		// handle the input
-		this.handleInput(game.getCurrentMap());
-		// set the current objective
-		game.setCurrentObjective(game.getCurrentObjective().updateObjective());
-		// set current map
-		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+		// Handle user input
+		this.handleInput();
+//		this.inputTests();
 		
+		// Updates current objective
+		game.getCurrentObjective().updateObjective();
+		
+		// Sets current map
+		game.setCurrentMap(game.getCurrentMap().managePortals(game.duck));
+
 		// Checks to see if last objective complete.
 		// If complete then go to Game Complete screen
-		if(game.isLastObjComplete()){
+		if (game.isLastObjComplete()) {
 			game.setScreen(game.getGameCompleteScreen());
 		}
-		if(!game.duck.isAlive()){
+		
+		// Checks if duck is alive. If not then set to game over screen
+		if (!game.duck.isAlive()) {
 			game.setScreen(game.getGameOverScreen());
 		}
-		// include the baddies that need to be included in the game
+		// Update the badies/ enemies that need to be included in the game
 		game.getCurrentMap().updateEnemies(game.duck);
 
-		// manage interation between baddies and the duck
 	}
 
 	/**
@@ -164,25 +188,25 @@ public class GameScreen implements Screen {
 		// draw the GUI
 		batch.draw(game.getAssetManager().get("GUI panel.png", Texture.class), 0,
 				game.getScreenHeight() - game.getAssetManager().get("GUI panel.png", Texture.class).getHeight());
-		
+
 		// draw the score
 		game.getMyFont().draw(batch, String.format("%06d", game.duck.getScore()), game.getScreenWidth() / 2 - 72,
 				game.getScreenHeight() - 6);
-		
+
 		// draw the map background (and the maps enemies)
 		game.getCurrentMap().draw(batch);
-		
+
 		// draw the duck texture
 		batch.draw(game.duck.getTexture(), game.duck.getPosition().x, game.duck.getPosition().y);
-		
+
 		// draw health
 		// Needs to pass numbers rather than textures
 		game.getHeart().drawHearts(batch, game.duck.getHealth(), game.duck.getMaxHealth(), game.getScreenWidth(),
 				game.getScreenHeight());
-		
+
 		// draw stamina
 		game.getStamina().draw(batch, game);
-		
+
 		// draw new objective
 		if (game.isNewObjective()) {
 			batch.draw(game.getAssetManager().get("objective.png", Texture.class), 350,
@@ -190,14 +214,18 @@ public class GameScreen implements Screen {
 		}
 	}
 
+	/**
+	 * Dispose of batch and font to free memory
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 		batch.dispose();
 		game.getMyFont().dispose();
 	}
+
+	// Below are functions required by Screen implementation but not needed
 	
-	// Functions required by Screen implementation but not needed
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -221,6 +249,5 @@ public class GameScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }
