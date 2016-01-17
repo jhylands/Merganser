@@ -218,9 +218,11 @@ public class PlayerDuck extends LiveEntity {
 				throw new Exception("MaxHealth must be >= 0");
 			}
 			if (maxHealth % 4 != 0){
-				this.setMaxHealth(maxHealth = maxHealth - (maxHealth % 4));
+				this.maxHealth = maxHealth - (maxHealth % 4);
+				return; 
 			} else {
-				this.setMaxHealth(maxHealth);
+				this.maxHealth = maxHealth;
+				return;
 			}
 		} catch (Exception e) {
 			System.err.println("Max health must be >= 0");

@@ -20,13 +20,13 @@ public class LiveEntity extends Entity {
 	/**
 	 * Integer health value for LiveEntity
 	 */
-	private int health;
+	protected int health;
 
 	/**
 	 * Maximum health value for LiveEntity PlayerDuck health must always be
 	 * divisible by 4 - this is handled within the PlayerDuck class
 	 */
-	private int maxHealth;
+	protected int maxHealth;
 
 	/**
 	 * Attack strength of the LiveEntity
