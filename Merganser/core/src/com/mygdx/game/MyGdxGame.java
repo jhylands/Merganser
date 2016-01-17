@@ -31,6 +31,8 @@ public class MyGdxGame extends Game {
 
 	// Map that playerDuck is currently on
 	private Map currentMap;
+	
+	// Array of type Map to store all of the maps in the game.
 	private Map[] maps;
 
 	// Instance of classes and fonts to enable rendering
