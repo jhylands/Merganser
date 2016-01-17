@@ -23,23 +23,35 @@ public class MapScreen implements Screen {
 	 */
 	private MyGdxGame game;
 	
-	// Boolean value for which map to display. Initialised to false on map that playerDuck is on.
-	// True means playerDuck is not on the current map displayed
+	/**
+	 *  Boolean value for which map to display. Initialised to false on map that playerDuck is on.
+	 *  True means playerDuck is not on the current map displayed
+	 */
 	private Boolean changeMap = false;
 	
-	// Vector of globalMap position. x,y coordinate and z to set what map screen it references to
+	/**
+	 *  Vector of globalMap position. x,y coordinate and z to set what map screen it references to
+	 */
 	private Vector3 globalMapPosition;
 	
-	// New SpriteBatch
+	/**
+	 *  New SpriteBatch
+	 */
 	private SpriteBatch sb1;
 	
-	// BitmapFont for displaying map text
+	/**
+	 * BitmapFont for displaying map text
+	 */
 	private BitmapFont mapFont;
 	
-	// Variable for current map name/ description as set in UML
+	/**
+	 *  Variable for current map name/ description as set in UML
+	 */
 	private String currentMapName;
 	
-	// Constant text for displaying current location on map
+	/**
+	 *  Constant text for displaying current location on map
+	 */
 	private String CURRENTLOCATION = "Current Location: ";
 
 	/**
@@ -64,7 +76,7 @@ public class MapScreen implements Screen {
 
 	/**
 	 * Handles user input.
-	 * If Left or Right Key pressed sets a boolean flag (changeMap) to 
+	 * If Left or Right Key pressed sets a boolean flag (changeMap) to display opposite map to one currently on
 	 */
 	public void handleInput() {
 		// if left or right key pressed, flip changeMap to opposite boolean value to say that the user

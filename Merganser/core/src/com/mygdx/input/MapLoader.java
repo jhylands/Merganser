@@ -142,7 +142,7 @@ public class MapLoader {
 	/**
 	 * function to take an element and extracts the mapFeature data from it defining a new map feature
 	 * @param feature
-	 * @return
+	 * @return MapFeature
 	 */
 	private MapFeature elm2MapFeature(Element feature) {
 		return new MapFeature(element2rectangle(feature),
@@ -151,36 +151,46 @@ public class MapLoader {
 				Str2Bool(feature.getChildText("isWater")));
 	}
 	/**
-	 * function to take an element and extract Portal data from it and defines a new Portal
+	 * Function to take an element and extract Portal data from it and defines a new Portal
+	 * 
+	 * NOTE: Requires data validation
 	 * @param portal
-	 * @return
+	 * @return Portal
 	 */
-	//NEEDS DATA VALIDATION
 	private Portal elm2Portal(Element portal){
 		return new Portal(element2rectangle(portal),
 				Integer.parseInt(portal.getChild("to").getChildText("ref")), portal2Vector(portal));
 	}
 
-	// requires data validation!
+	/**
+	 * Returns a boolean from a given String
+	 * True if text is an integer greater than 0
+	 * 
+	 * NOTE: Requires data validation
+	 * @param text String
+	 * @return Boolean
+	 */
 	private Boolean Str2Bool(String text) {
 		return Integer.parseInt(text) > 0;
 	}
 	
 	/**
 	 * Takes XML element and extracts rectangle data from it (x,y,width,height)
+	 * 
+	 * Note: Requires data validation
 	 * @param elm
-	 * @return
+	 * @return Rectangle
 	 */
-	//NEEDS DATA VALIDATION
 	private Rectangle element2rectangle(Element elm) {
 		return new Rectangle().set(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),
 				Integer.parseInt(elm.getChildText("width")), Integer.parseInt(elm.getChildText("height")));
 	}
 
 	/**
-	 * Takes XML element representing a portal and extract vector data (x,y)
-	 * @param portal
-	 * @return
+	 * Takes XML element representing a portal and extract vector data (x,y) for
+	 * coordinates where the portal will take you
+	 * @param portal Portal element of XML
+	 * @return Vector2
 	 */
 	private Vector2 portal2Vector(Element portal) {
 		return getVector2(portal.getChild("to"));
@@ -188,19 +198,20 @@ public class MapLoader {
 	
 	/**
 	 * Takes XML element and extract vector data (x,y)
+	 * 
+	 * Note: Requires data validation
 	 * @param portal
-	 * @return
+	 * @return Vector2
 	 */
-	//NEEDS DATA VALIDATION
 	private Vector2 getVector2(Element elm) {
 		return new Vector2(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")));
 	}
 	/**
 	 * Takes XML element and extract vector data (x,y,z)
+	 * Note: Requires data validation
 	 * @param portal
-	 * @return
+	 * @return Vector3
 	 */
-	//NEEDS DATA VALIDATION
 	private Vector3 getVector3(Element elm) {
 		return new Vector3(Integer.parseInt(elm.getChildText("x")), Integer.parseInt(elm.getChildText("y")),Integer.parseInt(elm.getChildText("z")));
 	}
@@ -208,14 +219,14 @@ public class MapLoader {
 	/**
 	 * Takes XML element representing a map and returns its global coordinates
 	 * @param map
-	 * @return
+	 * @return Vector3
 	 */
 	private Vector3 getGlobal(Element map) {
 		return getVector3(map.getChild("globalPosition"));
 	}
 
 	/**
-	 * Generates enemies from XML
+	 * Generates enemies into Repeatable from XML
 	 * @param map Map
 	 * @param manager AssetManager
 	 * @return Repeatable[]

@@ -71,58 +71,6 @@ public class MyGdxGame extends Game {
 	public boolean created = false;
 
 	/**
-	 * Load all required assets into AssetManager to allow loading of textures
-	 * into game at start for game speed and efficiency
-	 */
-	public void loadAssets() {
-
-		assetManager = new AssetManager();
-		// Load background for GUI panel at top of screen
-		assetManager.load("GUI panel.png", Texture.class);
-
-		// Load over-world maps
-		assetManager.load("map1.png", Texture.class);
-		assetManager.load("map2.png", Texture.class);
-
-		// Load heart textures
-		assetManager.load("Heart_0.png", Texture.class);
-		assetManager.load("Heart_1.png", Texture.class);
-		assetManager.load("Heart_2.png", Texture.class);
-		assetManager.load("Heart_3.png", Texture.class);
-		assetManager.load("Heart_4.png", Texture.class);
-
-		// Load background image textures
-		assetManager.load("bio-lab-0.png", Texture.class);
-		assetManager.load("bio-lab-0-r.png", Texture.class);
-		assetManager.load("bio-lab-1.png", Texture.class);
-		assetManager.load("outside.png", Texture.class);
-
-		// Load assets for duck
-		assetManager.load("large_duck.png", Texture.class);
-		assetManager.load("large_duck_down.png", Texture.class);
-		assetManager.load("large_duck_left.png", Texture.class);
-		assetManager.load("large_duck_right.png", Texture.class);
-		assetManager.load("duck_action_left.png", Texture.class);
-		assetManager.load("duck_action_right.png", Texture.class);
-		assetManager.load("duck_action_up.png", Texture.class);
-		assetManager.load("duck_action_down.png", Texture.class);
-
-		// Load assets for enemy goose
-		assetManager.load("goose_up.png", Texture.class);
-		assetManager.load("goose_down.png", Texture.class);
-		assetManager.load("goose_left.png", Texture.class);
-		assetManager.load("goose_right.png", Texture.class);
-		assetManager.load("objective.png", Texture.class);
-		assetManager.load("goose_action_left.png", Texture.class);
-		assetManager.load("goose_action_right.png", Texture.class);
-		assetManager.load("goose_action_up.png", Texture.class);
-		assetManager.load("goose_action_down.png", Texture.class);
-
-		// Finish loading textures into AssetManager
-		assetManager.finishLoading();
-	}
-
-	/**
 	 * Creates resources needed for the whole game
 	 */
 	@Override
@@ -208,6 +156,58 @@ public class MyGdxGame extends Game {
 
 		this.created = true;
 	}
+	
+	/**
+	 * Load all required assets into AssetManager to allow loading of textures
+	 * into game at start for game speed and efficiency
+	 */
+	public void loadAssets() {
+
+		assetManager = new AssetManager();
+		// Load background for GUI panel at top of screen
+		assetManager.load("GUI panel.png", Texture.class);
+
+		// Load over-world maps
+		assetManager.load("map1.png", Texture.class);
+		assetManager.load("map2.png", Texture.class);
+
+		// Load heart textures
+		assetManager.load("Heart_0.png", Texture.class);
+		assetManager.load("Heart_1.png", Texture.class);
+		assetManager.load("Heart_2.png", Texture.class);
+		assetManager.load("Heart_3.png", Texture.class);
+		assetManager.load("Heart_4.png", Texture.class);
+
+		// Load background image textures
+		assetManager.load("bio-lab-0.png", Texture.class);
+		assetManager.load("bio-lab-0-r.png", Texture.class);
+		assetManager.load("bio-lab-1.png", Texture.class);
+		assetManager.load("outside.png", Texture.class);
+
+		// Load assets for duck
+		assetManager.load("large_duck.png", Texture.class);
+		assetManager.load("large_duck_down.png", Texture.class);
+		assetManager.load("large_duck_left.png", Texture.class);
+		assetManager.load("large_duck_right.png", Texture.class);
+		assetManager.load("duck_action_left.png", Texture.class);
+		assetManager.load("duck_action_right.png", Texture.class);
+		assetManager.load("duck_action_up.png", Texture.class);
+		assetManager.load("duck_action_down.png", Texture.class);
+
+		// Load assets for enemy goose
+		assetManager.load("goose_up.png", Texture.class);
+		assetManager.load("goose_down.png", Texture.class);
+		assetManager.load("goose_left.png", Texture.class);
+		assetManager.load("goose_right.png", Texture.class);
+		assetManager.load("objective.png", Texture.class);
+		assetManager.load("goose_action_left.png", Texture.class);
+		assetManager.load("goose_action_right.png", Texture.class);
+		assetManager.load("goose_action_up.png", Texture.class);
+		assetManager.load("goose_action_down.png", Texture.class);
+
+		// Finish loading textures into AssetManager
+		assetManager.finishLoading();
+	}
 
 	@Override
 	public void render() {
@@ -256,7 +256,9 @@ public class MyGdxGame extends Game {
 		// map.setPortals([new Rectangle() ])
 	}
 
-	// GETTERS AND SETTERS
+	
+	
+	// ---- STANDARD GETTERS AND SETTERS ----
 
 	public PlayerDuck getDuck() {
 		return duck;

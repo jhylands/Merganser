@@ -8,27 +8,56 @@ import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 
 /**
- * Class to contain an individual map and its background
+ * Class to contain an individual map (get all MapFeatures and Portals on map)
+ * and set its background
  */
 public class Map {
+	/**
+	 * Background texture for this map
+	 */
 	private Texture background;
+	
+	/**
+	 * Name/ description of map
+	 */
 	private String name;
+	
+	/**
+	 * Array containing MapFeatures for the map
+	 */
 	private MapFeature[] features;
-	private Portal[] portals; // portals take you to a different map
-	// swimming and flying will be needed later to calculate stamina use
-	private Vector3 globalPosition;
-
-	private Repeatable[] enemies;
 
 	/**
-	 * Constructor, A map should only be constructed in the maploader class
+	 * Array of portals which take you to a different map
+	 */
+	private Portal[] portals;
+
+	/**
+	 * Global position for map
+	 */
+	private Vector3 globalPosition;
+
+	/**
+	 * Array of enemies for map
+	 */
+	private Repeatable[] enemies;
+	
+	// swimming and flying will be needed later to calculate stamina use
+
+	/**
+	 * Constructor, A map should only be constructed in the MapLoader class
 	 * (with the exception of testing)
 	 * 
 	 * @param name
+	 *            Name of current map
 	 * @param background
+	 *            Background texture
 	 * @param features
+	 *            Array of map features for this map
 	 * @param portals
+	 *            Array of portals for this map
 	 * @param globalPosition
+	 *            Global position on over-world for this map
 	 */
 	public Map(String name, Texture background, MapFeature[] features, Portal[] portals, Vector3 globalPosition,
 			Repeatable[] enemies) {
@@ -52,7 +81,9 @@ public class Map {
 	}
 
 	/**
-	 * function as yet unused but could be a useful features if the background
+	 * Function to set background of map
+	 * 
+	 * NOTE:function as yet unused but could be a useful features if the background
 	 * became interactive to set the background
 	 * 
 	 * @param background
@@ -149,8 +180,8 @@ public class Map {
 	}
 
 	/**
-	 * function to show if an object (rectangle) can land given a box and if it can land on
-	 * water
+	 * function to show if an object (rectangle) can land given a box and if it
+	 * can land on water
 	 * 
 	 * @return Boolean
 	 */
@@ -223,7 +254,8 @@ public class Map {
 	/**
 	 * Sets globalPosition vector
 	 * 
-	 * @param Vector3 globalPosition
+	 * @param Vector3
+	 *            globalPosition
 	 */
 	public void setGlobalPosition(Vector3 globalPosition) {
 		this.globalPosition = globalPosition;
@@ -239,8 +271,8 @@ public class Map {
 	}
 
 	/**
-	 * Updates enemies in enemies array 
-	 * Calls repeatable update function
+	 * Updates enemies in enemies array Calls repeatable update function
+	 * 
 	 * @param duck
 	 */
 	public void updateEnemies(PlayerDuck duck) {
@@ -251,6 +283,7 @@ public class Map {
 
 	/**
 	 * Renders the map background and enemies to SpriteBatch
+	 * 
 	 * @param batch
 	 */
 	public void draw(SpriteBatch batch) {

@@ -38,7 +38,7 @@ public class PlayerDuck extends LiveEntity {
 	// hitBox inherited from Entity
 
 	/**
-	 * Constructor for PlayerDuck Initialize players values (maxHealth, health,
+	 * Constructor for PlayerDuck Initialise players values (maxHealth, health,
 	 * starting score, stamina)
 	 */
 	public PlayerDuck() {
@@ -203,5 +203,31 @@ public class PlayerDuck extends LiveEntity {
 	public int getSTAMINAREGEN() {
 		return STAMINAREGEN;
 	}
+
+	/**
+	 * Overrides LiveEntity setMaxHealth as a PlayerDuck
+	 * must have a maxHealth divisible by 4 for heart
+	 * rendering on screen correctly
+	 * 
+	 * Rounds down to the nearest multiple of 4
+	 */
+	@Override
+	public void setMaxHealth(int maxHealth) {
+		try {
+			if (maxHealth < 0){
+				throw new Exception("MaxHealth must be >= 0");
+			}
+			if (maxHealth % 4 != 0){
+				this.setMaxHealth(maxHealth = maxHealth - (maxHealth % 4));
+			} else {
+				this.setMaxHealth(maxHealth);
+			}
+		} catch (Exception e) {
+			System.err.println("Max health must be >= 0");
+			Gdx.app.exit();
+		}
+	}
+	
+	
 
 }

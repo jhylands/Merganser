@@ -117,7 +117,7 @@ public class ObjectiveScreen implements Screen {
 	}
 
 	/**
-	 * Dispose of SpriteBatch when method called
+	 * Dispose of SpriteBatch and font when method called to free memory
 	 */
 	@Override
 	public void dispose() {

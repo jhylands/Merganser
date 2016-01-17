@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Calling draw creates a new Texture displaying the current stamina level
  */
 public class Stamina{
-	// Pixmap for drawing staminaBar
+	/**
+	 *  Pixmap for drawing staminaBar
+	 */
 	private Pixmap staminaBar;
+	
 	// Constants for the height and width of the stamina bar
 	private final int BARHEIGHT = 14;
 	private final int BARWIDTH = 100;
