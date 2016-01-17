@@ -57,7 +57,7 @@ public class Repeatable extends LiveEntity {
 		this.attackSprite[this.LEFT] = manager.get("goose_action_left.png", Texture.class);
 
 		this.speed = speed;
-		this.setPosition(new Vector2(randomNumber(470), randomNumber(240)));
+		this.setPosition(new Vector2(randomNumber(470), randomNumber(235)));
 	}
 
 	/**
