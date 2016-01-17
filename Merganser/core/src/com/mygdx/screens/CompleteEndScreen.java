@@ -157,7 +157,7 @@ public class CompleteEndScreen implements Screen {
 			}
 		}
 
-		// If ENTER pressed on 'exit' item then exit the application
+		// If ENTER pressed on 'exit' item then exit the application. If go to MainMenu create new game
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			switch (currentMenuItem) {
 			case 0:
@@ -203,7 +203,6 @@ public class CompleteEndScreen implements Screen {
 	 */
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		titleFont.dispose();
 		menuFont.dispose();
 		sb.dispose();

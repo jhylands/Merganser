@@ -12,6 +12,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Objective;
 
+/**
+ * Objective screen for displaying current objectives
+ *
+ */
 public class ObjectiveScreen implements Screen {
 
 	private MyGdxGame game;

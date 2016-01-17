@@ -21,11 +21,8 @@ import com.mygdx.sprite.PlayerDuck;
 import com.mygdx.sprite.Repeatable;
 
 /**
- * This class holds the initialization of the game. When LibGDX creates the game
+ * Holds the initialisation of the game. When LibGDX creates the game
  * using the desktop launcher the create function in this class is called.
- * 
- * @author james
- *
  */
 public class MyGdxGame extends Game {
 
@@ -174,7 +171,6 @@ public class MyGdxGame extends Game {
 			// If objective not set a nextObjective then automatically defined
 			// as LastObjective
 			getObjectives().get(0).setNextObjective(getObjectives().get(1));
-			// getObjectives().get(1).setNextObjective(getObjectives().get(0));
 
 		} catch (IndexOutOfBoundsException e) {
 			// Exit the game if objective references are wrong
@@ -218,6 +214,9 @@ public class MyGdxGame extends Game {
 		super.render();
 	}
 
+	/**
+	 * Call all screen dispose method to make sure to free memory
+	 */
 	@Override
 	public void dispose() {
 		mainGame.dispose();

@@ -21,7 +21,10 @@ import com.mygdx.game.Portal;
 import com.mygdx.sprite.Repeatable;
 
 
-
+/**
+ * Extracts map data from an XML file
+ *
+ */
 public class MapLoader {
 
 	// Required for asset manager to hold new background images
@@ -203,7 +206,7 @@ public class MapLoader {
 	}
 	
 	/**
-	 * Takes XML element representing a map and returs its global coordinates
+	 * Takes XML element representing a map and returns its global coordinates
 	 * @param map
 	 * @return
 	 */
@@ -211,6 +214,12 @@ public class MapLoader {
 		return getVector3(map.getChild("globalPosition"));
 	}
 
+	/**
+	 * Generates enemies from XML
+	 * @param map Map
+	 * @param manager AssetManager
+	 * @return Repeatable[]
+	 */
 	private Repeatable[] generateEnemies(Element map, AssetManager manager){
 		if (map.getChild("enemy") != null) {
 			Repeatable[] repeatables = new Repeatable[1];

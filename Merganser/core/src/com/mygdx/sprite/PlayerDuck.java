@@ -17,7 +17,7 @@ public class PlayerDuck extends LiveEntity {
 	private int DEFAULTDUCKSPEED = 3;
 	private int DEFAULTDUCKSPRINT = 6;
 	// MAXSTAM should always be 100
-	private int MAXSTAM = 100;
+	private final int MAXSTAM = 100;
 	private int MINSTAM = 0;
 	private int SPRINTCOST = 2;
 	private int STAMINAREGEN = 1;
@@ -57,6 +57,7 @@ public class PlayerDuck extends LiveEntity {
 	/**
 	 * Retrieves sprite Textures from AssetManager
 	 * Loads audio file from assets
+	 * Sets starting position
 	 * @param manager AssetManager where resources are stored
 	 */
 	public void assignResources(AssetManager manager) {
@@ -187,16 +188,20 @@ public class PlayerDuck extends LiveEntity {
 		return MINSTAM;
 	}
 
+	/**
+	 * Return cost of sprinting (constant)
+	 * @return Integer
+	 */
 	public int getSPRINTCOST() {
 		return SPRINTCOST;
 	}
 
+	/**
+	 * Return stamina regeneration
+	 * @return Integer
+	 */
 	public int getSTAMINAREGEN() {
 		return STAMINAREGEN;
-	}
-
-	public void setSTAMINAREGEN(int sTAMINAREGEN) {
-		STAMINAREGEN = sTAMINAREGEN;
 	}
 
 }

@@ -7,10 +7,15 @@ package com.mygdx.game;
  */
 public class Objective {
 
+	// Current game state
 	private MyGdxGame game;
+	// Target map
 	private Map targetMap;
+	// Next objective
 	private Objective nextObjective;
+	//Description of objective
 	private String objectiveDescription;
+	// Points awarded for completion of objective
 	private int pointsValue;
 	// Time counter to check when to reduce rewards
 	private int timeCounter = 0;

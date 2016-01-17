@@ -12,6 +12,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.sprite.PlayerDuck;
 
+/**
+ * Game Over Screen shown on ending the game
+ *
+ */
 public class EndScreen implements Screen {
 	
 	private SpriteBatch sb;
