@@ -86,7 +86,7 @@ public class CompleteEndScreen implements Screen {
 		titleFont.setColor(Color.WHITE);
 
 		// Populate menuItem String array with menu options/ values
-		menuItem = new String[] { "Score: " + game.duck.getScore(), "Quit" };
+		menuItem = new String[] { "Score: " + game.duck.getScore(), "Main Menu" ,"Quit" };
 
 		generator.dispose();
 	}
@@ -163,6 +163,11 @@ public class CompleteEndScreen implements Screen {
 			case 0:
 				break;
 			case 1:
+				game.setLastObjComplete(false);
+				game.create();
+				game.setScreen(game.getMainMenu());
+				break;
+			case 2:
 				Gdx.app.exit();
 				break;
 			}
