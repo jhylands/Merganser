@@ -42,10 +42,8 @@ public class Heart {
 	 * Calculates which heart textures to draw to represent current health level
 	 * @param health
 	 * @param maxHealth Should be a multiple of 4. Will get rounded down otherwise.
-	 * @param screenWidth
-	 * @param screenHeight
 	 */
-	public void addTextures(int health, int maxHealth, float screenWidth, float screenHeight) {
+	public void addTextures(int health, int maxHealth) {
 		// Clear disp list so can re-populate it each call
 		disp.clear();
 
@@ -87,7 +85,7 @@ public class Heart {
 	 * Allows maximum health value to be changed without changing any code
 	 */
 	public void drawHearts(SpriteBatch batch, int health, int maxHealth, float screenWidth, float screenHeight) {
-		addTextures(health, maxHealth, screenWidth, screenHeight);
+		addTextures(health, maxHealth);
 		for (int i = 0; i < disp.size(); i++) {
 			batch.draw(this.getTexture(disp.get(i)), screenWidth - 20 - i * this.getTexture(disp.get(i)).getWidth(),
 					screenHeight - this.getTexture(disp.get(i)).getHeight() - 2);
