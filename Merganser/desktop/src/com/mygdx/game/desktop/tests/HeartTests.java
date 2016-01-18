@@ -34,7 +34,7 @@ public class HeartTests extends AssetTestCase {
 		expectedResult.add(2);
 		expectedResult.add(0);
 		heart.addTextures(health, maxHealth);
-		assertEquals(heart.getDisp(), expectedResult);
+		assertEquals(expectedResult, heart.getDisp());
 	}
 
 	// Test zero case that zero health produces the correct output of hearts
@@ -46,7 +46,7 @@ public class HeartTests extends AssetTestCase {
 		expectedResult.add(0);
 		expectedResult.add(0);
 		heart.addTextures(health, maxHealth);
-		assertEquals(heart.getDisp(), expectedResult);
+		assertEquals(expectedResult, heart.getDisp());
 	}
 
 	// Test zero case that full health produces the correct output of hearts
@@ -58,7 +58,7 @@ public class HeartTests extends AssetTestCase {
 		expectedResult.add(4);
 		expectedResult.add(4);
 		heart.addTextures(health, maxHealth);
-		assertEquals(heart.getDisp(), expectedResult);
+		assertEquals(expectedResult, heart.getDisp());
 	}
 
 }
