@@ -225,8 +225,8 @@ public class PlayerDuck extends LiveEntity {
 				return;
 			}
 		} catch (Exception e) {
+			this.maxHealth = 0;
 			System.err.println("Max health must be >= 0");
-			Gdx.app.exit();
 		}
 	}
 	
