@@ -104,9 +104,10 @@ public class Map {
 	}
 
 	/**
-	 * setter for portals (more description needed)
+	 * Setter for portals. Replace the array of portals
+	 * on the map with a new array of Portal
 	 * 
-	 * @param portals
+	 * @param portals Portal[]
 	 */
 	public void setPortals(Portal[] portals) {
 		this.portals = portals;
