@@ -86,7 +86,7 @@ public class Objective {
 	 * function to cause a time penalty as the player takes longer to carry out
 	 * the objective (decrement pointsValue for completing objective)
 	 */
-	private void reduceReward() {
+	public void reduceReward() {
 		// Reduce rewards every 30 frames by REDUCEREWARD constant and reset time counter
 		if (timeCounter == 30) {
 			if (pointsValue > 1) {
@@ -101,7 +101,7 @@ public class Objective {
 	/**
 	 * Updates playerDuck score by pointsValue
 	 */
-	private void updateScore() {
+	public void updateScore() {
 		game.getDuck().addScore(pointsValue);
 	}
 
@@ -110,7 +110,7 @@ public class Objective {
 	 * 
 	 * @return
 	 */
-	private boolean isComplete() {
+	public boolean isComplete() {
 		if (game.getCurrentMap() == targetMap) {
 			updateScore();
 			return true;
@@ -213,6 +213,22 @@ public class Objective {
 	 */
 	public void setLastObjective(boolean lastObjective) {
 		this.lastObjective = lastObjective;
+	}
+	
+	/**
+	 * Sets time counter for testing purposes
+	 * @param time Integer
+	 */
+	public void setTimeCounter(int time){
+		timeCounter = time;
+	}
+	
+	/**
+	 * Returns the reduce reward constant
+	 * @return Integer
+	 */
+	public int getReduceReward(){
+		return REDUCEREWARD;
 	}
 	
 

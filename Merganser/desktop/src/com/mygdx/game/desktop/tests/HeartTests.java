@@ -8,15 +8,15 @@ import com.mygdx.sprite.PlayerDuck;
 
 public class HeartTests extends AssetTestCase {
 
-	Heart heart;
+	
 
 	public void setUp() {
 		super.setUp();
-		heart = new Heart(game.getAssetManager());
 	}
 
 	// Test that heart has been initialised with the 5 heart textures
 	public void testHeartInit() {
+		Heart heart = new Heart(game.getAssetManager());
 		assertTrue(heart.getTexture(0) instanceof Texture);
 		assertTrue(heart.getTexture(1) instanceof Texture);
 		assertTrue(heart.getTexture(2) instanceof Texture);
@@ -27,6 +27,7 @@ public class HeartTests extends AssetTestCase {
 	// Test that part health calculations give the correct output of hearts to
 	// draw
 	public void testAddTextures() {
+		Heart heart = new Heart(game.getAssetManager());
 		int health = 6;
 		int maxHealth = 12;
 		ArrayList<Integer> expectedResult = new ArrayList<Integer>();
@@ -39,6 +40,7 @@ public class HeartTests extends AssetTestCase {
 
 	// Test zero case that zero health produces the correct output of hearts
 	public void testAddTexturesZero() {
+		Heart heart = new Heart(game.getAssetManager());
 		int health = 0;
 		int maxHealth = 12;
 		ArrayList<Integer> expectedResult = new ArrayList<Integer>();
@@ -51,6 +53,7 @@ public class HeartTests extends AssetTestCase {
 
 	// Test zero case that full health produces the correct output of hearts
 	public void testAddTexturesFull() {
+		Heart heart = new Heart(game.getAssetManager());
 		int health = 12;
 		int maxHealth = 12;
 		ArrayList<Integer> expectedResult = new ArrayList<Integer>();
