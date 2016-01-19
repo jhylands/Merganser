@@ -120,9 +120,19 @@ public class MapTests extends AssetTestCase {
 
 	public void testIsSwimmingTrue() {
 		Rectangle duckPosition = new Rectangle(5, 5, 5, 5);
-		map = new Map("test", null, new MapFeature[] { new MapFeature(new Rectangle(0, 0, 50, 50), true, true, true) },
+		map = new Map("test", null, new MapFeature[] { new MapFeature(new Rectangle(0, 0, 50, 50), false, false, true) },
 				new Portal[] {}, new Vector3(50, 50, 0), new Repeatable[] {});
 		assertTrue(map.isSwimming(duckPosition));
+	}
+	
+	public void testValidSpaceTrueMultiple() {
+		map = new Map("test", null, new MapFeature[] { new MapFeature(new Rectangle(0, 0, 50, 50), true, true, false),
+				new MapFeature(new Rectangle(0, 50, 50, 50), true, true, false)},
+				new Portal[] {}, new Vector3(50, 50, 0), new Repeatable[] {});
+		Rectangle testSpace = new Rectangle(51, 51, 5, 5);
+		boolean flying = false;
+		boolean canSwim = false;
+		assertEquals(true, map.validSpace(testSpace, flying, canSwim));
 	}
 
 }
