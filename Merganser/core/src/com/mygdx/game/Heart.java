@@ -1,3 +1,5 @@
+// Download the .Jar file at http://merganser.weebly.com/ or directly on https://drive.google.com/file/d/0B_xhR6pi2K8Kc2Q1MFJrVDY0WVE/view?usp=sharing
+
 package com.mygdx.game;
 
 import java.util.ArrayList;
@@ -5,6 +7,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Handles drawing the hearts for the GUI
  *
@@ -31,17 +34,19 @@ public class Heart {
 	 * different quarters of the heart shaded in
 	 */
 	private Texture[] hearts = new Texture[5];
-	
+
 	/**
-	 * ArrayList containing integers as references to which heart in the
-	 * hearts array to draw
+	 * ArrayList containing integers as references to which heart in the hearts
+	 * array to draw
 	 */
 	private ArrayList<Integer> disp = new ArrayList<Integer>();
 
 	/**
 	 * Calculates which heart textures to draw to represent current health level
+	 * 
 	 * @param health
-	 * @param maxHealth Should be a multiple of 4. Will get rounded down otherwise.
+	 * @param maxHealth
+	 *            Should be a multiple of 4. Will get rounded down otherwise.
 	 */
 	public void addTextures(int health, int maxHealth) {
 		// Clear disp list so can re-populate it each call
@@ -81,8 +86,8 @@ public class Heart {
 	}
 
 	/**
-	 * Render hearts at top of the screen, right to left.
-	 * Allows maximum health value to be changed without changing any code
+	 * Render hearts at top of the screen, right to left. Allows maximum health
+	 * value to be changed without changing any code
 	 */
 	public void drawHearts(SpriteBatch batch, int health, int maxHealth, float screenWidth, float screenHeight) {
 		addTextures(health, maxHealth);
@@ -95,6 +100,7 @@ public class Heart {
 
 	/**
 	 * Returns texture by indexing Array of Heart textures
+	 * 
 	 * @param texNum
 	 * @return Texture
 	 */
@@ -104,8 +110,9 @@ public class Heart {
 	}
 
 	/**
-	 * Returns array of Integer values based on which
-	 * Texture to draw when passed to getTexture
+	 * Returns array of Integer values based on which Texture to draw when
+	 * passed to getTexture
+	 * 
 	 * @return ArrayList
 	 */
 	public ArrayList<Integer> getDisp() {

@@ -1,3 +1,4 @@
+// Download the .Jar file at http://merganser.weebly.com/ or directly on https://drive.google.com/file/d/0B_xhR6pi2K8Kc2Q1MFJrVDY0WVE/view?usp=sharing
 package com.mygdx.input;
 
 import java.io.File;

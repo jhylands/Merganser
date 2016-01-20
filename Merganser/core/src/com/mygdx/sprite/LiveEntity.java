@@ -1,13 +1,9 @@
+// Download the .Jar file at http://merganser.weebly.com/ or directly on https://drive.google.com/file/d/0B_xhR6pi2K8Kc2Q1MFJrVDY0WVE/view?usp=sharing
 package com.mygdx.sprite;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Map;
-
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
 /**
  * Implementation of LiveEntity which extends Entity containing features such as
@@ -140,7 +136,7 @@ public class LiveEntity extends Entity {
 			}
 		} catch (Exception e) {
 			System.err.println("Max health must be >= 0");
-			Gdx.app.exit();
+			maxHealth = 0;
 		}
 	}
 
